@@ -3,6 +3,9 @@ package it.uniroma3.siw.SiwBooks.service;
 import it.uniroma3.siw.SiwBooks.model.Book;
 import it.uniroma3.siw.SiwBooks.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +32,10 @@ public class BookService {
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
     }
-}
 
+    // Metodo per recuperare gli ultimi n libri ordinati per id discendente
+    public List<Book> findLatestBooks(int n) {
+        Pageable pageable = PageRequest.of(0, n, Sort.by(Sort.Direction.DESC, "id"));
+        return bookRepository.findAll(pageable).getContent();
+    }
+}

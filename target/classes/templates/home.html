@@ -2,13 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Benvenuto su SiwBooks</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
 </head>
 <body>
-    <h1>Benvenuto su SiwBooks</h1>
-    <p>Scopri i nostri libri o accedi al tuo profilo.</p>
-    <a th:href="@{/login}">Login</a> |
-    <a th:href="@{/register}">Registrati</a> |
-    <a th:href="@{/books}">Sfoglia libri</a>
+    <div class="container">
+        <h1>SiwBooks</h1>
+
+        <!-- Barra di ricerca -->
+        <form th:action="@{/books/search}" method="get" class="search-form">
+            <input type="text" name="q" placeholder="Cerca libri..." />
+            <button type="submit">Cerca</button>
+        </form>
+
+        <!-- Scritta centrale -->
+        <p class="welcome-text">Scopri i nostri libri o accedi al tuo profilo.</p>
+
+        <!-- Link login, registrazione, libri -->
+        <div class="nav-links">
+            <a th:href="@{/login}">Login</a> |
+            <a th:href="@{/register}">Registrati</a> |
+            <a th:href="@{/books}">Sfoglia libri</a>
+        </div>
+
+        <!-- Slider ultimi libri -->
+        <section class="latest-books-section">
+            <h2>Ultimi libri caricati</h2>
+            <div class="latest-books-slider">
+                <div class="slider-track" th:if="${books != null}">
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
+                            <p th:text="${book.title}"></p>
+                        </a>
+                    </div>
+                    <!-- Duplichiamo per effetto infinite scroll -->
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
+                            <p th:text="${book.title}"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

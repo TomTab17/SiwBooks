@@ -1,0 +1,128 @@
+/* Container generale */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Titolo principale */
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+/* Barra di ricerca */
+.search-form {
+    margin: 20px 0;
+}
+
+.search-form input[type="text"] {
+    padding: 8px 12px;
+    width: 60%;
+    font-size: 1em;
+    border: 2px solid #007BFF;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-form button {
+    padding: 9px 15px;
+    font-size: 1em;
+    border: 2px solid #007BFF;
+    border-left: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Testo centrale */
+.welcome-text {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Link navigazione */
+.nav-links a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    margin: 0 8px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Sezione ultimi libri */
+.latest-books-section {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.latest-books-section h2 {
+    margin-bottom: 15px;
+    color: #007BFF;
+}
+
+/* Slider orizzontale */
+.latest-books-slider {
+    overflow: hidden;
+    position: relative;
+    height: 220px;
+}
+
+/* Track animata per infinite scroll */
+.slider-track {
+    display: flex;
+    width: calc(200px * 20); /* numero libri * larghezza libro (esempio) */
+    animation: scroll-left 40s linear infinite;
+}
+
+/* Card libro */
+.book-card {
+    flex: 0 0 180px;
+    margin-right: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-card img {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.book-card p {
+    font-size: 1em;
+    color: #333;
+    margin: 0;
+}
+
+/* Animazione scroll infinito */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50%));
+    }
+}
