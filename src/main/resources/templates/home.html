@@ -23,6 +23,9 @@
             <a th:href="@{/register}">Registrati</a> |
             <a th:href="@{/books}">Sfoglia libri</a>
         </div>
+        <div class="admin-button" th:if="${isAdmin}">
+        <a th:href="@{/homeAdmin}" class="admin-link">Entra in modalità admin</a>
+    </div>
 
         <!-- Slider ultimi libri -->
         <section class="latest-books-section">

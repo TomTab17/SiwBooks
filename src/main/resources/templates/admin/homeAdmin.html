@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Admin - SiwBooks</title>
+    <link rel="stylesheet" th:href="@{/css/homeAdmin.css}" />
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Benvenuto nell'Area Admin di SiwBooks</h1>
+        <p>Gestisci contenuti e scopri nuove funzionalità.</p>
+        
+        <div class="admin-buttons">
+            <a th:href="@{/admin/authors/new}" class="btn btn-primary">Aggiungi autori</a>
+            <a th:href="@{/admin/books/new}" class="btn btn-primary">Aggiungi libri</a>
+            <a th:href="@{/}" class="btn btn-exit">Esci dalla modalità admin</a>
+        </div>
+    </div>
+</body>
+</html>
