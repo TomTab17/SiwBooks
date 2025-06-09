@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Dettaglio Autore</title></head>
+<body>
+<h1 th:text="${author.firstName + ' ' + author.lastName}">Nome</h1>
+<p th:text="'Nato il: ' + ${author.birthDate}"></p>
+<p th:text="'Nazionalità: ' + ${author.nationality}"></p>
+<img th:if="${author.photoPath}" th:src="@{${author.photoPath}}" alt="foto autore" width="200">
+</body>
+</html>
