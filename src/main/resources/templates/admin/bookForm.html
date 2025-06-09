@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Nuovo Libro</title></head>
+<body>
+<h1>Nuovo Libro</h1>
+<form th:action="@{/admin/books}" method="post">
+    <label>Titolo: <input type="text" name="title"/></label><br/>
+    <label>Anno Pubblicazione: <input type="number" name="publicationYear"/></label><br/>
+
+    <label>Autori:<br/>
+        <div th:each="author : ${allAuthors}">
+            <input type="checkbox" name="authorIds" th:value="${author.id}"/>
+            <span th:text="${author.firstName + ' ' + author.lastName}"></span><br/>
+        </div>
+    </label>
+
+    <button type="submit">Salva</button>
+</form>
+</body>
+</html>

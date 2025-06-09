@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Nuova Recensione</title></head>
+<body>
+<h1>Scrivi una recensione per <span th:text="${book.title}">Libro</span></h1>
+
+<form th:action="@{'/books/' + ${book.id} + '/reviews'}" method="post">
+    <label>Titolo: <input type="text" name="title"/></label><br/>
+    <label>Voto (1-5): <input type="number" name="rating" min="1" max="5"/></label><br/>
+    <label>Testo: <br/>
+        <textarea name="text" rows="6" cols="50"></textarea>
+    </label><br/>
+    <button type="submit">Invia Recensione</button>
+</form>
+
+<a th:href="@{'/books/' + ${book.id}}">Torna al libro</a>
+</body>
+</html>

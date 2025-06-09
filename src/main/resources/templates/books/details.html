@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Dettaglio Libro</title></head>
+<body>
+<h1 th:text="${book.title}">Titolo</h1>
+<p th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>
+
+<div>
+    <h2>Autori</h2>
+    <ul>
+        <li th:each="author : ${book.authors}">
+            <span th:text="${author.firstName + ' ' + author.lastName}">Autore</span>
+        </li>
+    </ul>
+</div>
+
+<img th:if="${book.imagePath}" th:src="@{${book.imagePath}}" alt="Copertina libro" width="200">
+</body>
+</html>
