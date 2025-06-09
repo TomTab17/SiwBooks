@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Nuovo Libro</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Nuovo Libro</title>
+    <link rel="stylesheet" href="/css/bookForm.css" />
+</head>
 <body>
-<h1>Nuovo Libro</h1>
-<form th:action="@{/admin/books}" method="post" enctype="multipart/form-data">
-    <label>Titolo: <input type="text" name="title"/></label><br/>
-    <label>Anno Pubblicazione: <input type="number" name="publicationYear"/></label><br/>
+    <h1>Nuovo Libro</h1>
 
-    <label>Copertina: <input type="file" name="coverImage"/></label><br/>
+    <form th:action="@{/admin/books}" method="post" enctype="multipart/form-data">
+        <label>
+            Titolo:
+            <input type="text" name="title" />
+        </label><br/>
 
-    <label>Autori:<br/>
+        <label>
+            Anno Pubblicazione:
+            <input type="number" name="publicationYear" />
+        </label><br/>
+
+        <label>
+            Copertina:
+            <input type="file" name="coverImage" />
+        </label><br/>
+
+        <label>Autori:</label><br/>
         <div th:each="author : ${allAuthors}">
-            <input type="checkbox" name="authorIds" th:value="${author.id}"/>
+            <input type="checkbox" name="authorIds" th:value="${author.id}" />
             <span th:text="${author.firstName + ' ' + author.lastName}"></span><br/>
         </div>
-    </label>
 
-    <button type="submit">Salva</button>
-</form>
-
+        <button type="submit">Salva</button>
+    </form>
 </body>
 </html>

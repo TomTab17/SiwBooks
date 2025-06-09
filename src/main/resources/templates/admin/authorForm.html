@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Nuovo Autore</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Nuovo Autore</title>
+    <link rel="stylesheet" href="/css/authorForm.css" />
+</head>
 <body>
-<h1>Nuovo Autore</h1>
-<form th:action="@{/admin/authors}" method="post">
-    <label>Nome: <input type="text" name="firstName" /></label><br/>
-    <label>Cognome: <input type="text" name="lastName" /></label><br/>
-    <label>Data di nascita: <input type="date" name="birthDate" /></label><br/>
-    <label>Data di morte: <input type="date" name="deathDate" /></label><br/>
-    <label>Nazionalità: <input type="text" name="nationality" /></label><br/>
-    <button type="submit">Salva</button>
-</form>
+    <h1>Nuovo Autore</h1>
+
+    <form th:action="@{/admin/authors}" method="post">
+        <label>
+            Nome:
+            <input type="text" name="firstName" />
+        </label><br/>
+
+        <label>
+            Cognome:
+            <input type="text" name="lastName" />
+        </label><br/>
+
+        <label>
+            Data di nascita:
+            <input type="date" name="birthDate" />
+        </label><br/>
+
+        <label>
+            Data di morte:
+            <input type="date" name="deathDate" />
+        </label><br/>
+
+        <label>
+            Nazionalità:
+            <input type="text" name="nationality" />
+        </label><br/>
+
+        <button type="submit">Salva</button>
+    </form>
 </body>
 </html>

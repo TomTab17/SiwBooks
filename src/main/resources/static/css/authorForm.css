@@ -1,0 +1,87 @@
+/* style.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #80deea);
+    padding: 40px 20px;
+    color: #222;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #00796b;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+form {
+    background-color: #ffffffdd;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 30px 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+label {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    color: #004d40;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #004d40;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.25s ease-in-out;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus,
+input[type="date"]:focus {
+    border-color: #26a69a;
+    outline: none;
+    background-color: #e0f2f1;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+button {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #00796b;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 25px;
+    box-shadow: 0 4px 12px rgba(0,121,107,0.4);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+
