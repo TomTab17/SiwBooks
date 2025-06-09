@@ -4,6 +4,9 @@
 <body>
 <h1 th:text="${book.title}">Titolo</h1>
 <p th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>
+<div th:if="${book.imagePath != null}">
+    <img th:src="@{${book.imagePath}}" alt="Copertina di copertina" style="max-width:200px;"/>
+</div>
 
 <div>
     <h2>Autori</h2>
@@ -14,6 +17,6 @@
     </ul>
 </div>
 
-<img th:if="${book.imagePath}" th:src="@{${book.imagePath}}" alt="Copertina libro" width="200">
+
 </body>
 </html>
