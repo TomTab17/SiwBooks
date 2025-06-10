@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 
 @Controller
 public class AuthController {
@@ -23,14 +22,30 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
-        user.setRoles(Set.of("ROLE_USER"));
-        userService.save(user);
-        return "redirect:/login";
+        userService.registerWithVerification(user);
+        return "redirect:/verify?username=" + user.getUsername();
     }
 
     @GetMapping("/login")
     public String showLoginForm() {
         return "auth/login";
+    }
+
+    @GetMapping("/verify")
+    public String showVerificationForm(@RequestParam String username, Model model) {
+        model.addAttribute("username", username);
+        return "auth/verify";
+    }
+
+    @PostMapping("/verify")
+    public String verifyUser(@RequestParam String username, @RequestParam String code, Model model) {
+        if (userService.verifyCode(username, code)) {
+            return "redirect:/login?verified=true";
+        } else {
+            model.addAttribute("error", "Codice non valido");
+            model.addAttribute("username", username);
+            return "auth/verify";
+        }
     }
 }
 

@@ -18,6 +18,12 @@ public class User {
     private String username;
     private String password;
 
+    @Column
+    private String verificationCode;
+
+    @Column
+    private boolean enabled = false;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles; // e.g. ROLE_USER, ROLE_ADMIN
 
@@ -89,4 +95,20 @@ public class User {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
+    public String getVerificationCode() {
+    return verificationCode;
+}
+
+public void setVerificationCode(String verificationCode) {
+    this.verificationCode = verificationCode;
+}
+
+public boolean isEnabled() {
+    return enabled;
+}
+
+public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+}
 }
