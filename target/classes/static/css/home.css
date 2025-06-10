@@ -7,6 +7,29 @@
     text-align: center;
 }
 
+/* Pulsante Admin in alto a sinistra */
+.admin-button-container {
+    position: absolute; /* Posizionamento assoluto rispetto al body */
+    top: 20px; /* 20px dal bordo superiore */
+    left: 20px; /* 20px dal bordo sinistro */
+    z-index: 999; /* Assicura che sia sopra gli altri elementi */
+}
+
+.admin-open-modal {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.admin-open-modal:hover {
+    background-color: #0056b3;
+}
+
 /* Titolo principale */
 h1 {
     font-size: 3em;
@@ -80,14 +103,12 @@ h1 {
     height: 220px;
 }
 
-/* Track animata per infinite scroll */
 .slider-track {
     display: flex;
-    width: calc(200px * 20); /* numero libri * larghezza libro (esempio) */
+    width: calc(200px * 20);
     animation: scroll-left 40s linear infinite;
 }
 
-/* Card libro */
 .book-card {
     flex: 0 0 180px;
     margin-right: 20px;
@@ -117,7 +138,6 @@ h1 {
     margin: 0;
 }
 
-/* Animazione scroll infinito */
 @keyframes scroll-left {
     0% {
         transform: translateX(0);
@@ -125,4 +145,81 @@ h1 {
     100% {
         transform: translateX(calc(-50%));
     }
+}
+
+/* MODALE Admin */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Bottoni nella modale */
+.admin-buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-buttons .btn {
+    padding: 0.8rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.admin-buttons .btn:hover {
+    background-color: #0056b3;
+}
+
+.admin-buttons .btn-exit {
+    background-color: #dc3545;
+}
+
+.admin-buttons .btn-exit:hover {
+    background-color: #b02a37;
 }

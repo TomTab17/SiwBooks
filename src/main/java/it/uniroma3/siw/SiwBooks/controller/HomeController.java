@@ -28,11 +28,4 @@ public class HomeController {
 
         return "home";
     }
-
-    @GetMapping("/homeAdmin")
-    public String homeAdmin(Authentication authentication, Model model) {
-        // Se vuoi mostrare dati o info personalizzate, puoi usarli qui
-        model.addAttribute("username", authentication.getName());
-        return "admin/homeAdmin"; // Assicurati che esista il file homeAdmin.html in templates
-    }
 }

@@ -5,29 +5,38 @@
     <link rel="stylesheet" th:href="@{/css/home.css}" />
 </head>
 <body>
+    <div class="admin-button-container" th:if="${isAdmin}">
+        <button class="admin-open-modal" onclick="openAdminModal()">Strumenti Admin</button>
+    </div>
+
     <div class="container">
         <h1>SiwBooks</h1>
 
-        <!-- Barra di ricerca -->
         <form th:action="@{/books/search}" method="get" class="search-form">
             <input type="text" name="q" placeholder="Cerca libri..." />
             <button type="submit">Cerca</button>
         </form>
 
-        <!-- Scritta centrale -->
         <p class="welcome-text">Scopri i nostri libri o accedi al tuo profilo.</p>
 
-        <!-- Link login, registrazione, libri -->
         <div class="nav-links">
             <a th:href="@{/login}">Login</a> |
             <a th:href="@{/register}">Registrati</a> |
             <a th:href="@{/books}">Sfoglia libri</a>
         </div>
-        <div class="admin-button" th:if="${isAdmin}">
-        <a th:href="@{/homeAdmin}" class="admin-link">Entra in modalità admin</a>
-    </div>
 
-        <!-- Slider ultimi libri -->
+        <div id="adminModal" class="modal" th:if="${isAdmin}">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeAdminModal()">&times;</span>
+                <h2>Strumenti Admin</h2>
+                <div class="admin-buttons">
+                    <a th:href="@{/admin/authors/new}" class="btn">Aggiungi autori</a>
+                    <a th:href="@{/admin/books/new}" class="btn">Aggiungi libri</a>
+                    <a th:href="@{/logout}" class="btn btn-exit">Esci</a>
+                </div>
+            </div>
+        </div>
+
         <section class="latest-books-section">
             <h2>Ultimi libri caricati</h2>
             <div class="latest-books-slider">
@@ -38,7 +47,6 @@
                             <p th:text="${book.title}"></p>
                         </a>
                     </div>
-                    <!-- Duplichiamo per effetto infinite scroll -->
                     <div class="book-card" th:each="book : ${books}">
                         <a th:href="@{'/books/' + ${book.id}}">
                             <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
@@ -49,5 +57,20 @@
             </div>
         </section>
     </div>
+
+    <script>
+        function openAdminModal() {
+            document.getElementById("adminModal").style.display = "block";
+        }
+        function closeAdminModal() {
+            document.getElementById("adminModal").style.display = "none";
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById("adminModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
