@@ -19,7 +19,7 @@
                 <input type="text" id="code3" name="code-digit-3" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
                 <input type="text" id="code4" name="code-digit-4" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
                 <input type="text" id="code5" name="code-digit-5" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
-            </div>
+                <input type="text" id="code6" name="code-digit-6" maxlength="1" inputmode="numeric" pattern="[0-9]" required /> </div>
             <input type="hidden" name="code" id="fullCodeInput" />
         </div>
         <button type="submit">Verifica</button>
@@ -34,8 +34,9 @@
 
         codeInputs.forEach((input, index) => {
             input.addEventListener('input', (e) => {
+                // This checks if the input is a single digit from 0-9
                 if (!/^[0-9]$/.test(e.data)) {
-                    input.value = '';
+                    input.value = ''; // Clear invalid input
                     return;
                 }
 
@@ -63,6 +64,10 @@
 
         verificationForm.addEventListener('submit', (e) => {
             updateFullCode();
+            if (fullCodeInput.value.length !== 6) {
+                alert('Il codice di verifica deve essere di 6 cifre.');
+                e.preventDefault();
+            }
         });
     });
 </script>

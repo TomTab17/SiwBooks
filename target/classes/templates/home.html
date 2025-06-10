@@ -3,6 +3,7 @@
 <head>
     <title>Benvenuto su SiwBooks</title>
     <link rel="stylesheet" th:href="@{/css/home.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="admin-button-container" th:if="${isAdmin}">
@@ -10,50 +11,56 @@
     </div>
 
     <div class="container">
-        <h1>
-            <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
-        </h1>
+        <header class="main-header">
+            <h1>
+                <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
+            </h1>
+            <p class="tagline">La tua prossima storia ti aspetta.</p>
+        </header>
 
-        <form th:action="@{/books/search}" method="get" class="search-form">
-            <input type="text" name="q" placeholder="Cerca libri..." />
-            <button type="submit">Cerca</button>
-        </form>
+        <section class="search-section">
+            <form th:action="@{/books/search}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Cerca libri, autori, generi..." />
+                <button type="submit">Cerca</button>
+            </form>
+        </section>
 
-        <p class="welcome-text">Scopri i nostri libri o accedi al tuo profilo.</p>
-
-        <div class="nav-links">
-            <a th:href="@{/login}">Login</a> |
-            <a th:href="@{/register}">Registrati</a> |
-            <a th:href="@{/books}">Sfoglia libri</a>
-        </div>
+        <section class="call-to-action-section">
+            <p class="welcome-text">Esplora la nostra vasta collezione o accedi ai servizi personalizzati.</p>
+            <div class="nav-links">
+                <a th:href="@{/login}" class="nav-btn">Accedi</a>
+                <a th:href="@{/register}" class="nav-btn">Registrati</a>
+                <a th:href="@{/books}" class="nav-btn primary-btn">Sfoglia Libri</a>
+            </div>
+        </section>
 
         <div id="adminModal" class="modal" th:if="${isAdmin}">
             <div class="modal-content">
                 <span class="close-button" onclick="closeAdminModal()">&times;</span>
-                <h2>Strumenti Admin</h2>
+                <h2>Strumenti Amministrazione</h2>
                 <div class="admin-buttons">
-                    <a th:href="@{/admin/authors/new}" class="btn">Aggiungi autori</a>
-                    <a th:href="@{/admin/books/new}" class="btn">Aggiungi libri</a>
-                    <a th:href="@{/logout}" class="btn btn-exit">Esci</a>
+                    <a th:href="@{/admin/authors/new}" class="btn">Aggiungi Autore</a>
+                    <a th:href="@{/admin/books/new}" class="btn">Aggiungi Libro</a>
+                    <a th:href="@{/logout}" class="btn btn-exit">Esci dalla sessione</a>
                 </div>
             </div>
         </div>
 
         <section class="latest-books-section">
-            <h2>Ultimi libri caricati</h2>
+            <h2>Novità Editoriali</h2>
             <div class="latest-books-slider">
                 <div class="slider-track" th:if="${books != null}">
                     <div class="book-card" th:each="book : ${books}">
                         <a th:href="@{'/books/' + ${book.id}}">
                             <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                            <p th:text="${book.title}"></p>
-                        </a>
+                            <h3 th:text="${book.title}"></h3>
+                            </a>
                     </div>
                     <div class="book-card" th:each="book : ${books}">
                         <a th:href="@{'/books/' + ${book.id}}">
                             <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                            <p th:text="${book.title}"></p>
-                        </a>
+                            <h3 th:text="${book.title}"></h3>
+                            </a>
                     </div>
                 </div>
             </div>

@@ -1,153 +1,269 @@
-/* Container generale */
+/* Stili Generali e Sfondo */
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif; /* Font pulito e professionale per il corpo */
+    background: linear-gradient(135deg, #f0f4f8 0%, #e9edf2 100%); /* Sfumatura molto sottile, grigio-blu */
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Previene scroll orizzontale in eccesso */
+}
+
 .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    max-width: 1000px; /* Più largo per un look più espanso */
+    margin: 40px auto; /* Più spazio in alto e in basso */
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Ombra più soft e diffusa */
     text-align: center;
+    flex-grow: 1;
 }
 
-/* Pulsante Admin in alto a sinistra */
-.admin-button-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 999;
+/* Header Principale */
+.main-header {
+    margin-bottom: 40px;
 }
 
-.admin-open-modal {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 18px;
-    font-size: 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.admin-open-modal:hover {
-    background-color: #0056b3;
-}
-
-/* Titolo principale */
 h1 {
-    font-size: 3em;
+    font-family: 'Montserrat', sans-serif; /* Font più incisivo per i titoli */
+    font-size: 3.8em; /* Grande e d'impatto */
+    color: #2c3e50; /* Blu scuro professionale */
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: -1px; /* Rende il testo più compatto */
 }
-
 
 .logo-siwbooks-large {
     height: auto;
-    width: 300px;
+    width: 350px; /* Ancora più grande */
     max-width: 100%;
     vertical-align: middle;
-    margin: 0;
 }
 
+.tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em; /* Sottotitolo prominente */
+    color: #555;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+/* Pulsante Admin */
+.admin-button-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 999;
+}
+
+.admin-open-modal {
+    background-color: #00a896; /* Verde/azzurro del logo come accento */
+    color: white;
+    padding: 12px 22px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px; /* Meno arrotondato per professionalità */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.admin-open-modal:hover {
+    background-color: #008f7e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Sezione Ricerca */
+.search-section {
+    margin: 50px 0; /* Più spazio in alto e in basso */
+}
 
 .search-form {
-    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    max-width: 700px; /* Contenuta in larghezza */
+    margin: 0 auto;
+    border: 1px solid #ddd; /* Bordo sottile e pulito */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Ombra molto leggera */
 }
 
 .search-form input[type="text"] {
-    padding: 8px 12px;
-    width: 60%;
-    font-size: 1em;
-    border: 2px solid #007BFF;
-    border-radius: 4px 0 0 4px;
+    flex-grow: 1;
+    padding: 15px 20px; /* Più padding */
+    font-size: 1.15em; /* Testo più grande */
+    border: none;
     outline: none;
-}
-
-.search-form button {
-    padding: 9px 15px;
-    font-size: 1em;
-    border: 2px solid #007BFF;
-    border-left: none;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Testo centrale */
-.welcome-text {
-    font-size: 1.2em;
-    margin-bottom: 20px;
+    background-color: #fcfdff;
     color: #333;
 }
 
-/* Link navigazione */
-.nav-links a {
+.search-form input[type="text"]::placeholder {
+    color: #889;
+}
+
+.search-form button {
+    padding: 15px 30px; /* Più padding per il bottone */
+    font-size: 1.15em;
+    border: none;
+    background-color: #2980b9; /* Un blu più professionale per la ricerca */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-form button:hover {
+    background-color: #2471a3;
+    transform: translateX(2px);
+}
+
+/* Sezione Call-to-Action */
+.call-to-action-section {
+    margin: 60px 0; /* Molto spazio */
+}
+
+.welcome-text {
+    font-size: 1.4em; /* Testo più grande e chiaro */
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Maggior spazio tra i bottoni */
+}
+
+.nav-links .nav-btn {
     text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
-    margin: 0 8px;
+    color: #2c3e50; /* Colore scuro per i bottoni secondari */
+    background-color: #f0f4f8; /* Sfondo chiaro e sottile */
+    padding: 14px 30px;
+    border-radius: 6px;
+    font-weight: 600; /* Più bold */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: 1px solid #dbe2e9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.nav-links a:hover {
-    text-decoration: underline;
+.nav-links .nav-btn:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* Sezione ultimi libri */
+.nav-links .primary-btn {
+    background-color: #00a896; /* Il colore del logo come bottone principale */
+    color: white;
+    border: none;
+    box-shadow: 0 6px 15px rgba(0, 168, 150, 0.25);
+}
+
+.nav-links .primary-btn:hover {
+    background-color: #008f7e;
+    box-shadow: 0 8px 20px rgba(0, 168, 150, 0.35);
+}
+
+/* Sezione Novità Editoriali */
 .latest-books-section {
-    margin-top: 40px;
-    text-align: left;
+    margin-top: 80px; /* Molto spazio sopra */
+    padding-top: 40px; /* Padding interno */
+    border-top: 1px solid #eee; /* Linea divisoria sottile */
 }
 
 .latest-books-section h2 {
-    margin-bottom: 15px;
-    color: #007BFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em; /* Titolo grande */
+    color: #2c3e50;
+    margin-bottom: 40px; /* Più spazio sotto il titolo */
+    text-align: center;
+    font-weight: 700; /* Più forte */
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.latest-books-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #00a896; /* Linea colorata sotto il titolo */
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 /* Slider orizzontale */
 .latest-books-slider {
     overflow: hidden;
     position: relative;
-    height: 220px;
+    height: 340px; /* Più spazio per le card */
+    padding: 20px 0;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02); /* Ombra interna leggera */
+    border-radius: 8px;
 }
 
 .slider-track {
     display: flex;
-    width: calc(200px * 20);
-    animation: scroll-left 40s linear infinite;
+    width: calc(260px * 20); /* Regolato per la nuova dimensione delle card */
+    animation: scroll-left 60s linear infinite; /* Rallentato per fluidità */
 }
 
 .book-card {
-    flex: 0 0 180px;
+    flex: 0 0 240px; /* Card più grandi */
     margin-right: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Ombra più pulita */
     text-align: center;
-    padding: 10px;
-    transition: transform 0.3s ease;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
 }
 
 .book-card:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px); /* Effetto "lift" più marcato */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.book-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .book-card img {
-    width: 160px;
-    height: 200px;
+    width: 100%; /* Larghezza massima per l'immagine */
+    height: 250px; /* Altezza fissa per coerenza */
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 8px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.book-card p {
-    font-size: 1em;
-    color: #333;
+.book-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em; /* Titolo del libro più grande */
+    color: #2c3e50;
     margin: 0;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* Punti sospensivi per titoli lunghi */
+}
+
+.book-card .book-author { /* Stile opzionale per l'autore */
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
 }
 
 @keyframes scroll-left {
@@ -155,7 +271,7 @@ h1 {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-50%));
+        transform: translateX(calc(-50% - 20px)); /* Adatta lo scroll per un loop perfetto */
     }
 }
 
@@ -169,75 +285,149 @@ h1 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
+    background-color: rgba(0,0,0,0.75); /* Sfondo più scuro per focus */
+    backdrop-filter: blur(6px);
 }
 
 .modal-content {
     background-color: #ffffff;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 10px;
+    margin: 6% auto; /* Posizionato più in alto */
+    padding: 40px;
+    border-radius: 12px;
     width: 90%;
-    max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 580px; /* Più grande */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     text-align: center;
     position: relative;
-    animation: fadeIn 0.4s ease;
+    animation: fadeInScale 0.4s ease-out; /* Nuova animazione */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: 700;
 }
 
 .close-button {
     position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 24px;
+    top: 18px;
+    right: 25px;
+    font-size: 32px;
     font-weight: bold;
-    color: #999;
+    color: #bbb;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .close-button:hover {
-    color: #000;
+    color: #777;
 }
 
 /* Bottoni nella modale */
 .admin-buttons {
-    margin-top: 1rem;
+    margin-top: 1.8rem;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .admin-buttons .btn {
-    padding: 0.8rem;
+    padding: 1.1rem;
     text-decoration: none;
     color: white;
-    background-color: #007bff;
+    background-color: #2980b9; /* Blu per i bottoni admin */
     text-align: center;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.25);
 }
 
 .admin-buttons .btn:hover {
-    background-color: #0056b3;
+    background-color: #2471a3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(41, 128, 185, 0.35);
 }
 
 .admin-buttons .btn-exit {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Rosso per l'uscita */
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.25);
 }
 
 .admin-buttons .btn-exit:hover {
-    background-color: #b02a37;
+    background-color: #c82333;
+    box-shadow: 0 8px 18px rgba(220, 53, 69, 0.35);
 }
 
-.logo-siwbooks {
-    height: 1.2em;
-    margin-left: 10px;
-    vertical-align: middle;
+/* Media Queries per la responsività */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.8em;
+    }
+
+    .logo-siwbooks-large {
+        width: 250px;
+    }
+
+    .tagline {
+        font-size: 1.2em;
+    }
+
+    .search-form {
+        flex-direction: column;
+        max-width: 100%;
+        box-shadow: none; /* Rimuovi ombra su mobile */
+    }
+
+    .search-form input[type="text"],
+    .search-form button {
+        border-radius: 8px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .search-form button {
+        margin-left: 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .latest-books-section h2 {
+        font-size: 2em;
+    }
+
+    .latest-books-slider {
+        height: 300px;
+        padding: 10px 0;
+    }
+
+    .book-card {
+        flex: 0 0 180px;
+        padding: 15px;
+    }
+
+    .book-card img {
+        height: 200px;
+    }
+
+    .modal-content {
+        margin: 5% auto;
+        padding: 30px;
+    }
 }
