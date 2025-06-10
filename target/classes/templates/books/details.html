@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Dettaglio Libro</title></head>
+<head>
+    <title>Dettaglio Libro</title>
+    <link rel="stylesheet" href="/css/details.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
 <body>
-<h1 th:text="${book.title}">Titolo</h1>
-<p th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>
-<div th:if="${book.imagePath != null}">
-    <img th:src="@{${book.imagePath}}" alt="Copertina di copertina" style="max-width:200px;"/>
-</div>
+    <div class="container">
+        <header>
+            <h1 th:text="${book.title}">Titolo del Libro</h1>
+            <p class="publication-info" th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>
+        </header>
 
-<div>
-    <h2>Autori</h2>
-    <ul>
-        <li th:each="author : ${book.authors}">
-            <span th:text="${author.firstName + ' ' + author.lastName}">Autore</span>
-        </li>
-    </ul>
-</div>
+        <section class="book-details">
+            <div class="book-image" th:if="${book.imagePath != null}">
+                <img th:src="@{${book.imagePath}}" alt="Copertina di copertina"/>
+            </div>
 
+            <div class="authors-section">
+                <h2>Autori</h2>
+                <ul class="author-list">
+                    <li th:each="author : ${book.authors}">
+                        <span th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
+        <div class="back-button-container">
+            <a href="javascript:history.back()" class="back-button">Torna Indietro</a>
+        </div>
+    </div>
 </body>
 </html>

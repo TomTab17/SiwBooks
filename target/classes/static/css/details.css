@@ -1,0 +1,206 @@
+:root {
+    --deep-blue: #0A3C52; /* Azzurro molto scuro, quasi navy */
+    --primary-blue: #0E6BA8; /* Azzurro scuro dominante */
+    --secondary-blue: #1C8EF9; /* Azzurro brillante per accenti */
+    --light-blue: #ADD8E6; /* Azzurro chiaro per sfumature e sfondi secondari */
+    --very-light-blue: #E0F2F7; /* Azzurro chiarissimo per sfondi leggeri */
+    --dark-text: #2c3e50;
+    --light-text: #7f8c8d;
+    --white: #ffffff;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--primary-blue) 100%);
+    color: var(--white);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    padding: 40px;
+    margin: 30px;
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeIn 1s ease-out;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--very-light-blue);
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--deep-blue);
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px var(--shadow-light);
+}
+
+.publication-info {
+    font-size: 1.1em;
+    color: var(--light-text);
+    font-weight: 600;
+}
+
+.book-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.book-image {
+    flex: 0 0 auto;
+    max-width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    border: 3px solid var(--primary-blue);
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-image:hover {
+    transform: translateY(-5px);
+}
+
+.book-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.authors-section {
+    flex: 1;
+    min-width: 280px;
+}
+
+.authors-section h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--deep-blue);
+    font-size: 2em;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--very-light-blue);
+    padding-bottom: 5px;
+}
+
+.author-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.author-list li {
+    background-color: var(--very-light-blue);
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    border-left: 6px solid var(--secondary-blue);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.1em;
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+.author-list li:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+/* Stili per il pulsante "Torna Indietro" */
+.back-button-container {
+    text-align: center;
+    margin-top: 40px; /* Spazio sopra il pulsante */
+    padding-top: 20px;
+    border-top: 1px solid var(--very-light-blue); /* Bordo superiore per separazione */
+}
+
+.back-button {
+    display: inline-block; /* Rende il link un blocco per padding e margini */
+    background-color: var(--deep-blue); /* Sfondo del pulsante azzurro molto scuro */
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none; /* Rimuove la sottolineatura del link */
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.back-button:hover {
+    background-color: var(--primary-blue); /* Cambia in azzurro scuro primario al hover */
+    transform: translateY(-2px); /* Effetto leggero di sollevamento */
+    box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media Queries per la Responsività */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 15px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .book-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-image {
+        max-width: 80%;
+    }
+
+    .authors-section {
+        min-width: unset;
+        width: 100%;
+        text-align: center;
+    }
+
+    .author-list li {
+        justify-content: center;
+        text-align: center;
+        border-left: none;
+        border-bottom: 4px solid var(--secondary-blue);
+    }
+
+    .back-button {
+        width: 100%; /* Il pulsante occupa tutta la larghezza su mobile */
+        box-sizing: border-box;
+    }
+}

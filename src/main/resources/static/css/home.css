@@ -1,23 +1,23 @@
 /* Stili Generali e Sfondo */
 body {
     margin: 0;
-    font-family: 'Open Sans', sans-serif; /* Font pulito e professionale per il corpo */
-    background: linear-gradient(135deg, #f0f4f8 0%, #e9edf2 100%); /* Sfumatura molto sottile, grigio-blu */
+    font-family: 'Open Sans', sans-serif; 
+    background: linear-gradient(135deg, #f0f4f8 0%, #e9edf2 100%); 
     color: #333;
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Previene scroll orizzontale in eccesso */
+    overflow-x: hidden; 
 }
 
 .container {
-    max-width: 1000px; /* Più largo per un look più espanso */
-    margin: 40px auto; /* Più spazio in alto e in basso */
+    max-width: 1000px; 
+    margin: 40px auto; 
     padding: 40px;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Ombra più soft e diffusa */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
     text-align: center;
     flex-grow: 1;
 }
@@ -28,26 +28,26 @@ body {
 }
 
 h1 {
-    font-family: 'Montserrat', sans-serif; /* Font più incisivo per i titoli */
-    font-size: 3.8em; /* Grande e d'impatto */
-    color: #2c3e50; /* Blu scuro professionale */
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 3.8em;
+    color: #2c3e50;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    letter-spacing: -1px; /* Rende il testo più compatto */
+    letter-spacing: -1px; 
 }
 
 .logo-siwbooks-large {
     height: auto;
-    width: 350px; /* Ancora più grande */
+    width: 350px; 
     max-width: 100%;
     vertical-align: middle;
 }
 
 .tagline {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.6em; /* Sottotitolo prominente */
+    font-size: 1.3em; 
     color: #555;
     margin-top: 5px;
     font-weight: 400;
@@ -62,12 +62,12 @@ h1 {
 }
 
 .admin-open-modal {
-    background-color: #00a896; /* Verde/azzurro del logo come accento */
+    background-color: #00a896; 
     color: white;
     padding: 12px 22px;
     font-size: 16px;
     border: none;
-    border-radius: 6px; /* Meno arrotondato per professionalità */
+    border-radius: 6px; 
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
@@ -81,24 +81,24 @@ h1 {
 
 /* Sezione Ricerca */
 .search-section {
-    margin: 50px 0; /* Più spazio in alto e in basso */
+    margin: 50px 0; 
 }
 
 .search-form {
     display: flex;
     justify-content: center;
-    max-width: 700px; /* Contenuta in larghezza */
+    max-width: 700px; 
     margin: 0 auto;
-    border: 1px solid #ddd; /* Bordo sottile e pulito */
+    border: 1px solid #ddd; 
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Ombra molto leggera */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
 }
 
 .search-form input[type="text"] {
     flex-grow: 1;
-    padding: 15px 20px; /* Più padding */
-    font-size: 1.15em; /* Testo più grande */
+    padding: 15px 20px;
+    font-size: 1.15em; 
     border: none;
     outline: none;
     background-color: #fcfdff;
@@ -110,10 +110,10 @@ h1 {
 }
 
 .search-form button {
-    padding: 15px 30px; /* Più padding per il bottone */
+    padding: 15px 30px; 
     font-size: 1.15em;
     border: none;
-    background-color: #2980b9; /* Un blu più professionale per la ricerca */
+    background-color: #2980b9; 
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -126,11 +126,11 @@ h1 {
 
 /* Sezione Call-to-Action */
 .call-to-action-section {
-    margin: 60px 0; /* Molto spazio */
+    margin: 60px 0; 
 }
 
 .welcome-text {
-    font-size: 1.4em; /* Testo più grande e chiaro */
+    font-size: 1.4em; 
     color: #555;
     margin-bottom: 30px;
     font-weight: 400;
@@ -139,16 +139,16 @@ h1 {
 .nav-links {
     display: flex;
     justify-content: center;
-    gap: 25px; /* Maggior spazio tra i bottoni */
+    gap: 25px; 
 }
 
 .nav-links .nav-btn {
     text-decoration: none;
-    color: #2c3e50; /* Colore scuro per i bottoni secondari */
-    background-color: #f0f4f8; /* Sfondo chiaro e sottile */
+    color: #2c3e50; 
+    background-color: #f0f4f8; 
     padding: 14px 30px;
     border-radius: 6px;
-    font-weight: 600; /* Più bold */
+    font-weight: 600; 
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     border: 1px solid #dbe2e9;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -161,7 +161,7 @@ h1 {
 }
 
 .nav-links .primary-btn {
-    background-color: #00a896; /* Il colore del logo come bottone principale */
+    background-color: #00a896; 
     color: white;
     border: none;
     box-shadow: 0 6px 15px rgba(0, 168, 150, 0.25);
@@ -174,18 +174,18 @@ h1 {
 
 /* Sezione Novità Editoriali */
 .latest-books-section {
-    margin-top: 80px; /* Molto spazio sopra */
-    padding-top: 40px; /* Padding interno */
-    border-top: 1px solid #eee; /* Linea divisoria sottile */
+    margin-top: 80px; 
+    padding-top: 40px; 
+    border-top: 1px solid #eee; 
 }
 
 .latest-books-section h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em; /* Titolo grande */
+    font-size: 2.5em; 
     color: #2c3e50;
-    margin-bottom: 40px; /* Più spazio sotto il titolo */
+    margin-bottom: 40px; 
     text-align: center;
-    font-weight: 700; /* Più forte */
+    font-weight: 700; 
     position: relative;
     padding-bottom: 10px;
 }
@@ -195,7 +195,7 @@ h1 {
     display: block;
     width: 60px;
     height: 3px;
-    background-color: #00a896; /* Linea colorata sotto il titolo */
+    background-color: #00a896; 
     margin: 10px auto 0;
     border-radius: 2px;
 }
@@ -204,24 +204,24 @@ h1 {
 .latest-books-slider {
     overflow: hidden;
     position: relative;
-    height: 340px; /* Più spazio per le card */
+    height: 340px; 
     padding: 20px 0;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.02); /* Ombra interna leggera */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02); 
     border-radius: 8px;
 }
 
 .slider-track {
     display: flex;
-    width: calc(260px * 20); /* Regolato per la nuova dimensione delle card */
-    animation: scroll-left 60s linear infinite; /* Rallentato per fluidità */
+    width: calc(260px * 20); 
+    animation: scroll-left 60s linear infinite; 
 }
 
 .book-card {
-    flex: 0 0 240px; /* Card più grandi */
+    flex: 0 0 240px; 
     margin-right: 20px;
     background: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Ombra più pulita */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
     text-align: center;
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -229,7 +229,7 @@ h1 {
 }
 
 .book-card:hover {
-    transform: translateY(-8px); /* Effetto "lift" più marcato */
+    transform: translateY(-8px); 
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
@@ -240,8 +240,8 @@ h1 {
 }
 
 .book-card img {
-    width: 100%; /* Larghezza massima per l'immagine */
-    height: 250px; /* Altezza fissa per coerenza */
+    width: 100%; 
+    height: 250px; 
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 15px;
