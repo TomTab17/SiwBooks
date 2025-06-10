@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <title>Registrazione</title>
     <link rel="stylesheet" th:href="@{/css/register.css}" href="/css/login.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div class="login-container">
     <h2>Crea un nuovo account</h2>
     <form th:action="@{/register}" th:object="${user}" method="post" class="login-form">
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
         <div class="form-group">
             <label for="firstName">Nome</label>
             <input type="text" th:field="*{firstName}" id="firstName" required />
