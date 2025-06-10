@@ -37,7 +37,6 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    // Nuovo metodo per trovare un utente tramite email
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -47,7 +46,6 @@ public class UserService {
     }
 
     public RegisterResult registerWithVerification(User user) {
-        // 1. Verifica se username o email sono già in uso
         Optional<User> existingUserByUsername = userRepository.findByUsername(user.getUsername());
         if (existingUserByUsername.isPresent()) {
             User foundUser = existingUserByUsername.get();
@@ -68,12 +66,10 @@ public class UserService {
             }
         }
 
-        // Se l'username e l'email non sono in uso, procedi con la registrazione
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setRoles(Set.of("ROLE_USER"));
 
-        // Genera codice di verifica
         String code = String.valueOf(new Random().nextInt(900000) + 100000); // 6 cifre
         user.setVerificationCode(code);
         user.setEnabled(false);
@@ -99,7 +95,32 @@ public class UserService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
-            throw new IllegalStateException("Errore nell'invio della mail", e); // Aggiungi e per stack trace
+            throw new IllegalStateException("Errore nell'invio della mail", e);
+        }
+    }
+
+    // Nuovo metodo per inviare l'email di conferma registrazione
+    private void sendRegistrationConfirmationEmail(User user) {
+        String toAddress = user.getEmail();
+        String subject = "Registrazione completata su SIWBooks!";
+        String content = "Ciao " + user.getFirstName() + ",<br>"
+                + "La tua registrazione a SIWBooks è stata completata con successo! Di seguito i dettagli del tuo account:<br><br>"
+                + "<b>Nome:</b> " + user.getFirstName() + "<br>"
+                + "<b>Cognome:</b> " + user.getLastName() + "<br>"
+                + "<b>Email:</b> " + user.getEmail() + "<br>"
+                + "<b>Username:</b> " + user.getUsername() + "<br><br>"
+                + "Ora puoi accedere al tuo account e iniziare a esplorare i nostri libri!<br><br>"
+                + "Il team di SIWBooks";
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setTo(toAddress);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new IllegalStateException("Errore nell'invio della mail di conferma registrazione", e);
         }
     }
 
@@ -107,10 +128,12 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            if (user.getVerificationCode() != null && user.getVerificationCode().equals(code)) { // Aggiunto null check
+            if (user.getVerificationCode() != null && user.getVerificationCode().equals(code)) {
                 user.setEnabled(true);
                 user.setVerificationCode(null); // pulizia
                 userRepository.save(user);
+                // Invia l'email di conferma registrazione DOPO aver abilitato l'utente
+                sendRegistrationConfirmationEmail(user);
                 return true;
             }
         }
