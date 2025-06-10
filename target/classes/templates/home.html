@@ -1,83 +1,91 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benvenuto su SiwBooks</title>
     <link rel="stylesheet" th:href="@{/css/home.css}" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="admin-button-container" th:if="${isAdmin}">
-        <button class="admin-open-modal" onclick="openAdminModal()">Strumenti Admin</button>
+        <button class="admin-open-modal" onclick="openAdminModal()">
+            <i class="fas fa-user-cog"></i> Strumenti Admin
+        </button>
     </div>
 
     <div class="container">
         <header class="main-header">
-            <h1>
+            <div class="logo-area">
                 <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
-            </h1>
-            <p class="tagline">"Trasformiamo pagine in pixel e storie in eternità"</p>
+                <p class="tagline">Trasformiamo pagine in pixel e storie in eternità.</p>
+            </div>
+            
+            <nav class="main-nav">
+                <a th:href="@{/books}" class="nav-btn primary-btn"><i class="fas fa-book-open"></i> Sfoglia Libri</a>
+                <a th:href="@{/login}" class="nav-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
+                <a th:href="@{/register}" class="nav-btn"><i class="fas fa-user-plus"></i> Registrati</a>
+            </nav>
         </header>
 
-        <section class="search-section">
-            <form th:action="@{/books/search}" method="get" class="search-form">
-                <input type="text" name="q" placeholder="Cerca libri, autori, generi..." />
-                <button type="submit">Cerca</button>
-            </form>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>Trova la tua prossima grande lettura!</h2>
+                <p>Esplora un universo di storie, scopri nuovi autori e lasciati ispirare.</p>
+                <form th:action="@{/books/search}" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="Cerca per titolo, autore, genere..." />
+                    <button type="submit"><i class="fas fa-search"></i> Cerca</button>
+                </form>
+            </div>
         </section>
-
-        <section class="call-to-action-section">
-            <p class="welcome-text">Esplora la nostra vasta collezione o accedi ai servizi personalizzati.</p>
-            <div class="nav-links">
-                <a th:href="@{/login}" class="nav-btn">Accedi</a>
-                <a th:href="@{/register}" class="nav-btn">Registrati</a>
-                <a th:href="@{/books}" class="nav-btn primary-btn">Sfoglia Libri</a>
+        
+        <section class="latest-books-section">
+            <h2><i class="fas fa-star"></i> Novità Editoriali</h2>
+            <div class="latest-books-slider" th:if="${books != null}">
+                <div class="slider-track">
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
+                            <h3 th:text="${book.title}"></h3>
+                        </a>
+                    </div>
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
+                            <h3 th:text="${book.title}"></h3>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
         <div id="adminModal" class="modal" th:if="${isAdmin}">
             <div class="modal-content">
                 <span class="close-button" onclick="closeAdminModal()">&times;</span>
-                <h2>Strumenti Amministrazione</h2>
+                <h2><i class="fas fa-toolbox"></i> Strumenti Amministrazione</h2>
                 <div class="admin-buttons">
-                    <a th:href="@{/admin/authors/new}" class="btn">Aggiungi Autore</a>
-                    <a th:href="@{/admin/books/new}" class="btn">Aggiungi Libro</a>
-                    <a th:href="@{/logout}" class="btn btn-exit">Esci dalla sessione</a>
+                    <a th:href="@{/admin/authors/new}" class="btn"><i class="fas fa-user-edit"></i> Aggiungi Autore</a>
+                    <a th:href="@{/admin/books/new}" class="btn"><i class="fas fa-plus-square"></i> Aggiungi Libro</a>
+                    <a th:href="@{/logout}" class="btn btn-exit"><i class="fas fa-power-off"></i> Esci dalla sessione</a>
                 </div>
             </div>
         </div>
-
-        <section class="latest-books-section">
-            <h2>Novità Editoriali</h2>
-            <div class="latest-books-slider">
-                <div class="slider-track" th:if="${books != null}">
-                    <div class="book-card" th:each="book : ${books}">
-                        <a th:href="@{'/books/' + ${book.id}}">
-                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                            <h3 th:text="${book.title}"></h3>
-                            </a>
-                    </div>
-                    <div class="book-card" th:each="book : ${books}">
-                        <a th:href="@{'/books/' + ${book.id}}">
-                            <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                            <h3 th:text="${book.title}"></h3>
-                            </a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
     <script>
         function openAdminModal() {
-            document.getElementById("adminModal").style.display = "block";
+            document.getElementById("adminModal").classList.add("show");
         }
+
         function closeAdminModal() {
-            document.getElementById("adminModal").style.display = "none";
+            document.getElementById("adminModal").classList.remove("show");
         }
+
         window.onclick = function(event) {
             const modal = document.getElementById("adminModal");
             if (event.target === modal) {
-                modal.style.display = "none";
+                modal.classList.remove("show");
             }
         }
     </script>

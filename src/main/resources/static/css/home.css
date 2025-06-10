@@ -1,59 +1,102 @@
-/* Stili Generali e Sfondo */
+/* ======== Stili Generali e Sfondo ======== */
 body {
     margin: 0;
-    font-family: 'Open Sans', sans-serif; 
-    background: linear-gradient(135deg, #f0f4f8 0%, #e9edf2 100%); 
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e0f2f7 0%, #c1e4f2 100%);
     color: #333;
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
-    max-width: 1000px; 
-    margin: 40px auto; 
-    padding: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px 50px;
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
     text-align: center;
     flex-grow: 1;
+    border: 1px solid #e0e0e0;
 }
 
-/* Header Principale */
+/* ======== Header ======== */
 .main-header {
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-h1 {
-    font-family: 'Montserrat', sans-serif; 
-    font-size: 3.8em;
-    color: #2c3e50;
-    margin-bottom: 10px;
+.logo-area {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: -1px; 
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .logo-siwbooks-large {
-    height: auto;
-    width: 350px; 
+    width: 250px;
     max-width: 100%;
-    vertical-align: middle;
+    margin-bottom: 5px;
 }
 
 .tagline {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em; 
-    color: #555;
-    margin-top: 5px;
+    font-size: 1.1rem;
+    color: #666;
     font-weight: 400;
+    margin-left: 5px;
+    text-align: left; /* Assicura allineamento corretto in logo-area */
 }
 
-/* Pulsante Admin */
+.main-nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #4a69bd;
+    background-color: #f0f4f8;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #dbe2e9;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.nav-btn:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+    color: #335099;
+}
+
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
+}
+
+/* ======== Pulsante Admin ======== */
 .admin-button-container {
     position: absolute;
     top: 30px;
@@ -62,372 +105,553 @@ h1 {
 }
 
 .admin-open-modal {
-    background-color: #00a896; 
+    background-color: #28a745;
     color: white;
     padding: 12px 22px;
-    font-size: 16px;
+    font-size: 1rem;
     border: none;
-    border-radius: 6px; 
+    border-radius: 6px;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .admin-open-modal:hover {
-    background-color: #008f7e;
+    background-color: #218838;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-/* Sezione Ricerca */
-.search-section {
-    margin: 50px 0; 
+/* ======== Hero Section ======== */
+.hero-section {
+    background: url('/media/libri.jpg') no-repeat center center/cover; /* Assicurati che 'libri.jpg' esista o cambialo */
+    padding: 80px 20px;
+    border-radius: 12px;
+    margin-bottom: 60px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden; /* Importante per i bordi arrotondati con l'immagine */
 }
 
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* ======== Ricerca ======== */
 .search-form {
     display: flex;
-    justify-content: center;
-    max-width: 700px; 
+    max-width: 700px;
     margin: 0 auto;
-    border: 1px solid #ddd; 
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 .search-form input[type="text"] {
     flex-grow: 1;
-    padding: 15px 20px;
-    font-size: 1.15em; 
+    padding: 18px 25px;
+    font-size: 1rem;
     border: none;
     outline: none;
-    background-color: #fcfdff;
+    background-color: transparent;
     color: #333;
 }
 
-.search-form input[type="text"]::placeholder {
-    color: #889;
+.search-form input::placeholder {
+    color: #888;
 }
 
 .search-form button {
-    padding: 15px 30px; 
-    font-size: 1.15em;
+    padding: 18px 30px;
+    font-size: 1rem;
     border: none;
-    background-color: #2980b9; 
+    background-color: #007bff;
     color: white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .search-form button:hover {
-    background-color: #2471a3;
+    background-color: #0056b3;
     transform: translateX(2px);
 }
 
-/* Sezione Call-to-Action */
-.call-to-action-section {
-    margin: 60px 0; 
-}
-
-.welcome-text {
-    font-size: 1.4em; 
-    color: #555;
-    margin-bottom: 30px;
-    font-weight: 400;
-}
-
-.nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 25px; 
-}
-
-.nav-links .nav-btn {
-    text-decoration: none;
-    color: #2c3e50; 
-    background-color: #f0f4f8; 
-    padding: 14px 30px;
-    border-radius: 6px;
-    font-weight: 600; 
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    border: 1px solid #dbe2e9;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.nav-links .nav-btn:hover {
-    background-color: #e2e8f0;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-
-.nav-links .primary-btn {
-    background-color: #00a896; 
-    color: white;
-    border: none;
-    box-shadow: 0 6px 15px rgba(0, 168, 150, 0.25);
-}
-
-.nav-links .primary-btn:hover {
-    background-color: #008f7e;
-    box-shadow: 0 8px 20px rgba(0, 168, 150, 0.35);
-}
-
-/* Sezione Novità Editoriali */
+/* ======== Novità Editoriali ======== */
 .latest-books-section {
-    margin-top: 80px; 
-    padding-top: 40px; 
-    border-top: 1px solid #eee; 
+    margin-top: 80px;
+    padding-top: 50px;
+    border-top: 1px solid #f0f0f0;
 }
 
 .latest-books-section h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em; 
-    color: #2c3e50;
-    margin-bottom: 40px; 
+    font-size: 2.2rem;
+    font-weight: 700;
     text-align: center;
-    font-weight: 700; 
+    color: #2c3e50;
+    margin-bottom: 40px;
     position: relative;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 .latest-books-section h2::after {
     content: '';
     display: block;
-    width: 60px;
-    height: 3px;
-    background-color: #00a896; 
+    width: 80px;
+    height: 4px;
+    background-color: #007bff;
     margin: 10px auto 0;
     border-radius: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* Slider orizzontale */
 .latest-books-slider {
     overflow: hidden;
-    position: relative;
-    height: 340px; 
+    height: 380px;
+    background-color: #fcfdff;
+    border-radius: 10px;
     padding: 20px 0;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.02); 
-    border-radius: 8px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.03);
+    border: 1px solid #e5e5e5;
 }
 
 .slider-track {
     display: flex;
-    width: calc(260px * 20); 
-    animation: scroll-left 60s linear infinite; 
-}
-
-.book-card {
-    flex: 0 0 240px; 
-    margin-right: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
-    text-align: center;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #f0f0f0;
-}
-
-.book-card:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-.book-card a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.book-card img {
-    width: 100%; 
-    height: 250px; 
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.book-card h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em; /* Titolo del libro più grande */
-    color: #2c3e50;
-    margin: 0;
-    font-weight: 600;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis; /* Punti sospensivi per titoli lunghi */
-}
-
-.book-card .book-author { /* Stile opzionale per l'autore */
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 5px;
+    /* La larghezza deve essere sufficiente a contenere almeno il doppio degli elementi per un loop fluido */
+    width: calc(300px * 20); /* Esempio: 20 schede da 280px + 20px di margine */
+    animation: scroll-left 60s linear infinite;
 }
 
 @keyframes scroll-left {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-50% - 20px)); /* Adatta lo scroll per un loop perfetto */
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 10px)); /* Adattato per loop perfetto con nuova card width */ }
 }
 
-/* MODALE Admin */
+.book-card {
+    flex: 0 0 280px; /* Larghezza scheda libro */
+    margin-right: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border-color: #007bff;
+}
+
+.book-card img {
+    width: 100%;
+    height: 280px; /* Altezza copertina aumentata */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover img {
+    transform: scale(1.02);
+}
+
+.book-card h3 {
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ======== Modale Admin ======== */
 .modal {
-    display: none;
+    display: none; /* Cruciale: nascosto di default */
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.75); /* Sfondo più scuro per focus */
-    backdrop-filter: blur(6px);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+}
+
+/* Classe per mostrare la modale via JavaScript */
+.modal.show {
+    display: flex; /* La modale diventa flex solo quando ha la classe 'show' */
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-    background-color: #ffffff;
-    margin: 6% auto; /* Posizionato più in alto */
+    background-color: white;
     padding: 40px;
-    border-radius: 12px;
+    border-radius: 15px;
     width: 90%;
-    max-width: 580px; /* Più grande */
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 650px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     text-align: center;
     position: relative;
-    animation: fadeInScale 0.4s ease-out; /* Nuova animazione */
+    animation: fadeInScale 0.5s ease-out;
 }
 
 @keyframes fadeInScale {
-    from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+    from { opacity: 0; transform: translateY(-70px) scale(0.85); }
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .modal-content h2 {
+    font-size: 2rem;
     font-family: 'Montserrat', sans-serif;
-    color: #2c3e50;
-    font-size: 2em;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     font-weight: 700;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 .close-button {
     position: absolute;
     top: 18px;
     right: 25px;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
-    color: #bbb;
+    color: #aaa;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .close-button:hover {
     color: #777;
+    transform: rotate(90deg);
 }
 
-/* Bottoni nella modale */
+/* ======== Pulsanti Admin Modale ======== */
 .admin-buttons {
-    margin-top: 1.8rem;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .admin-buttons .btn {
-    padding: 1.1rem;
-    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #17a2b8; /* Azzurro per i bottoni admin */
     color: white;
-    background-color: #2980b9; /* Blu per i bottoni admin */
-    text-align: center;
-    border-radius: 8px;
+    border-radius: 10px;
+    text-decoration: none;
     font-weight: 600;
-    font-size: 1.1em;
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.25);
+    box-shadow: 0 5px 12px rgba(23, 162, 184, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .admin-buttons .btn:hover {
-    background-color: #2471a3;
+    background-color: #138496;
     transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(41, 128, 185, 0.35);
+    box-shadow: 0 10px 20px rgba(23, 162, 184, 0.35);
 }
 
 .admin-buttons .btn-exit {
     background-color: #dc3545; /* Rosso per l'uscita */
-    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.25);
+    box-shadow: 0 5px 12px rgba(220, 53, 69, 0.25);
 }
 
 .admin-buttons .btn-exit:hover {
     background-color: #c82333;
-    box-shadow: 0 8px 18px rgba(220, 53, 69, 0.35);
+    box-shadow: 0 10px 20px rgba(220, 53, 69, 0.35);
 }
 
-/* Media Queries per la responsività */
-@media (max-width: 768px) {
+/* ======== Responsività ======== */
+@media (max-width: 992px) {
     .container {
-        margin: 20px auto;
-        padding: 20px;
+        padding: 30px;
+        margin: 30px auto;
     }
 
-    h1 {
-        font-size: 2.8em;
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
     }
 
-    .logo-siwbooks-large {
-        width: 250px;
-    }
-
-    .tagline {
-        font-size: 1.2em;
+    .main-nav {
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
     .search-form {
         flex-direction: column;
-        max-width: 100%;
-        box-shadow: none; /* Rimuovi ombra su mobile */
+    }
+
+    .search-form input,
+    .search-form button {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2.4rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .latest-books-section h2 {
+        font-size: 2rem;
+    }
+
+    .book-card {
+        flex: 0 0 250px; /* leggermente più piccole su tablet */
+    }
+
+    .modal-content {
+        padding: 30px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .admin-button-container {
+        top: 20px;
+        left: 20px;
+    }
+
+    .logo-siwbooks-large {
+        width: 200px;
+    }
+
+    .tagline {
+        font-size: 1em;
+    }
+
+    .hero-section {
+        padding: 60px 15px;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h2 {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+        margin-bottom: 30px;
     }
 
     .search-form input[type="text"],
     .search-form button {
-        border-radius: 8px;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .search-form button {
-        margin-left: 0;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 15px;
+        padding: 15px 20px;
+        font-size: 0.95em;
     }
 
     .latest-books-section h2 {
-        font-size: 2em;
+        font-size: 1.8em;
+        margin-bottom: 30px;
     }
 
     .latest-books-slider {
-        height: 300px;
-        padding: 10px 0;
+        height: 320px; /* Ridotta leggermente per schermi più piccoli */
+        padding: 15px 0;
     }
 
     .book-card {
-        flex: 0 0 180px;
+        flex: 0 0 200px; /* Riduci ulteriormente per mobile */
         padding: 15px;
+        margin-right: 15px;
     }
 
     .book-card img {
         height: 200px;
     }
 
+    .book-card h3 {
+        font-size: 1.1em;
+    }
+
     .modal-content {
         margin: 5% auto;
-        padding: 30px;
+        padding: 25px;
+        border-radius: 10px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.6em;
+        gap: 10px;
+    }
+
+    .close-button {
+        font-size: 30px;
+        top: 15px;
+        right: 20px;
+    }
+
+    .admin-buttons {
+        gap: 15px;
+    }
+
+    .admin-buttons .btn {
+        font-size: 1em;
+        padding: 1rem;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .admin-button-container {
+        top: 15px;
+        left: 15px;
+    }
+
+    .logo-siwbooks-large {
+        width: 160px;
+    }
+
+    .tagline {
+        font-size: 0.85em;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        padding: 10px 15px;
+    }
+
+    .hero-section {
+        padding: 40px 10px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.6em;
+    }
+
+    .hero-content p {
+        font-size: 0.9em;
+    }
+
+    .search-form {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .search-form input[type="text"],
+    .search-form button {
+        border-radius: 8px;
+        margin-bottom: 8px; /* Aggiusta margine quando in colonna */
+    }
+
+    .latest-books-section h2 {
+        font-size: 1.6em;
+    }
+
+    .latest-books-slider {
+        height: 280px;
+        padding: 10px 0;
+    }
+
+    .book-card {
+        flex: 0 0 160px;
+        padding: 10px;
+        margin-right: 10px;
+    }
+
+    .book-card img {
+        height: 160px;
+    }
+
+    .book-card h3 {
+        font-size: 0.95em;
+    }
+
+    .modal-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3em;
+    }
+
+    .close-button {
+        font-size: 24px;
+    }
+
+    .admin-buttons {
+        gap: 12px;
+    }
+
+    .admin-buttons .btn {
+        font-size: 0.9em;
+        padding: 0.8rem;
     }
 }
