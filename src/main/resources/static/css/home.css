@@ -57,19 +57,39 @@ body {
 
 .main-nav {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    flex-direction: column; /* Cambiato a column per impilare gli elementi */
+    align-items: flex-end; /* Allinea a destra per il desktop */
+    gap: 15px; /* Spazio tra le sezioni */
+}
+
+/* Nuovi stili per la sezione autenticazione */
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
+    justify-content: flex-end; /* Allinea a destra */
+}
+
+.not-logged-in-text {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    margin: 0; /* Rimuovi margini predefiniti del paragrafo */
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px; /* Spazio tra i pulsanti Accedi e Registrati */
 }
 
 .nav-btn {
     text-decoration: none;
-    color: #4a69bd;
-    background-color: #f0f4f8;
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: 1px solid #dbe2e9;
+    border: 1px solid;
     box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
@@ -77,17 +97,25 @@ body {
     font-size: 1rem;
 }
 
-.nav-btn:hover {
+/* Stile per i pulsanti secondari (Accedi, Registrati) */
+.secondary-btn {
+    color: #4a69bd;
+    background-color: #f0f4f8;
+    border-color: #dbe2e9;
+}
+
+.secondary-btn:hover {
     background-color: #e2e8f0;
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(0,0,0,0.1);
     color: #335099;
 }
 
+/* Stile per il pulsante primario (Sfoglia tutti i libri) */
 .primary-btn {
     background-color: #007bff;
     color: white;
-    border: none;
+    border-color: #007bff; /* Assicurati che il bordo sia dello stesso colore */
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
 }
 
@@ -95,6 +123,14 @@ body {
     background-color: #0056b3;
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
 }
+
+/* Stile specifico per il pulsante "Sfoglia tutti i libri" per renderlo più grande */
+.browse-all-btn {
+    padding: 12px 25px; /* Aumenta il padding */
+    font-size: 1.1rem; /* Aumenta la dimensione del testo */
+    align-self: flex-end; /* Allinea a destra nel layout a colonna */
+}
+
 
 /* ======== Pulsante Admin ======== */
 .admin-button-container {
@@ -426,8 +462,11 @@ body {
     }
 
     .main-nav {
-        justify-content: center;
-        flex-wrap: wrap;
+        align-items: center; /* Centra gli elementi in colonna */
+    }
+
+    .auth-section {
+        justify-content: center; /* Centra i bottoni di auth */
     }
 
     .search-form {
@@ -537,7 +576,7 @@ body {
     }
 
     .modal-content h2 {
-        font-size: 1.6em;
+        font-size: 1.8em;
         gap: 10px;
     }
 
@@ -552,9 +591,13 @@ body {
     }
 
     .admin-buttons .btn {
-        font-size: 1em;
+        font-size: 1.1em;
         padding: 1rem;
         gap: 8px;
+    }
+
+    .browse-all-btn {
+        align-self: center; /* Centra anche qui */
     }
 }
 
@@ -582,8 +625,21 @@ body {
         gap: 10px;
     }
 
+    .auth-section {
+        flex-direction: column; /* Impila testo e bottoni */
+        gap: 10px;
+        align-items: center; /* Centra testo e bottoni */
+    }
+
+    .auth-buttons {
+        flex-direction: column; /* Impila i bottoni Accedi e Registrati */
+        width: 100%;
+        gap: 10px;
+    }
+
     .nav-btn {
         padding: 10px 15px;
+        width: 100%; /* I bottoni riempiono la larghezza disponibile */
     }
 
     .hero-section {
@@ -651,7 +707,12 @@ body {
     }
 
     .admin-buttons .btn {
-        font-size: 0.9em;
+        font-size: 1em;
         padding: 0.8rem;
+    }
+
+    .browse-all-btn {
+        align-self: center; /* Centra anche qui */
+        width: 100%; /* Riempi larghezza */
     }
 }

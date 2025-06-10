@@ -1,0 +1,58 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f8fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 95, 153, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    color: #005f99;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.book-list {
+    list-style: none;
+    padding: 0;
+}
+
+.book-list li {
+    margin: 15px 0;
+    padding: 10px 15px;
+    background-color: #e6f0f8;
+    border-left: 5px solid #005f99;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.book-list li:hover {
+    background-color: #d1e6f4;
+}
+
+.book-link {
+    text-decoration: none;
+    color: #005f99;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.book-link:hover {
+    text-decoration: underline;
+}
+
+.year {
+    color: #666;
+    font-style: italic;
+}

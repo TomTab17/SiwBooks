@@ -23,9 +23,14 @@
             </div>
             
             <nav class="main-nav">
-                <a th:href="@{/books}" class="nav-btn primary-btn"><i class="fas fa-book-open"></i> Sfoglia Libri</a>
-                <a th:href="@{/login}" class="nav-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
-                <a th:href="@{/register}" class="nav-btn"><i class="fas fa-user-plus"></i> Registrati</a>
+                <div class="auth-section">
+                    <p class="not-logged-in-text">Non hai effettuato l'accesso?</p>
+                    <div class="auth-buttons">
+                        <a th:href="@{/login}" class="nav-btn secondary-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
+                        <a th:href="@{/register}" class="nav-btn secondary-btn"><i class="fas fa-user-plus"></i> Registrati</a>
+                    </div>
+                </div>
+                <a th:href="@{/books}" class="nav-btn primary-btn browse-all-btn"><i class="fas fa-book-open"></i> Sfoglia tutti i libri</a>
             </nav>
         </header>
 
@@ -41,7 +46,7 @@
         </section>
         
         <section class="latest-books-section">
-            <h2><i class="fas fa-star"></i> Novità Editoriali</h2>
+            <h2>✨ Novità Editoriali ⤵️</h2>
             <div class="latest-books-slider" th:if="${books != null}">
                 <div class="slider-track">
                     <div class="book-card" th:each="book : ${books}">

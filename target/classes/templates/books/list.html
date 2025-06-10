@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Libri</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Libri</title>
+    <link rel="stylesheet" type="text/css" href="/css/list.css">
+</head>
 <body>
-<h1>Lista Libri</h1>
-<ul>
-    <li th:each="book : ${books}">
-        <a th:href="@{'/books/' + ${book.id}}">
-            <span th:text="${book.title}">Titolo</span>
-        </a> - <span th:text="${book.publicationYear}">Anno</span>
-    </li>
-</ul>
+    <div class="container">
+        <h1>Lista Libri</h1>
+        <ul class="book-list">
+            <li th:each="book : ${books}">
+                <a th:href="@{'/books/' + ${book.id}}" class="book-link">
+                    <span th:text="${book.title}">Titolo</span>
+                </a>
+                <span class="year" th:text="${book.publicationYear}">Anno</span>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
