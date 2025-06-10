@@ -1,0 +1,182 @@
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.verification-container {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.08);
+    text-align: center;
+    width: 100%;
+    max-width: 550px;
+    animation: fadeIn 0.8s ease-out;
+    box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-1.25rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #212529;
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+p {
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    background-color: #f8d7da;
+    border: 1px solid #dc3545;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.verification-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.code-inputs input[type="text"] {
+    width: 3.5rem;
+    height: 4.25rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    border: 2px solid #ced4da;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-in-out;
+    background-color: #fcfdfe;
+    color: #343a40;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    caret-color: #007bff;
+}
+
+.code-inputs input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    outline: none;
+    background-color: #ffffff;
+    transform: scale(1.03);
+}
+
+.code-inputs input[type="text"]:valid {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.1);
+}
+
+button[type="submit"] {
+    background: #007bff;
+    color: white;
+    padding: 0.85rem 1.75rem;
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 123, 255, 0.2);
+}
+
+button[type="submit"]:hover {
+    background: #0056b3;
+    transform: translateY(-0.15rem);
+    box-shadow: 0 0.35rem 0.9rem rgba(0, 123, 255, 0.3);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    background: #004085;
+    box-shadow: none;
+}
+
+@media (max-width: 600px) {
+    .verification-container {
+        margin: 1.25rem;
+        padding: 2rem;
+        max-width: 90%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .code-inputs {
+        gap: 0.5rem;
+    }
+
+    .code-inputs input[type="text"] {
+        width: 3rem;
+        height: 3.8rem;
+        font-size: 1.8rem;
+        border-radius: 0.6rem;
+    }
+
+    button[type="submit"] {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .verification-container {
+        padding: 1.5rem;
+    }
+
+    .code-inputs input[type="text"] {
+        width: 2.5rem;
+        height: 3.2rem;
+        font-size: 1.5rem;
+    }
+}

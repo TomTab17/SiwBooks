@@ -1,19 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Verifica Email</title>
+    <link rel="stylesheet" th:href="@{/css/verify.css}" href="/css/verify.css">
 </head>
 <body>
-<div>
-    <h2>Verifica il tuo indirizzo email</h2>
-    <p th:text="${error}" style="color:red;"></p>
-    <form th:action="@{/verify}" method="post">
+<div class="verification-container">
+    <h2>Verifica il tuo indirizzo email<br>📬 👀</h2>
+    <p th:if="${error}" th:text="${error}" class="error-message"></p>
+    <form th:action="@{/verify}" method="post" class="verification-form" id="verificationForm">
         <input type="hidden" name="username" th:value="${username}" />
-        <label for="code">Codice di verifica:</label>
-        <input type="text" name="code" id="code" required />
+        <div class="form-group digit-inputs">
+            <label for="code1">Codice di verifica:</label>
+            <div class="code-inputs">
+                <input type="text" id="code1" name="code-digit-1" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
+                <input type="text" id="code2" name="code-digit-2" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
+                <input type="text" id="code3" name="code-digit-3" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
+                <input type="text" id="code4" name="code-digit-4" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
+                <input type="text" id="code5" name="code-digit-5" maxlength="1" inputmode="numeric" pattern="[0-9]" required />
+            </div>
+            <input type="hidden" name="code" id="fullCodeInput" />
+        </div>
         <button type="submit">Verifica</button>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const codeInputs = document.querySelectorAll('.code-inputs input[type="text"]');
+        const fullCodeInput = document.getElementById('fullCodeInput');
+        const verificationForm = document.getElementById('verificationForm');
+
+        codeInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (!/^[0-9]$/.test(e.data)) {
+                    input.value = '';
+                    return;
+                }
+
+                if (input.value.length === 1 && index < codeInputs.length - 1) {
+                    codeInputs[index + 1].focus();
+                }
+                updateFullCode();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value.length === 0 && index > 0) {
+                    codeInputs[index - 1].focus();
+                    updateFullCode();
+                }
+            });
+        });
+
+        function updateFullCode() {
+            let combinedCode = '';
+            codeInputs.forEach(input => {
+                combinedCode += input.value;
+            });
+            fullCodeInput.value = combinedCode;
+        }
+
+        verificationForm.addEventListener('submit', (e) => {
+            updateFullCode();
+        });
+    });
+</script>
 </body>
 </html>
