@@ -9,10 +9,10 @@
 
 /* Pulsante Admin in alto a sinistra */
 .admin-button-container {
-    position: absolute; /* Posizionamento assoluto rispetto al body */
-    top: 20px; /* 20px dal bordo superiore */
-    left: 20px; /* 20px dal bordo sinistro */
-    z-index: 999; /* Assicura che sia sopra gli altri elementi */
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
 }
 
 .admin-open-modal {
@@ -34,9 +34,21 @@
 h1 {
     font-size: 3em;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Barra di ricerca */
+
+.logo-siwbooks-large {
+    height: auto;
+    width: 300px;
+    max-width: 100%;
+    vertical-align: middle;
+    margin: 0;
+}
+
+
 .search-form {
     margin: 20px 0;
 }
@@ -222,4 +234,10 @@ h1 {
 
 .admin-buttons .btn-exit:hover {
     background-color: #b02a37;
+}
+
+.logo-siwbooks {
+    height: 1.2em;
+    margin-left: 10px;
+    vertical-align: middle;
 }
