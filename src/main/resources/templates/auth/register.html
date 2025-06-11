@@ -40,11 +40,34 @@
             <label for="password">Password</label>
             <input type="password" th:field="*{password}" id="password" required />
         </div>
+
+        <!-- Selezione Avatar -->
+        <div class="form-group">
+            <label for="avatar">Scegli un avatar</label>
+            <select th:field="*{avatar}" id="avatar" onchange="updateAvatarPreview(this)">
+                <option value="/media/avatar/Avatar1.png">Avatar 1</option>
+                <option value="/media/avatar/Avatar2.png">Avatar 2</option>
+                <option value="/media/avatar/Avatar3.png">Avatar 3</option>
+                <option value="/media/avatar/Avatar4.png">Avatar 4</option>
+            </select>
+            <div style="margin-top: 10px; text-align: center;">
+                <img id="avatarPreview" src="/media/avatar/Avatar1.png" alt="Anteprima avatar" width="80" height="80"
+                     style="border-radius: 50%; border: 2px solid #ccc;" />
+            </div>
+        </div>
+
         <button type="submit">Registrati</button>
     </form>
     <p class="register-link">
         Hai già un account? <a th:href="@{/login}" href="/login">Accedi</a>
     </p>
 </div>
+
+<script>
+    function updateAvatarPreview(select) {
+        const selected = select.value;
+        document.getElementById("avatarPreview").src = selected;
+    }
+</script>
 </body>
 </html>

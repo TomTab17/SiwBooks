@@ -17,6 +17,7 @@ public class User {
     private String email;     // Nuovo campo
     private String username;
     private String password;
+    private String avatar;
 
     @Column
     private String verificationCode;
@@ -110,5 +111,13 @@ public boolean isEnabled() {
 
 public void setEnabled(boolean enabled) {
     this.enabled = enabled;
+}
+
+public String getAvatar() {
+    return avatar;
+}
+
+public void setAvatar(String avatar) {
+    this.avatar = avatar;
 }
 }
