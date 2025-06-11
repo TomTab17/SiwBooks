@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Modifica Profilo</title>
+    <link rel="stylesheet" th:href="@{/css/editProfile.css}" />
+</head>
+<body>
+    <h1>Modifica Profilo</h1>
+
+    <form th:action="@{/profile/editProfile}" th:object="${loggedUser}" method="post" class="edit-profile-form">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" th:field="*{firstName}" required />
+
+        <label for="surname">Cognome:</label>
+        <input type="text" id="surname" th:field="*{lastName}" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" placeholder="Inserisci nuova password" />
+
+        <label for="avatar">Scegli un avatar:</label>
+        <select id="avatar" th:field="*{avatar}" onchange="updateAvatarPreview(this)">
+            <option value="/media/avatar/Avatar1.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar1.png'}">Avatar 1</option>
+            <option value="/media/avatar/Avatar2.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar2.png'}">Avatar 2</option>
+            <option value="/media/avatar/Avatar3.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar3.png'}">Avatar 3</option>
+            <option value="/media/avatar/Avatar4.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar4.png'}">Avatar 4</option>
+        </select>
+
+        <div style="margin-top: 10px; text-align: center;">
+            <img id="avatarPreview" th:src="@{${loggedUser.avatar}}" alt="Anteprima avatar" width="80" height="80"
+                style="border-radius: 50%; border: 2px solid #ccc;" />
+        </div>
+
+        <button type="submit">Salva modifiche</button>
+    </form>
+
+    <script>
+        function updateAvatarPreview(select) {
+            const selected = select.value;
+            document.getElementById("avatarPreview").src = selected;
+        }
+    </script>
+</body>
+</html>

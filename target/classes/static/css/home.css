@@ -1,4 +1,3 @@
-/* ======== Stili Generali e Sfondo ======== */
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -24,7 +23,7 @@ body {
     border: 1px solid #e0e0e0;
 }
 
-/* ======== Header ======== */
+
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -52,35 +51,35 @@ body {
     color: #666;
     font-weight: 400;
     margin-left: 5px;
-    text-align: left; /* Assicura allineamento corretto in logo-area */
+    text-align: left; 
 }
 
 .main-nav {
     display: flex;
-    flex-direction: column; /* Cambiato a column per impilare gli elementi */
-    align-items: flex-end; /* Allinea a destra per il desktop */
-    gap: 15px; /* Spazio tra le sezioni */
+    flex-direction: column; 
+    align-items: flex-end;
+    gap: 15px;
 }
 
-/* Nuovi stili per la sezione autenticazione */
+
 .auth-section {
     display: flex;
     align-items: center;
     gap: 15px;
-    flex-wrap: wrap; /* Permette ai bottoni di andare a capo su schermi piccoli */
-    justify-content: flex-end; /* Allinea a destra */
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .not-logged-in-text {
     font-size: 1rem;
     color: #555;
     font-weight: 500;
-    margin: 0; /* Rimuovi margini predefiniti del paragrafo */
+    margin: 0;
 }
 
 .auth-buttons {
     display: flex;
-    gap: 10px; /* Spazio tra i pulsanti Accedi e Registrati */
+    gap: 10px;
 }
 
 .nav-btn {
@@ -97,7 +96,7 @@ body {
     font-size: 1rem;
 }
 
-/* Stile per i pulsanti secondari (Accedi, Registrati) */
+
 .secondary-btn {
     color: #4a69bd;
     background-color: #f0f4f8;
@@ -111,11 +110,11 @@ body {
     color: #335099;
 }
 
-/* Stile per il pulsante primario (Sfoglia tutti i libri) */
+
 .primary-btn {
     background-color: #007bff;
     color: white;
-    border-color: #007bff; /* Assicurati che il bordo sia dello stesso colore */
+    border-color: #007bff;
     box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
 }
 
@@ -124,15 +123,15 @@ body {
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
 }
 
-/* Stile specifico per il pulsante "Sfoglia tutti i libri" per renderlo più grande */
+
 .browse-all-btn {
-    padding: 12px 25px; /* Aumenta il padding */
-    font-size: 1.1rem; /* Aumenta la dimensione del testo */
-    align-self: flex-end; /* Allinea a destra nel layout a colonna */
+    padding: 12px 25px;
+    font-size: 1.1rem; 
+    align-self: flex-end;
 }
 
 
-/* ======== Pulsante Admin ======== */
+
 .admin-button-container {
     position: absolute;
     top: 30px;
@@ -161,16 +160,15 @@ body {
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
-/* ======== Hero Section ======== */
 .hero-section {
-    background: url('/media/libri.jpg') no-repeat center center/cover; /* Assicurati che 'libri.jpg' esista o cambialo */
+    background: url('/media/libri.jpg') no-repeat center center/cover;
     padding: 80px 20px;
     border-radius: 12px;
     margin-bottom: 60px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     position: relative;
-    overflow: hidden; /* Importante per i bordi arrotondati con l'immagine */
+    overflow: hidden;
 }
 
 .hero-section::before {
@@ -201,7 +199,6 @@ body {
     font-weight: 300;
 }
 
-/* ======== Ricerca ======== */
 .search-form {
     display: flex;
     max-width: 700px;
@@ -244,7 +241,6 @@ body {
     transform: translateX(2px);
 }
 
-/* ======== Novità Editoriali ======== */
 .latest-books-section {
     margin-top: 80px;
     padding-top: 50px;
@@ -292,18 +288,17 @@ body {
 
 .slider-track {
     display: flex;
-    /* La larghezza deve essere sufficiente a contenere almeno il doppio degli elementi per un loop fluido */
-    width: calc(300px * 20); /* Esempio: 20 schede da 280px + 20px di margine */
+    width: calc(300px * 20);
     animation: scroll-left 60s linear infinite;
 }
 
 @keyframes scroll-left {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 10px)); /* Adattato per loop perfetto con nuova card width */ }
+    100% { transform: translateX(calc(-50% - 10px));  }
 }
 
 .book-card {
-    flex: 0 0 280px; /* Larghezza scheda libro */
+    flex: 0 0 280px;
     margin-right: 20px;
     background: white;
     border-radius: 12px;
@@ -322,7 +317,7 @@ body {
 
 .book-card img {
     width: 100%;
-    height: 280px; /* Altezza copertina aumentata */
+    height: 280px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 18px;
@@ -346,9 +341,9 @@ body {
     text-overflow: ellipsis;
 }
 
-/* ======== Modale Admin ======== */
+
 .modal {
-    display: none; /* Cruciale: nascosto di default */
+    display: none;
     position: fixed;
     z-index: 1000;
     top: 0; left: 0;
@@ -357,9 +352,9 @@ body {
     backdrop-filter: blur(8px);
 }
 
-/* Classe per mostrare la modale via JavaScript */
+
 .modal.show {
-    display: flex; /* La modale diventa flex solo quando ha la classe 'show' */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -409,7 +404,7 @@ body {
     transform: rotate(90deg);
 }
 
-/* ======== Pulsanti Admin Modale ======== */
+
 .admin-buttons {
     display: flex;
     flex-direction: column;
@@ -419,7 +414,7 @@ body {
 .admin-buttons .btn {
     padding: 1rem;
     font-size: 1.1rem;
-    background-color: #17a2b8; /* Azzurro per i bottoni admin */
+    background-color: #17a2b8;
     color: white;
     border-radius: 10px;
     text-decoration: none;
@@ -439,7 +434,7 @@ body {
 }
 
 .admin-buttons .btn-exit {
-    background-color: #dc3545; /* Rosso per l'uscita */
+    background-color: #dc3545;
     box-shadow: 0 5px 12px rgba(220, 53, 69, 0.25);
 }
 
@@ -448,7 +443,21 @@ body {
     box-shadow: 0 10px 20px rgba(220, 53, 69, 0.35);
 }
 
-/* ======== Responsività ======== */
+.logged-in-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user-profile-link:hover {
+    opacity: 0.8;
+}
+
+.avatar-icon {
+    border-radius: 50%;
+}
+
+
 @media (max-width: 992px) {
     .container {
         padding: 30px;
@@ -462,11 +471,11 @@ body {
     }
 
     .main-nav {
-        align-items: center; /* Centra gli elementi in colonna */
+        align-items: center;
     }
 
     .auth-section {
-        justify-content: center; /* Centra i bottoni di auth */
+        justify-content: center;
     }
 
     .search-form {
@@ -492,7 +501,7 @@ body {
     }
 
     .book-card {
-        flex: 0 0 250px; /* leggermente più piccole su tablet */
+        flex: 0 0 250px;
     }
 
     .modal-content {
@@ -551,12 +560,12 @@ body {
     }
 
     .latest-books-slider {
-        height: 320px; /* Ridotta leggermente per schermi più piccoli */
+        height: 320px;
         padding: 15px 0;
     }
 
     .book-card {
-        flex: 0 0 200px; /* Riduci ulteriormente per mobile */
+        flex: 0 0 200px;
         padding: 15px;
         margin-right: 15px;
     }
@@ -597,7 +606,7 @@ body {
     }
 
     .browse-all-btn {
-        align-self: center; /* Centra anche qui */
+        align-self: center;
     }
 }
 
@@ -626,20 +635,20 @@ body {
     }
 
     .auth-section {
-        flex-direction: column; /* Impila testo e bottoni */
+        flex-direction: column;
         gap: 10px;
-        align-items: center; /* Centra testo e bottoni */
+        align-items: center;
     }
 
     .auth-buttons {
-        flex-direction: column; /* Impila i bottoni Accedi e Registrati */
+        flex-direction: column;
         width: 100%;
         gap: 10px;
     }
 
     .nav-btn {
         padding: 10px 15px;
-        width: 100%; /* I bottoni riempiono la larghezza disponibile */
+        width: 100%;
     }
 
     .hero-section {
@@ -663,7 +672,7 @@ body {
     .search-form input[type="text"],
     .search-form button {
         border-radius: 8px;
-        margin-bottom: 8px; /* Aggiusta margine quando in colonna */
+        margin-bottom: 8px;
     }
 
     .latest-books-section h2 {
@@ -712,7 +721,7 @@ body {
     }
 
     .browse-all-btn {
-        align-self: center; /* Centra anche qui */
-        width: 100%; /* Riempi larghezza */
+        align-self: center;
+        width: 100%;
     }
 }

@@ -24,12 +24,28 @@
             
             <nav class="main-nav">
                 <div class="auth-section">
-                    <p class="not-logged-in-text">Non hai effettuato l'accesso?</p>
-                    <div class="auth-buttons">
-                        <a th:href="@{/login}" class="nav-btn secondary-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
-                        <a th:href="@{/register}" class="nav-btn secondary-btn"><i class="fas fa-user-plus"></i> Registrati</a>
-                    </div>
-                </div>
+
+    <!-- Se l'utente NON è loggato -->
+    <div th:if="${loggedUser == null}">
+        <p class="not-logged-in-text">Non hai effettuato l'accesso?</p>
+        <div class="auth-buttons">
+            <a th:href="@{/login}" class="nav-btn secondary-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
+            <a th:href="@{/register}" class="nav-btn secondary-btn"><i class="fas fa-user-plus"></i> Registrati</a>
+        </div>
+    </div>
+
+    <!-- Se l'utente è loggato -->
+    <div th:if="${loggedUser != null}" class="logged-in-user">
+        <a th:href="@{/profile/myProfile}" class="user-profile-link" style="text-decoration:none; color: inherit;">
+            <img th:src="@{${loggedUser.avatar != null} ? ${loggedUser.avatar} : '/media/default-avatar.png'}"
+                 alt="Avatar utente" class="avatar-icon" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
+            <div class="user-name" style="font-weight:bold; font-size: 1rem;">
+                <span th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></span>
+            </div>
+        </a>
+    </div>
+
+</div>
                 <a th:href="@{/books}" class="nav-btn primary-btn browse-all-btn"><i class="fas fa-book-open"></i> Sfoglia tutti i libri</a>
             </nav>
         </header>

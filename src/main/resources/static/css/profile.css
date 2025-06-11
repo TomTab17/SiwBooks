@@ -1,0 +1,62 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+.avatar-section {
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+}
+
+.user-info h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.user-info p {
+    font-size: 1.1rem;
+    margin: 8px 0;
+}
+
+.btn.edit-profile-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 28px;
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn.edit-profile-btn i {
+    margin-right: 8px;
+}
+
+.btn.edit-profile-btn:hover {
+    background-color: #0056b3;
+}

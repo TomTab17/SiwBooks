@@ -33,6 +33,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public String encodePassword(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
+    }
+
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -99,7 +103,7 @@ public class UserService {
         }
     }
 
-    // Nuovo metodo per inviare l'email di conferma registrazione
+    // Email di conferma registrazione
     private void sendRegistrationConfirmationEmail(User user) {
         String toAddress = user.getEmail();
         String subject = "Registrazione completata su SIWBooks!";
@@ -132,7 +136,7 @@ public class UserService {
                 user.setEnabled(true);
                 user.setVerificationCode(null); // pulizia
                 userRepository.save(user);
-                // Invia l'email di conferma registrazione DOPO aver abilitato l'utente
+                // Invia l'email di conferma
                 sendRegistrationConfirmationEmail(user);
                 return true;
             }
