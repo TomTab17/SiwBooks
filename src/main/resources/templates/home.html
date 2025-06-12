@@ -95,6 +95,10 @@
         </div>
     </div>
 
+    <footer style="background-color: #f8f8f8; padding: 20px; text-align: center;">
+        <p>&copy; 2025 SiwBooks. Tutti i diritti riservati.</p>
+    </footer>
+
     <script>
         function openAdminModal() {
             document.getElementById("adminModal").classList.add("show");
@@ -110,6 +114,14 @@
                 modal.classList.remove("show");
             }
         }
+    </script>
+
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            document.body.style.backgroundPositionY = -(scrollPosition * 0.3) + 'px';
+        });
     </script>
 </body>
 </html>
