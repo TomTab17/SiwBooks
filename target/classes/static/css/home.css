@@ -12,7 +12,6 @@ body {
     scroll-behavior: smooth;
 }
 
-
 .container {
     max-width: 1200px;
     margin: 40px auto;
@@ -25,10 +24,11 @@ body {
     border: 1px solid #e0e0e0;
 }
 
-
 .main-header {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin-bottom: 50px;
     padding-bottom: 20px;
@@ -38,7 +38,9 @@ body {
 .logo-area {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .logo-siwbooks-large {
@@ -53,16 +55,21 @@ body {
     color: #666;
     font-weight: 400;
     margin-left: 5px;
-    text-align: left; 
+    text-align: left;
 }
 
 .main-nav {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-end;
-    gap: 15px;
+    justify-content: center;
+    width: 100%;
 }
 
+.auth-section-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
 
 .auth-section {
     display: flex;
@@ -98,7 +105,6 @@ body {
     font-size: 1rem;
 }
 
-
 .secondary-btn {
     color: #4a69bd;
     background-color: #f0f4f8;
@@ -112,7 +118,6 @@ body {
     color: #335099;
 }
 
-
 .primary-btn {
     background-color: #007bff;
     color: white;
@@ -125,14 +130,10 @@ body {
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
 }
 
-
 .browse-all-btn {
     padding: 12px 25px;
-    font-size: 1.1rem; 
-    align-self: flex-end;
+    font-size: 1.1rem;
 }
-
-
 
 .admin-button-container {
     position: absolute;
@@ -298,7 +299,7 @@ body {
 
 @keyframes scroll-left {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 10px));  }
+    100% { transform: translateX(calc(-50% - 10px)); }
 }
 
 .book-card {
@@ -345,7 +346,6 @@ body {
     text-overflow: ellipsis;
 }
 
-
 .modal {
     display: none;
     position: fixed;
@@ -355,7 +355,6 @@ body {
     background-color: rgba(0,0,0,0.8);
     backdrop-filter: blur(8px);
 }
-
 
 .modal.show {
     display: flex;
@@ -407,7 +406,6 @@ body {
     color: #777;
     transform: rotate(90deg);
 }
-
 
 .admin-buttons {
     display: flex;
@@ -465,7 +463,6 @@ footer {
     flex-shrink: 0;
 }
 
-
 @media (max-width: 992px) {
     .container {
         padding: 30px;
@@ -478,12 +475,20 @@ footer {
         gap: 20px;
     }
 
-    .main-nav {
-        align-items: center;
+    .auth-section-container {
+        position: static;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .auth-section {
         justify-content: center;
+    }
+
+    .main-nav {
+        align-items: center;
     }
 
     .search-form {
@@ -541,6 +546,28 @@ footer {
         font-size: 1em;
     }
 
+    .auth-section-container {
+        position: static;
+        width: 100%;
+        text-align: center;
+    }
+
+    .auth-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        width: 100%;
+        padding: 10px 15px;
+    }
+
     .hero-section {
         padding: 60px 15px;
         margin-bottom: 40px;
@@ -548,12 +575,10 @@ footer {
 
     .hero-content h2 {
         font-size: 2em;
-        margin-bottom: 15px;
     }
 
     .hero-content p {
         font-size: 1em;
-        margin-bottom: 30px;
     }
 
     .search-form input[type="text"],
@@ -587,9 +612,7 @@ footer {
     }
 
     .modal-content {
-        margin: 5% auto;
         padding: 25px;
-        border-radius: 10px;
     }
 
     .modal-content h2 {
@@ -637,15 +660,15 @@ footer {
         font-size: 0.85em;
     }
 
-    .main-nav {
-        flex-direction: column;
-        gap: 10px;
+    .auth-section-container {
+        position: static;
+        width: 100%;
+        text-align: center;
     }
 
     .auth-section {
         flex-direction: column;
         gap: 10px;
-        align-items: center;
     }
 
     .auth-buttons {
@@ -676,7 +699,7 @@ footer {
         margin-left: 0;
         margin-right: 0;
     }
-    
+
     .search-form input[type="text"],
     .search-form button {
         border-radius: 8px;
