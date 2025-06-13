@@ -39,9 +39,12 @@
                             <div class="user-role" th:if="${isAdmin}" style="font-size: 0.85rem; color: #777;">Amministratore</div>
                         </div>
                     </a>
-                    <a th:href="@{/logout}" class="logout-btn" title="Esci">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" class="logout-btn" title="Esci">
+        <i class="fas fa-sign-out-alt"></i>
+    </button>
+</form>
+
                 </div>
             </div>
         </div>
@@ -95,7 +98,12 @@
             <div class="admin-buttons">
                 <a th:href="@{/admin/authors/new}" class="btn"><i class="fas fa-user-edit"></i> Aggiungi Autore</a>
                 <a th:href="@{/admin/books/new}" class="btn"><i class="fas fa-plus-square"></i> Aggiungi Libro</a>
-                <a th:href="@{/logout}" class="btn btn-exit"><i class="fas fa-power-off"></i> Esci dalla sessione</a>
+                <form th:action="@{/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-exit">
+                    <i class="fas fa-power-off"></i> Esci dalla sessione
+                    </button>
+                </form>
+
             </div>
         </div>
     </div>

@@ -460,13 +460,25 @@ body {
 }
 
 .admin-buttons .btn-exit {
+    all: unset;         
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid #dc3545;
     background-color: #dc3545;
+    color: white;
     box-shadow: 0 5px 12px rgba(220, 53, 69, 0.25);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .admin-buttons .btn-exit:hover {
     background-color: #c82333;
     box-shadow: 0 10px 20px rgba(220, 53, 69, 0.35);
+    transform: translateY(-2px);
 }
 
 .logged-in-user {
@@ -521,6 +533,7 @@ body {
 }
 
 .logout-btn {
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;

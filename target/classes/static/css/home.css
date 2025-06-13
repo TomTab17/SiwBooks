@@ -90,8 +90,8 @@ body {
 
 .auth-section-container {
     position: absolute;
-    top: 0px;
-    right: -20px;
+    top: 20px;
+    right: 20px;
     z-index: 100;
 }
 
@@ -460,13 +460,25 @@ body {
 }
 
 .admin-buttons .btn-exit {
+    all: unset;         
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid #dc3545;
     background-color: #dc3545;
+    color: white;
     box-shadow: 0 5px 12px rgba(220, 53, 69, 0.25);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .admin-buttons .btn-exit:hover {
     background-color: #c82333;
     box-shadow: 0 10px 20px rgba(220, 53, 69, 0.35);
+    transform: translateY(-2px);
 }
 
 .logged-in-user {
@@ -478,7 +490,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .logged-in-user:hover {
@@ -504,7 +515,7 @@ body {
 .user-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .user-name {
@@ -519,13 +530,10 @@ body {
     font-size: 0.85rem;
     color: #777;
     font-style: italic;
-    text-align: center;
 }
 
 .logout-btn {
-    position: absolute; /* Cambiato per posizionamento assoluto */
-    top: 5px; /* Distanza dal bordo superiore */
-    right: 5px;
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
