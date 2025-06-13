@@ -103,18 +103,6 @@ body {
     justify-content: flex-end;
 }
 
-.not-logged-in-text {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-    margin: 0;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 10px;
-}
-
 .nav-btn {
     text-decoration: none;
     padding: 10px 20px;
@@ -460,7 +448,7 @@ body {
 }
 
 .admin-buttons .btn-exit {
-    all: unset;         
+    all: unset;        
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -559,6 +547,110 @@ body {
     transform: scale(1.1);
 }
 
+/* Stili per la nuova sezione di benvenuto */
+.welcome-section {
+    background: url('/media/libro.jpg') no-repeat center center; 
+    background-size: cover;
+    border-radius: 12px;
+    padding: 40px 30px;
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    color: #2c3e50;
+    border: 2px solid #d4a373; 
+}
+
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 245, 230, 0.9); 
+    z-index: 1;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.welcome-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    animation: fadeIn 1.2s ease-in-out 0.2s;
+    animation-fill-mode: both;
+}
+
+.welcome-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.welcome-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.register-btn {
+    background-color: #d4a373; /* Colore dorato per il tema libri */
+    color: #fff;
+    border: 1px solid #d4a373;
+}
+
+.register-btn:hover {
+    background-color: #b5895a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
+}
+
+.login-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Animazione per l'entrata del testo */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 footer {
     flex-shrink: 0;
 }
@@ -643,6 +735,31 @@ footer {
         height: 36px;
         font-size: 0.9rem;
     }
+
+    .welcome-section {
+        padding: 30px 20px;
+        margin: 20px 0;
+    }
+
+    .welcome-title {
+        font-size: 1.8rem;
+    }
+
+    .welcome-text {
+        font-size: 1rem;
+    }
+
+    .welcome-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -674,17 +791,6 @@ footer {
     .auth-section {
         flex-direction: column;
         gap: 10px;
-    }
-
-    .auth-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .nav-btn {
-        width: 100%;
-        padding: 10px 15px;
     }
 
     .hero-section {
@@ -814,17 +920,6 @@ footer {
         gap: 10px;
     }
 
-    .auth-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .nav-btn {
-        padding: 10px 15px;
-        width: 100%;
-    }
-
     .hero-section {
         padding: 40px 10px;
     }
@@ -916,5 +1011,22 @@ footer {
         width: 32px;
         height: 32px;
         font-size: 0.85rem;
+    }
+
+    .welcome-section {
+        padding: 20px 15px;
+    }
+
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+
+    .welcome-text {
+        font-size: 0.95rem;
+    }
+
+    .welcome-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
     }
 }

@@ -18,17 +18,9 @@
 
 <div class="container">
     <header class="main-header">
-        <!-- Contenitore per l'auth-section in alto a destra -->
+        <!-- Contenitore per l'auth-section in alto a destra (solo per utenti loggati) -->
         <div class="auth-section-container">
             <div class="auth-section">
-                <!-- Se l'utente NON è loggato -->
-                <div th:if="${loggedUser == null}">
-                    <p class="not-logged-in-text">Non hai effettuato l'accesso?</p>
-                    <div class="auth-buttons">
-                        <a th:href="@{/login}" class="nav-btn secondary-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
-                        <a th:href="@{/register}" class="nav-btn secondary-btn"><i class="fas fa-user-plus"></i> Registrati</a>
-                    </div>
-                </div>
                 <!-- Se l'utente è loggato -->
                 <div th:if="${loggedUser != null}" class="logged-in-user">
                     <a th:href="@{/profile/myProfile}" class="user-profile-link" style="text-decoration:none; color: inherit;">
@@ -40,11 +32,10 @@
                         </div>
                     </a>
                     <form th:action="@{/logout}" method="post" style="display:inline;">
-    <button type="submit" class="logout-btn" title="Esci">
-        <i class="fas fa-sign-out-alt"></i>
-    </button>
-</form>
-
+                        <button type="submit" class="logout-btn" title="Esci">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -53,6 +44,18 @@
         <div class="logo-area">
             <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
             <p class="tagline">Trasformiamo pagine in pixel e storie in eternità.</p>
+
+            <!-- Nuova sezione per utenti non loggati -->
+            <div th:if="${loggedUser == null}" class="welcome-section">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">Unisciti alla tua passione per i libri!</h2>
+                    <p class="welcome-text">Crea un account o accedi per scoprire migliaia di storie, salvare i tuoi libri preferiti e condividere le tue letture.</p>
+                    <div class="welcome-buttons">
+                        <a th:href="@{/register}" class="welcome-btn register-btn"><i class="fas fa-user-plus"></i> Registrati Ora</a>
+                        <a th:href="@{/login}" class="welcome-btn login-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Navigazione principale -->
@@ -100,10 +103,9 @@
                 <a th:href="@{/admin/books/new}" class="btn"><i class="fas fa-plus-square"></i> Aggiungi Libro</a>
                 <form th:action="@{/logout}" method="post" style="display:inline;">
                     <button type="submit" class="btn btn-exit">
-                    <i class="fas fa-power-off"></i> Esci dalla sessione
+                        <i class="fas fa-power-off"></i> Esci dalla sessione
                     </button>
                 </form>
-
             </div>
         </div>
     </div>
