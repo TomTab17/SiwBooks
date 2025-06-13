@@ -41,12 +41,13 @@ body {
     align-items: center;
     text-align: center;
     justify-content: center;
+    margin-bottom: 0;
 }
 
 .logo-siwbooks-large {
     width: 250px;
     max-width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: -5px;
 }
 
 .tagline {
@@ -54,14 +55,16 @@ body {
     font-size: 1.1rem;
     color: #666;
     font-weight: 400;
-    margin-left: 5px;
-    text-align: left;
+    margin-top: -5px; 
+    margin-bottom: 25px;
+    text-align: center;  
 }
 
 .main-nav {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 20px; 
 }
 
 .auth-section-container {
