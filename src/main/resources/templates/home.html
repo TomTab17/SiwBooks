@@ -33,10 +33,14 @@
                 <div th:if="${loggedUser != null}" class="logged-in-user">
                     <a th:href="@{/profile/myProfile}" class="user-profile-link" style="text-decoration:none; color: inherit;">
                         <img th:src="@{${loggedUser.avatar != null} ? ${loggedUser.avatar} : '/media/default-avatar.png'}"
-                             alt="Avatar utente" class="avatar-icon" style="width:40px; height:40px; border-radius:50%; object-fit:cover;" />
-                        <div class="user-name" style="font-weight:bold; font-size: 1rem;">
-                            <span th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></span>
+                             alt="Avatar utente" class="avatar-icon" />
+                        <div class="user-info">
+                            <div class="user-name" th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></div>
+                            <div class="user-role" th:if="${isAdmin}" style="font-size: 0.85rem; color: #777;">Amministratore</div>
                         </div>
+                    </a>
+                    <a th:href="@{/logout}" class="logout-btn" title="Esci">
+                        <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
             </div>

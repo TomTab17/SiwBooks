@@ -472,15 +472,71 @@ body {
 .logged-in-user {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.user-profile-link:hover {
-    opacity: 0.8;
+.logged-in-user:hover {
+    background-color: #f0f4f8;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .avatar-icon {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #007bff;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.user-profile-link:hover .avatar-icon {
+    transform: scale(1.05);
+    border-color: #0056b3;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+.user-role {
+    font-size: 0.85rem;
+    color: #777;
+    font-style: italic;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
 }
 
 footer {
@@ -547,6 +603,25 @@ footer {
 
     .modal-content h2 {
         font-size: 1.8rem;
+    }
+
+    .logged-in-user {
+        padding: 8px 12px;
+    }
+
+    .avatar-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-name {
+        font-size: 1.1rem;
+    }
+
+    .logout-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
     }
 }
 
@@ -663,6 +738,30 @@ footer {
     .browse-all-btn {
         align-self: center;
     }
+
+    .logged-in-user {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .avatar-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .user-name {
+        font-size: 1rem;
+    }
+
+    .user-info {
+        align-items: center;
+    }
+
+    .logout-btn {
+        margin-top: 8px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -778,5 +877,24 @@ footer {
     .browse-all-btn {
         align-self: center;
         width: 100%;
+    }
+
+    .logged-in-user {
+        padding: 8px;
+    }
+
+    .avatar-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .user-name {
+        font-size: 0.95rem;
+    }
+
+    .logout-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
     }
 }
