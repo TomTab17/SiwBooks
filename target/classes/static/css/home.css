@@ -51,13 +51,34 @@ body {
 }
 
 .tagline {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Georgia', serif;
+    font-style: italic;
     font-size: 1.1rem;
-    color: #666;
-    font-weight: 400;
+    color: #444;
     margin-top: -5px; 
     margin-bottom: 25px;
-    text-align: center;  
+    position: relative;
+    padding: 0 20px;
+}
+
+.tagline::before,
+.tagline::after {
+    font-family: 'Georgia', serif;
+    font-size: 1.2rem;
+    color: #999;
+    position: absolute;
+}
+
+.tagline::before {
+    content: '“';
+    left: 10px;
+    top: 0;
+}
+
+.tagline::after {
+    content: '”';
+    right: 10px;
+    top: 0;
 }
 
 .main-nav {
