@@ -90,8 +90,8 @@ body {
 
 .auth-section-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: -20px;
     z-index: 100;
 }
 
@@ -478,6 +478,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .logged-in-user:hover {
@@ -503,7 +504,7 @@ body {
 .user-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .user-name {
@@ -518,9 +519,13 @@ body {
     font-size: 0.85rem;
     color: #777;
     font-style: italic;
+    text-align: center;
 }
 
 .logout-btn {
+    position: absolute; /* Cambiato per posizionamento assoluto */
+    top: 5px; /* Distanza dal bordo superiore */
+    right: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
