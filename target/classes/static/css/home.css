@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background: url('/media/sfondo.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-size: auto 150%;
     color: #333;
     line-height: 1.6;
     min-height: 100vh;
