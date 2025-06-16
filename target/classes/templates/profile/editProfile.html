@@ -6,33 +6,44 @@
     <link rel="stylesheet" th:href="@{/css/editProfile.css}" />
 </head>
 <body>
-    <h1>Modifica Profilo</h1>
+    <div class="container">
+        <h1>Modifica Profilo</h1>
 
-    <form th:action="@{/profile/editProfile}" th:object="${loggedUser}" method="post" class="edit-profile-form">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" th:field="*{firstName}" required />
+        <form th:action="@{/profile/editProfile}" th:object="${loggedUser}" method="post" class="edit-profile-form">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" th:field="*{firstName}" required />
+            </div>
 
-        <label for="surname">Cognome:</label>
-        <input type="text" id="surname" th:field="*{lastName}" required />
+            <div class="form-group">
+                <label for="surname">Cognome:</label>
+                <input type="text" id="surname" th:field="*{lastName}" required />
+            </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}" placeholder="Inserisci nuova password" />
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" placeholder="Lascia vuoto per mantenere la password attuale" />
+            </div>
 
-        <label for="avatar">Scegli un avatar:</label>
-        <select id="avatar" th:field="*{avatar}" onchange="updateAvatarPreview(this)">
-            <option value="/media/avatar/Avatar1.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar1.png'}">Avatar 1</option>
-            <option value="/media/avatar/Avatar2.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar2.png'}">Avatar 2</option>
-            <option value="/media/avatar/Avatar3.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar3.png'}">Avatar 3</option>
-            <option value="/media/avatar/Avatar4.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar4.png'}">Avatar 4</option>
-        </select>
+            <div class="form-group">
+                <label for="avatar">Scegli un avatar:</label>
+                <select id="avatar" th:field="*{avatar}" onchange="updateAvatarPreview(this)">
+                    <option value="/media/avatar/Avatar1.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar1.png'}">Avatar 1</option>
+                    <option value="/media/avatar/Avatar2.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar2.png'}">Avatar 2</option>
+                    <option value="/media/avatar/Avatar3.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar3.png'}">Avatar 3</option>
+                    <option value="/media/avatar/Avatar4.png" th:selected="${loggedUser.avatar == '/media/avatar/Avatar4.png'}">Avatar 4</option>
+                </select>
+                <div class="avatar-preview-container">
+                    <img id="avatarPreview" th:src="@{${loggedUser.avatar}}" alt="Anteprima avatar" />
+                </div>
+            </div>
 
-        <div style="margin-top: 10px; text-align: center;">
-            <img id="avatarPreview" th:src="@{${loggedUser.avatar}}" alt="Anteprima avatar" width="80" height="80"
-                style="border-radius: 50%; border: 2px solid #ccc;" />
-        </div>
-
-        <button type="submit">Salva modifiche</button>
-    </form>
+            <div class="button-group">
+                <button type="submit" class="save-button">Salva modifiche</button>
+                <button type="button" class="cancel-button" onclick="window.history.back();">Annulla modifiche</button>
+            </div>
+        </form>
+    </div>
 
     <script>
         function updateAvatarPreview(select) {
