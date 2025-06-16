@@ -8,15 +8,15 @@
 <body>
     <h1>Nuovo Autore</h1>
 
-    <form th:action="@{/admin/authors}" method="post">
+    <form th:action="@{/admin/authors}" method="post" enctype="multipart/form-data">
         <label>
             Nome:
-            <input type="text" name="firstName" />
+            <input type="text" name="firstName" required/>
         </label><br/>
 
         <label>
             Cognome:
-            <input type="text" name="lastName" />
+            <input type="text" name="lastName" required/>
         </label><br/>
 
         <label>
@@ -32,6 +32,11 @@
         <label>
             Nazionalità:
             <input type="text" name="nationality" />
+        </label><br/>
+
+        <label>
+            Foto Autore:
+            <input type="file" name="photoFile" accept="image/*" />
         </label><br/>
 
         <button type="submit">Salva</button>
