@@ -27,6 +27,7 @@
                 <div class="search-header">
                     <h1>Risultati di Ricerca per "<span th:text="${query}"></span>"</h1>
                     <div class="search-options">
+                        <p class="search-by-text">Ricerca libro in base a:</p>
                         <button id="searchByTitleBtn" th:classappend="${searchType == 'title' ? 'active' : ''}" onclick="changeSearchType('title')">Titolo</button>
                         <button id="searchByAuthorBtn" th:classappend="${searchType == 'author' ? 'active' : ''}" onclick="changeSearchType('author')">Autore</button>
                     </div>

@@ -86,6 +86,8 @@ body {
     justify-content: center;
     width: 100%;
     margin-top: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .auth-section-container {
@@ -142,9 +144,23 @@ body {
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
 }
 
-.browse-all-btn {
+.browse-all-btn,
+.view-all-authors-btn {
     padding: 12px 25px;
     font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.view-all-authors-btn {
+    background-color: #17a2b8;
+    color: white;
+    border-color: #17a2b8;
+    box-shadow: 0 6px 15px rgba(23, 162, 184, 0.25);
+}
+
+.view-all-authors-btn:hover {
+    background-color: #138496;
+    box-shadow: 0 8px 20px rgba(23, 162, 184, 0.35);
 }
 
 .admin-button-container {
@@ -331,7 +347,6 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     border-color: #007bff;
 }
-
 
 .book-image-wrapper {
     position: relative;
@@ -723,6 +738,8 @@ footer {
     }
 
     .main-nav {
+        flex-direction: column;
+        gap: 15px;
         align-items: center;
     }
 
@@ -882,7 +899,6 @@ footer {
         margin-right: 15px;
     }
 
-    
     .book-image-wrapper {
         height: 200px;
     }
@@ -1053,7 +1069,6 @@ footer {
         margin-right: 10px;
     }
 
-    
     .book-image-wrapper {
         height: 160px;
     }

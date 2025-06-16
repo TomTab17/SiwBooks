@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Autori</title></head>
+<head>
+    <title>Autori</title>
+    <link rel="stylesheet" th:href="@{/css/listAuthors.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/media/SiwBookslogoIco.ico" type="image/x-icon" />
+</head>
 <body>
-<h1>Lista Autori</h1>
-<ul>
-  <li th:each="author : ${authors}">
-    <a th:href="@{'/authors/' + ${author.id}}">
-      <span th:text="${author.firstName + ' ' + author.lastName}">Nome</span>
-    </a>
-  </li>
-</ul>
+    <div class="container">
+        <h1><i class="fas fa-users"></i> Lista Autori</h1>
+        <div class="authors-list-container">
+            <ul>
+              <li th:each="author : ${authors}">
+                <a th:href="@{'/authors/' + ${author.id}}">
+                  <span th:text="${author.firstName + ' ' + author.lastName}">Nome</span>
+                </a>
+              </li>
+            </ul>
+        </div>
+        <div class="back-button">
+            <a th:href="@{/}" class="btn-back"><i class="fas fa-home"></i> Torna alla Home</a>
+        </div>
+    </div>
 </body>
 </html>

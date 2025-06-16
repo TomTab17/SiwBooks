@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Dettaglio Autore</title></head>
+<head>
+    <title>Dettaglio Autore</title>
+    <link rel="stylesheet" th:href="@{/css/detailsAuthor.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
-<h1 th:text="${author.firstName + ' ' + author.lastName}">Nome</h1>
-<p th:text="'Nato il: ' + ${author.birthDate}"></p>
-<p th:text="'Nazionalità: ' + ${author.nationality}"></p>
-<img th:if="${author.photoPath}" th:src="@{${author.photoPath}}" alt="foto autore" width="200">
+    <div class="background-overlay"></div>
+    <div class="author-details-container">
+        <div class="author-header">
+            <h1 th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</h1>
+            <div class="author-image">
+                <img th:if="${author.photoPath}" th:src="@{${author.photoPath}}" alt="Foto Autore">
+                <img th:unless="${author.photoPath}" src="/media/default-author.png" alt="Nessuna foto disponibile">
+            </div>
+        </div>
+        <div class="author-info">
+            <p><i class="fas fa-birthday-cake"></i> <span th:text="'Nato il: ' + ${author.birthDate}">Nato il: data</span></p>
+            <p><i class="fas fa-flag"></i> <span th:text="'Nazionalità: ' + ${author.nationality}">Nazionalità: nazionalita</span></p>
+        </div>
+        <div class="back-button">
+            <a th:href="@{/}" class="btn-back"><i class="fas fa-home"></i> Torna alla Home</a>
+        </div>
+    </div>
 </body>
 </html>

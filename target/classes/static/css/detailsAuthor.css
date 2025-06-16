@@ -1,0 +1,187 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('/media/sfondoAutori.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px) brightness(0.8);
+    z-index: 1;
+}
+
+.author-details-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.author-header {
+    width: 100%;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 25px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.author-image img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #007bff;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.25);
+    transition: transform 0.3s ease-in-out;
+}
+
+.author-image img:hover {
+    transform: scale(1.05);
+}
+
+.author-info {
+    width: 100%;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.author-info p {
+    font-size: 1.15rem;
+    margin-bottom: 15px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-info p i {
+    color: #007bff;
+    font-size: 1.3rem;
+}
+
+.back-button {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .author-details-container {
+        padding: 30px;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .author-image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .author-info p {
+        font-size: 1rem;
+    }
+
+    .author-info p i {
+        font-size: 1.1rem;
+    }
+
+    .btn-back {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .author-details-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .author-image img {
+        width: 120px;
+        height: 120px;
+        border: 4px solid #007bff;
+    }
+
+    .author-info {
+        padding: 0 10px;
+    }
+
+    .author-info p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .author-info p i {
+        font-size: 1rem;
+    }
+}
