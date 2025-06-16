@@ -1,0 +1,358 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.search-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.search-page-header {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.search-page-header .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-page-header .logo-siwbooks-small {
+    height: 40px;
+    width: auto;
+}
+
+.search-page-header .tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+.search-nav .nav-btn {
+    background-color: #007bff; 
+    color: white;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-nav .nav-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.search-main-content {
+    flex-grow: 1;
+    padding: 20px 0;
+}
+
+.search-results-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-header h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.search-options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-options button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    color: #555;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.search-options button.active {
+    background-color: #28a745; 
+    color: white;
+    border-color: #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.search-options button:hover:not(.active) {
+    background-color: #e9e9e9;
+    border-color: #c9c9c9;
+    color: #333;
+}
+
+
+.search-form-results {
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto 40px auto;
+    border: 2px solid #007bff; 
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
+}
+
+.search-form-results input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    padding: 14px 25px;
+    font-size: 1.1em;
+    outline: none;
+    background-color: #fdfdfd;
+}
+
+.search-form-results button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.search-form-results button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 35px;
+    padding: 20px 0;
+}
+
+.book-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.book-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 150%;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    background-color: #f0f0f0; 
+}
+
+.book-image-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #c9c9c9;
+    filter: blur(12px);
+    transform: scale(1.1);
+}
+
+.book-cover-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.book-card h3 {
+    font-size: 1.2em;
+    color: #222;
+    margin: 18px 15px 12px;
+    line-height: 1.4;
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.book-card p {
+    font-size: 0.95em;
+    color: #666;
+    margin: 0 15px 18px;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 1.3em;
+    color: #888;
+    padding: 60px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    border: 1px dashed #ddd;
+    margin-top: 40px;
+}
+
+.no-results p:first-child {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.search-page-footer {
+    background-color: #222;
+    color: #bbb;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-page-footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .search-page-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .search-page-header .tagline {
+        margin-top: 5px;
+    }
+
+    .search-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-header h1 {
+        font-size: 2em;
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-options {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-form-results {
+        flex-direction: column;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    .search-form-results input[type="text"] {
+        border-radius: 10px 10px 0 0;
+        padding: 10px 15px;
+    }
+
+    .search-form-results button[type="submit"] {
+        border-radius: 0 0 10px 10px;
+        padding: 10px 15px;
+    }
+
+    .search-results-container {
+        padding: 15px;
+        margin: 20px 10px;
+    }
+
+    .results-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .book-card h3 {
+        font-size: 1em;
+        margin: 10px;
+    }
+
+    .book-card p {
+        font-size: 0.85em;
+        margin: 0 10px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-page-header .logo-siwbooks-small {
+        height: 35px;
+    }
+    .search-page-header .tagline {
+        font-size: 0.8em;
+    }
+    .search-nav .nav-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .search-header h1 {
+        font-size: 1.8em;
+    }
+    .search-options button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}

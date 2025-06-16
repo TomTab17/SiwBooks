@@ -69,7 +69,7 @@ public class BookController {
         }
     }
 
-    // Form per admin - nuovo libro 
+    // Form per admin - nuovo libro
     @GetMapping("/admin/books/new")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -111,5 +111,26 @@ public class BookController {
     public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteById(id);
         return "redirect:/books";
+    }
+
+    // Ricerca
+    @GetMapping("/books/search")
+    public String searchBooks(@RequestParam(value = "q", required = false) String query,
+                              @RequestParam(value = "type", defaultValue = "title") String searchType,
+                              Model model) {
+        List<Book> searchResults;
+        if (query == null || query.isBlank()) {
+            searchResults = bookService.findAll();
+        } else {
+            if ("author".equalsIgnoreCase(searchType)) {
+                searchResults = bookService.searchBooksByAuthor(query);
+            } else {
+                searchResults = bookService.searchBooksByTitle(query);
+            }
+        }
+        model.addAttribute("query", query);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("books", searchResults);
+        return "books/searchResults";
     }
 }

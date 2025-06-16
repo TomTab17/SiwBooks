@@ -38,4 +38,14 @@ public class BookService {
         Pageable pageable = PageRequest.of(0, n, Sort.by(Sort.Direction.DESC, "id"));
         return bookRepository.findAll(pageable).getContent();
     }
+
+    // Metodo di ricerca per titolo
+    public List<Book> searchBooksByTitle(String query) {
+        return bookRepository.findByTitleContainingIgnoreCase(query);
+    }
+
+    // Metodo di ricerca per autore
+    public List<Book> searchBooksByAuthor(String query) {
+        return bookRepository.findByAuthorsNameContainingIgnoreCase(query);
+    }
 }

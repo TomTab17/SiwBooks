@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultati di Ricerca - SiwBooks</title>
+    <link rel="stylesheet" th:href="@{/css/searchResults.css}" /> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/media/SiwBookslogoIco.ico" type="image/x-icon" />
+</head>
+<body>
+    <div class="search-page-wrapper">
+        <header class="search-page-header">
+            <div class="logo-area">
+                <a th:href="@{/}" class="logo-link">
+                    <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-small"/>
+                </a>
+                <p class="tagline">La tua libreria digitale.</p>
+            </div>
+            <nav class="search-nav">
+                <a th:href="@{/books}" class="nav-btn"><i class="fas fa-book-open"></i> Sfoglia tutti i libri</a>
+                </nav>
+        </header>
+
+        <main class="search-main-content">
+            <section class="search-results-container">
+                <div class="search-header">
+                    <h1>Risultati di Ricerca per "<span th:text="${query}"></span>"</h1>
+                    <div class="search-options">
+                        <button id="searchByTitleBtn" th:classappend="${searchType == 'title' ? 'active' : ''}" onclick="changeSearchType('title')">Titolo</button>
+                        <button id="searchByAuthorBtn" th:classappend="${searchType == 'author' ? 'active' : ''}" onclick="changeSearchType('author')">Autore</button>
+                    </div>
+                </div>
+
+                <form th:action="@{/books/search}" method="get" class="search-form-results">
+                    <input type="text" name="q" th:value="${query}" placeholder="Cerca per titolo, autore..." />
+                    <input type="hidden" name="type" id="hiddenSearchType" th:value="${searchType}" />
+                    <button type="submit"><i class="fas fa-search"></i> Cerca</button>
+                </form>
+
+                <div th:if="${books.isEmpty()}" class="no-results">
+                    <p>Nessun libro trovato per la tua ricerca.</p>
+                    <p>Prova a modificare la parola chiave o il tipo di ricerca.</p>
+                </div>
+
+                <div class="results-grid" th:if="${!books.isEmpty()}">
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <div class="book-image-wrapper">
+                                <div class="book-image-background"></div>
+                                <img th:src="@{${book.imagePath}}" alt="Copertina libro" class="book-cover-image" />
+                            </div>
+                            <h3 th:text="${book.title}"></h3>
+                            <p th:if="${!book.authors.isEmpty()}">
+                                Di <span th:each="author, iterStat : ${book.authors}">
+                                    <span th:text="${author.firstName + ' ' + author.lastName}"></span><span th:if="${!iterStat.last}">, </span>
+                                </span>
+                            </p>
+                            <p th:if="${book.publicationYear != null}" th:text="'Anno: ' + ${book.publicationYear}"></p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="search-page-footer">
+            <p>© 2025 SiwBooks. Tutti i diritti riservati.</p>
+            </footer>
+    </div>
+
+    <script src="https://unpkg.com/colorthief@2.3.0/dist/color-thief.umd.js"></script>
+    <script>
+        const colorThief = new ColorThief();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookImages = document.querySelectorAll('.book-cover-image');
+
+            bookImages.forEach(img => {
+                if (img.complete) {
+                    setDominantColorBackground(img);
+                } else {
+                    img.addEventListener('load', () => setDominantColorBackground(img));
+                    img.addEventListener('error', () => {
+                        console.error('Errore nel caricamento dell\'immagine:', img.src);
+                        const wrapper = img.closest('.book-image-wrapper');
+                        if (wrapper) {
+                            const backgroundDiv = wrapper.querySelector('.book-image-background');
+                            if (backgroundDiv) {
+                                backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        function setDominantColorBackground(imgElement) {
+            try {
+                const dominantColor = colorThief.getColor(imgElement);
+                const rgbColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+
+                const wrapper = imgElement.closest('.book-image-wrapper');
+                if (wrapper) {
+                    const backgroundDiv = wrapper.querySelector('.book-image-background');
+                    if (backgroundDiv) {
+                        backgroundDiv.style.backgroundColor = rgbColor;
+                    }
+                }
+            } catch (e) {
+                console.error('Errore nell\'estrazione del colore o nell\'impostazione dello sfondo:', e);
+                const wrapper = imgElement.closest('.book-image-wrapper');
+                if (wrapper) {
+                    const backgroundDiv = wrapper.querySelector('.book-image-background');
+                    if (backgroundDiv) {
+                        backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                    }
+                }
+            }
+        }
+
+        // Funzione per cambiare il tipo di ricerca e inviare il form
+        function changeSearchType(type) {
+            document.getElementById('hiddenSearchType').value = type;
+            document.querySelector('.search-form-results').submit();
+        }
+    </script>
+</body>
+</html>
