@@ -2,20 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Libri</title>
+    <title>Lista Libri</title>
     <link rel="stylesheet" type="text/css" href="/css/list.css">
 </head>
 <body>
     <div class="container">
-        <h1>Lista Libri</h1>
-        <ul class="book-list">
-            <li th:each="book : ${books}">
-                <a th:href="@{'/books/' + ${book.id}}" class="book-link">
-                    <span th:text="${book.title}">Titolo</span>
-                </a>
-                <span class="year" th:text="${book.publicationYear}">Anno</span>
-            </li>
-        </ul>
+        <a href="javascript:history.back()" class="back-button">← Indietro</a>
+        <h1>La nostra collezione 📚</h1>
+
+        <div class="content-wrapper">
+            <ul class="book-list">
+                <li class="list-header">
+                    <span class="header-title">Titolo ✍🏻</span>
+                    <span class="header-year">Anno di pubblicazione 🗓️</span>
+                </li>
+                <li th:each="book : ${books}" th:data-initial="${#strings.substring(book.title, 0, 1).toUpperCase()}">
+                    <a th:href="@{'/books/' + ${book.id}}" class="book-link">
+                        <span th:text="${book.title}">Titolo</span>
+                    </a>
+                    <span class="year" th:text="${book.publicationYear}">Anno</span>
+                </li>
+            </ul>
+
+            <div class="alphabet-az">
+            </div>
+        </div>
     </div>
+
+    <script src="/js/list.js"></script>
 </body>
 </html>
