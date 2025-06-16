@@ -10,133 +10,183 @@
     <link rel="icon" href="/media/SiwBookslogoIco.ico" type="image/x-icon" />
 </head>
 <body>
-<div class="admin-button-container" th:if="${isAdmin}">
-    <button class="admin-open-modal" onclick="openAdminModal()">
-        <i class="fas fa-user-cog"></i> Strumenti Admin
-    </button>
-</div>
+    <div class="admin-button-container" th:if="${isAdmin}">
+        <button class="admin-open-modal" onclick="openAdminModal()">
+            <i class="fas fa-user-cog"></i> Strumenti Admin
+        </button>
+    </div>
 
-<div class="container">
-    <header class="main-header">
-        <!-- Contenitore per l'auth-section in alto a destra (solo per utenti loggati) -->
-        <div class="auth-section-container">
-            <div class="auth-section">
-                <!-- Se l'utente è loggato -->
-                <div th:if="${loggedUser != null}" class="logged-in-user">
-                    <a th:href="@{/profile/myProfile}" class="user-profile-link" style="text-decoration:none; color: inherit;">
-                        <img th:src="@{${loggedUser.avatar != null} ? ${loggedUser.avatar} : '/media/default-avatar.png'}"
-                             alt="Avatar utente" class="avatar-icon" />
-                        <div class="user-info">
-                            <div class="user-name" th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></div>
-                            <div class="user-role" th:if="${isAdmin}" style="font-size: 0.85rem; color: #777;">Amministratore</div>
+    <div class="container">
+        <header class="main-header">
+            <div class="auth-section-container">
+                <div class="auth-section">
+                    <div th:if="${loggedUser != null}" class="logged-in-user">
+                        <a th:href="@{/profile/myProfile}" class="user-profile-link" style="text-decoration:none; color: inherit;">
+                            <img th:src="@{${loggedUser.avatar != null} ? ${loggedUser.avatar} : '/media/default-avatar.png'}"
+                                alt="Avatar utente" class="avatar-icon" />
+                            <div class="user-info">
+                                <div class="user-name" th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}"></div>
+                                <div class="user-role" th:if="${isAdmin}" style="font-size: 0.85rem; color: #777;">Amministratore</div>
+                            </div>
+                        </a>
+                        <form th:action="@{/logout}" method="post" style="display:inline;">
+                            <button type="submit" class="logout-btn" title="Esci">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo-area">
+                <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
+                <p class="tagline">Trasformiamo pagine in pixel e storie in eternità.</p>
+
+                <div th:if="${loggedUser == null}" class="welcome-section">
+                    <div class="welcome-content">
+                        <h2 class="welcome-title">Unisciti alla tua passione per i libri!</h2>
+                        <p class="welcome-text">Crea un account o accedi per scoprire migliaia di storie, salvare i tuoi libri preferiti e condividere le tue letture.</p>
+                        <div class="welcome-buttons">
+                            <a th:href="@{/register}" class="welcome-btn register-btn"><i class="fas fa-user-plus"></i> Registrati Ora</a>
+                            <a th:href="@{/login}" class="welcome-btn login-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
                         </div>
-                    </a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <a th:href="@{/books}" class="nav-btn primary-btn browse-all-btn"><i class="fas fa-book-open"></i> Sfoglia tutti i libri</a>
+            </nav>
+        </header>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>Trova la tua prossima grande lettura!</h2>
+                <p>Esplora un universo di storie, scopri nuovi autori e lasciati ispirare.</p>
+                <form th:action="@{/books/search}" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="Cerca per titolo, autore, genere..." />
+                    <button type="submit"><i class="fas fa-search"></i> Cerca</button>
+                </form>
+            </div>
+        </section>
+        <section class="latest-books-section">
+            <h2>✨ Novità Editoriali ⤵️</h2>
+            <div class="latest-books-slider" th:if="${books != null}">
+                <div class="slider-track">
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <div class="book-image-wrapper">
+                                <div class="book-image-background"></div>
+                                <img th:src="@{${book.imagePath}}" alt="Copertina libro" class="book-cover-image" />
+                            </div>
+                            <h3 th:text="${book.title}"></h3>
+                        </a>
+                    </div>
+                    <div class="book-card" th:each="book : ${books}">
+                        <a th:href="@{'/books/' + ${book.id}}">
+                            <div class="book-image-wrapper">
+                                <div class="book-image-background"></div>
+                                <img th:src="@{${book.imagePath}}" alt="Copertina libro" class="book-cover-image" />
+                            </div>
+                            <h3 th:text="${book.title}"></h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="adminModal" class="modal" th:if="${isAdmin}">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeAdminModal()">×</span>
+                <h2><i class="fas fa-toolbox"></i> Strumenti Amministrazione</h2>
+                <div class="admin-buttons">
+                    <a th:href="@{/admin/authors/new}" class="btn"><i class="fas fa-user-edit"></i> Aggiungi Autore</a>
+                    <a th:href="@{/admin/books/new}" class="btn"><i class="fas fa-plus-square"></i> Aggiungi Libro</a>
                     <form th:action="@{/logout}" method="post" style="display:inline;">
-                        <button type="submit" class="logout-btn" title="Esci">
-                            <i class="fas fa-sign-out-alt"></i>
+                        <button type="submit" class="btn btn-exit">
+                            <i class="fas fa-power-off"></i> Esci dalla sessione
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-
-        <!-- Logo e tagline -->
-        <div class="logo-area">
-            <img src="/media/SiwBooksLogo.png" alt="Logo SiwBooks" class="logo-siwbooks-large"/>
-            <p class="tagline">Trasformiamo pagine in pixel e storie in eternità.</p>
-
-            <!-- Nuova sezione per utenti non loggati -->
-            <div th:if="${loggedUser == null}" class="welcome-section">
-                <div class="welcome-content">
-                    <h2 class="welcome-title">Unisciti alla tua passione per i libri!</h2>
-                    <p class="welcome-text">Crea un account o accedi per scoprire migliaia di storie, salvare i tuoi libri preferiti e condividere le tue letture.</p>
-                    <div class="welcome-buttons">
-                        <a th:href="@{/register}" class="welcome-btn register-btn"><i class="fas fa-user-plus"></i> Registrati Ora</a>
-                        <a th:href="@{/login}" class="welcome-btn login-btn"><i class="fas fa-sign-in-alt"></i> Accedi</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigazione principale -->
-        <nav class="main-nav">
-            <a th:href="@{/books}" class="nav-btn primary-btn browse-all-btn"><i class="fas fa-book-open"></i> Sfoglia tutti i libri</a>
-        </nav>
-    </header>
-
-    <section class="hero-section">
-        <div class="hero-content">
-            <h2>Trova la tua prossima grande lettura!</h2>
-            <p>Esplora un universo di storie, scopri nuovi autori e lasciati ispirare.</p>
-            <form th:action="@{/books/search}" method="get" class="search-form">
-                <input type="text" name="q" placeholder="Cerca per titolo, autore, genere..." />
-                <button type="submit"><i class="fas fa-search"></i> Cerca</button>
-            </form>
-        </div>
-    </section>
-    <section class="latest-books-section">
-        <h2>✨ Novità Editoriali ⤵️</h2>
-        <div class="latest-books-slider" th:if="${books != null}">
-            <div class="slider-track">
-                <div class="book-card" th:each="book : ${books}">
-                    <a th:href="@{'/books/' + ${book.id}}">
-                        <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                        <h3 th:text="${book.title}"></h3>
-                    </a>
-                </div>
-                <div class="book-card" th:each="book : ${books}">
-                    <a th:href="@{'/books/' + ${book.id}}">
-                        <img th:src="@{${book.imagePath}}" alt="Copertina libro" />
-                        <h3 th:text="${book.title}"></h3>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="adminModal" class="modal" th:if="${isAdmin}">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeAdminModal()">×</span>
-            <h2><i class="fas fa-toolbox"></i> Strumenti Amministrazione</h2>
-            <div class="admin-buttons">
-                <a th:href="@{/admin/authors/new}" class="btn"><i class="fas fa-user-edit"></i> Aggiungi Autore</a>
-                <a th:href="@{/admin/books/new}" class="btn"><i class="fas fa-plus-square"></i> Aggiungi Libro</a>
-                <form th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-exit">
-                        <i class="fas fa-power-off"></i> Esci dalla sessione
-                    </button>
-                </form>
-            </div>
-        </div>
     </div>
-</div>
 
-<footer style="background-color: #f8f8f8; padding: 20px; text-align: center;">
-    <p>© 2025 SiwBooks. Tutti i diritti riservati.</p>
-</footer>
+    <footer style="background-color: #f8f8f8; padding: 20px; text-align: center;">
+        <p>© 2025 SiwBooks. Tutti i diritti riservati.</p>
+    </footer>
 
-<script>
-function openAdminModal() {
-    document.getElementById("adminModal").classList.add("show");
-}
+    <script src="https://unpkg.com/colorthief@2.3.0/dist/color-thief.umd.js"></script>
 
-function closeAdminModal() {
-    document.getElementById("adminModal").classList.remove("show");
-}
+    <script>
+        const colorThief = new ColorThief();
 
-window.onclick = function(event) {
-    const modal = document.getElementById("adminModal");
-    if (event.target === modal) {
-        modal.classList.remove("show");
-    }
-}
-</script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookImages = document.querySelectorAll('.book-cover-image');
 
-<script>
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
-    document.body.style.backgroundPositionY = -(scrollPosition * 0.3) + 'px';
-});
-</script>
+            bookImages.forEach(img => {
+                if (img.complete) {
+                    setDominantColorBackground(img);
+                } else {
+                    img.addEventListener('load', () => setDominantColorBackground(img));
+                    img.addEventListener('error', () => {
+                        console.error('Errore nel caricamento dell\'immagine:', img.src);
+                        const wrapper = img.closest('.book-image-wrapper');
+                        if (wrapper) {
+                            const backgroundDiv = wrapper.querySelector('.book-image-background');
+                            if (backgroundDiv) {
+                                backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        function setDominantColorBackground(imgElement) {
+            try {
+                const dominantColor = colorThief.getColor(imgElement);
+                const rgbColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+
+                const wrapper = imgElement.closest('.book-image-wrapper');
+                if (wrapper) {
+                    const backgroundDiv = wrapper.querySelector('.book-image-background');
+                    if (backgroundDiv) {
+                        backgroundDiv.style.backgroundColor = rgbColor;
+                    }
+                }
+            } catch (e) {
+                console.error('Errore nell\'estrazione del colore o nell\'impostazione dello sfondo:', e);
+                // Imposta un colore di fallback in caso di errore nell'estrazione
+                const wrapper = imgElement.closest('.book-image-wrapper');
+                if (wrapper) {
+                    const backgroundDiv = wrapper.querySelector('.book-image-background');
+                    if (backgroundDiv) {
+                        backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                    }
+                }
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById("adminModal").classList.add("show");
+        }
+
+        function closeAdminModal() {
+            document.getElementById("adminModal").classList.remove("show");
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("adminModal");
+            if (event.target === modal) {
+                modal.classList.remove("show");
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            document.body.style.backgroundPositionY = -(scrollPosition * 0.3) + 'px';
+        });
+    </script>
 </body>
 </html>
