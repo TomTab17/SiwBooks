@@ -1,14 +1,16 @@
 :root {
-    --deep-blue: #0A3C52; /* Azzurro molto scuro, quasi navy */
-    --primary-blue: #0E6BA8; /* Azzurro scuro dominante */
-    --secondary-blue: #1C8EF9; /* Azzurro brillante per accenti */
-    --light-blue: #ADD8E6; /* Azzurro chiaro per sfumature e sfondi secondari */
-    --very-light-blue: #E0F2F7; /* Azzurro chiarissimo per sfondi leggeri */
+    --deep-blue: #0A3C52;
+    --primary-blue: #0E6BA8;
+    --secondary-blue: #1C8EF9; 
+    --light-blue: #ADD8E6;
+    --very-light-blue: #E0F2F7;
     --dark-text: #2c3e50;
     --light-text: #7f8c8d;
     --white: #ffffff;
     --shadow-light: rgba(0, 0, 0, 0.1);
     --shadow-medium: rgba(0, 0, 0, 0.2);
+    --red-error: #e74c3c;
+    --green-success: #2ecc71;
 }
 
 body {
@@ -35,6 +37,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     animation: fadeIn 1s ease-out;
+    color: var(--dark-text);
 }
 
 header {
@@ -63,6 +66,7 @@ h1 {
     flex-wrap: wrap;
     gap: 30px;
     align-items: flex-start;
+    margin-bottom: 30px;
 }
 
 .book-image {
@@ -127,21 +131,157 @@ h1 {
     box-shadow: 0 2px 8px var(--shadow-light);
 }
 
-/* Stili per il pulsante "Torna Indietro" */
-.back-button-container {
-    text-align: center;
-    margin-top: 40px; /* Spazio sopra il pulsante */
+/* --- SEZIONE RECENSIONI --- */
+.reviews-section {
+    margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid var(--very-light-blue); /* Bordo superiore per separazione */
+    border-top: 1px solid var(--very-light-blue);
 }
 
-.back-button {
-    display: inline-block; /* Rende il link un blocco per padding e margini */
-    background-color: var(--deep-blue); /* Sfondo del pulsante azzurro molto scuro */
+.reviews-section h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--deep-blue);
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.reviews-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.review-item {
+    background-color: var(--very-light-blue);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    border-left: 8px solid var(--light-blue);
+    position: relative;
+}
+
+.review-item h3 {
+    color: var(--primary-blue);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.rating {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.rating .fas {
+    color: gold;
+}
+
+.rating .far {
+    color: #ccc;
+}
+
+.review-text {
+    color: var(--dark-text);
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.review-author {
+    font-size: 0.9em;
+    color: var(--light-text);
+    text-align: right;
+    font-style: italic;
+}
+
+/* Stili per messaggi di alert */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid transparent;
+    color: var(--white);
+}
+
+.alert-success {
+    background-color: var(--green-success);
+    border-color: darken(var(--green-success), 10%);
+}
+
+.alert-danger {
+    background-color: var(--red-error);
+    border-color: darken(var(--red-error), 10%);
+}
+
+/* Stili per il link/pulsante "Aggiungi Recensione" */
+.add-review-link {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.add-review-link p {
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.add-review-link .button {
+    display: inline-block;
+    background-color: var(--secondary-blue);
     color: var(--white);
     padding: 12px 25px;
     border-radius: 8px;
-    text-decoration: none; /* Rimuove la sottolineatura del link */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.add-review-link .button:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+/* Stili per il pulsante "Elimina Recensione" (Admin) */
+.delete-button {
+    background-color: var(--red-error);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 500;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: darken(var(--red-error), 10%);
+}
+
+
+.back-button-container {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--very-light-blue);
+}
+
+.back-button {
+    display: inline-block;
+    background-color: var(--deep-blue);
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
     font-weight: 600;
     font-size: 1.1em;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -149,12 +289,12 @@ h1 {
 }
 
 .back-button:hover {
-    background-color: var(--primary-blue); /* Cambia in azzurro scuro primario al hover */
-    transform: translateY(-2px); /* Effetto leggero di sollevamento */
+    background-color: var(--primary-blue);
+    transform: translateY(-2px);
     box-shadow: 0 6px 15px var(--shadow-medium);
 }
 
-/* Animazioni */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -166,7 +306,7 @@ h1 {
     }
 }
 
-/* Media Queries per la Responsività */
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -199,8 +339,19 @@ h1 {
         border-bottom: 4px solid var(--secondary-blue);
     }
 
-    .back-button {
-        width: 100%; /* Il pulsante occupa tutta la larghezza su mobile */
+    .back-button, .add-review-link .button {
+        width: 100%;
         box-sizing: border-box;
+    }
+
+    .review-item {
+        padding: 15px;
+    }
+
+    .delete-button {
+        position: static;
+        display: block;
+        width: fit-content;
+        margin: 10px auto 0;
     }
 }

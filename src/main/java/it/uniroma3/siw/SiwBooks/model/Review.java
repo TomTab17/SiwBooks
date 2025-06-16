@@ -3,6 +3,8 @@ package it.uniroma3.siw.SiwBooks.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Review {
@@ -11,12 +13,15 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Il titolo della recensione è obbligatorio")
     private String title;
 
-    @Min(1)
-    @Max(5)
-    private int rating;
+    @NotNull(message = "La valutazione è obbligatoria")
+    @Min(value = 1, message = "La valutazione deve essere almeno 1 stella")
+    @Max(value = 5, message = "La valutazione non può superare le 5 stelle")
+    private Integer rating;
 
+    @NotBlank(message = "Il testo della recensione è obbligatorio")
     @Column(length = 2000)
     private String text;
 
@@ -44,11 +49,11 @@ public class Review {
         this.title = title;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -76,4 +81,3 @@ public class Review {
         this.user = user;
     }
 }
-

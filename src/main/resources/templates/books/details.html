@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Dettaglio Libro</title>
     <link rel="stylesheet" href="/css/details.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -22,6 +23,41 @@
                 <ul class="author-list">
                     <li th:each="author : ${book.authors}">
                         <span th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <hr/>
+
+        <section class="reviews-section">
+            <h2>Recensioni</h2>
+
+            <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+            <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+            <div sec:authorize="isAuthenticated()" class="add-review-link">
+                <p th:if="${userHasReviewed}">Hai già lasciato una recensione per questo libro.</p>
+                <a th:unless="${userHasReviewed}" th:href="@{'/books/' + ${book.id} + '/reviews/new'}" class="button">Aggiungi Recensione</a>
+            </div>
+
+            <div th:if="${book.reviews.isEmpty()}">
+                <p>Ancora nessuna recensione per questo libro.</p>
+            </div>
+            <div th:unless="${book.reviews.isEmpty()}">
+                <ul class="reviews-list">
+                    <li th:each="review : ${book.reviews}" class="review-item">
+                        <h3 th:text="${review.title}">Titolo Recensione</h3>
+                        <div class="rating">
+                            <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                <i th:class="${i <= review.rating} ? 'fas fa-star' : 'far fa-star'"></i>
+                            </span>
+                        </div>
+                        <p class="review-text" th:text="${review.text}">Testo della recensione...</p>
+                        <p class="review-author">Recensito da: <span th:text="${review.user.username}">Nome Utente</span></p>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{'/admin/reviews/delete/' + ${review.id}}" class="delete-button" onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">Elimina Recensione</a>
+                        </div>
                     </li>
                 </ul>
             </div>

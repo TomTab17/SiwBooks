@@ -2,9 +2,13 @@ package it.uniroma3.siw.SiwBooks.controller;
 
 import it.uniroma3.siw.SiwBooks.model.Author;
 import it.uniroma3.siw.SiwBooks.model.Book;
+import it.uniroma3.siw.SiwBooks.model.User;
 import it.uniroma3.siw.SiwBooks.service.AuthorService;
 import it.uniroma3.siw.SiwBooks.service.BookService;
+import it.uniroma3.siw.SiwBooks.service.ReviewService;
+import it.uniroma3.siw.SiwBooks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +32,12 @@ public class BookController {
     @Autowired
     private AuthorService authorService;
 
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private UserService userService;
+
     // Lista dei libri
     @GetMapping("/books")
     public String listBooks(Model model) {
@@ -37,17 +47,29 @@ public class BookController {
 
     // Dettaglio libro
     @GetMapping("/books/{id}")
-    public String bookDetails(@PathVariable("id") Long id, Model model) {
+    public String bookDetails(@PathVariable("id") Long id, Model model, Authentication authentication) {
         Optional<Book> bookOpt = bookService.findById(id);
         if (bookOpt.isPresent()) {
-            model.addAttribute("book", bookOpt.get());
+            Book book = bookOpt.get();
+            model.addAttribute("book", book);
+
+            boolean userHasReviewed = false;
+            if (authentication != null && authentication.isAuthenticated()) {
+                String username = authentication.getName();
+                User currentUser = userService.getUserByUsername(username);
+                if (currentUser != null) {
+                    userHasReviewed = reviewService.findByBookAndUser(book, currentUser).isPresent();
+                }
+            }
+            model.addAttribute("userHasReviewed", userHasReviewed);
+
             return "books/details";
         } else {
             return "redirect:/books";
         }
     }
 
-    // Form per admin - nuovo libro
+    // Form per admin - nuovo libro 
     @GetMapping("/admin/books/new")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -57,31 +79,31 @@ public class BookController {
 
     // Salvataggio libro (admin)
     @PostMapping("/admin/books")
-public String addBook(@ModelAttribute("book") Book book,
-                      @RequestParam("authorIds") List<Long> authorIds,
-                      @RequestParam("coverImage") MultipartFile coverImage) throws IOException {
+    public String addBook(@ModelAttribute("book") Book book,
+                          @RequestParam("authorIds") List<Long> authorIds,
+                          @RequestParam("coverImage") MultipartFile coverImage) throws IOException {
 
-    List<Author> selectedAuthors = authorService.findAll().stream()
-            .filter(a -> authorIds.contains(a.getId()))
-            .toList();
-    book.setAuthors(selectedAuthors);
+        List<Author> selectedAuthors = authorService.findAll().stream()
+                .filter(a -> authorIds.contains(a.getId()))
+                .toList();
+        book.setAuthors(selectedAuthors);
 
-    if (!coverImage.isEmpty()) {
-        String uploadDir = "uploads/book-covers"; // scegli la tua cartella
-        Files.createDirectories(Paths.get(uploadDir));
+        if (!coverImage.isEmpty()) {
+            String uploadDir = "uploads/book-covers";
+            Files.createDirectories(Paths.get(uploadDir));
 
-        String originalFilename = Paths.get(coverImage.getOriginalFilename()).getFileName().toString();
-        String sanitizedFilename = originalFilename.replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
-        String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
-        Path path = Paths.get(uploadDir, newFileName);
+            String originalFilename = Paths.get(coverImage.getOriginalFilename()).getFileName().toString();
+            String sanitizedFilename = originalFilename.replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
+            String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
+            Path path = Paths.get(uploadDir, newFileName);
 
-        Files.copy(coverImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        book.setImagePath("/" + uploadDir + "/" + newFileName); // percorso per usare in src img (devi configurare static resources)
+            Files.copy(coverImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            book.setImagePath("/" + uploadDir + "/" + newFileName);
+        }
+
+        bookService.save(book);
+        return "redirect:/books";
     }
-
-    bookService.save(book);
-    return "redirect:/books";
-}
 
 
     // Cancellazione libro (admin)
@@ -91,4 +113,3 @@ public String addBook(@ModelAttribute("book") Book book,
         return "redirect:/books";
     }
 }
-

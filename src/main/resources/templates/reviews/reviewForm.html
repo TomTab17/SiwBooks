@@ -1,18 +1,109 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Nuova Recensione</title></head>
+<head>
+    <title>Nuova Recensione</title>
+    <link rel="stylesheet" href="/css/reviewForm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
-<h1>Scrivi una recensione per <span th:text="${book.title}">Libro</span></h1>
+    <div class="form-container">
+        <h1>Scrivi una recensione per <span th:text="${book.title}">Libro</span></h1>
 
-<form th:action="@{'/books/' + ${book.id} + '/reviews'}" method="post">
-    <label>Titolo: <input type="text" name="title"/></label><br/>
-    <label>Voto (1-5): <input type="number" name="rating" min="1" max="5"/></label><br/>
-    <label>Testo: <br/>
-        <textarea name="text" rows="6" cols="50"></textarea>
-    </label><br/>
-    <button type="submit">Invia Recensione</button>
-</form>
+        <form th:action="@{'/books/' + ${book.id} + '/reviews'}" th:object="${review}" method="post">
+            <div th:if="${#fields.hasErrors('global')}" class="alert alert-danger">
+                <p th:each="err : ${#fields.errors('global')}" th:text="${err}"></p>
+            </div>
 
-<a th:href="@{'/books/' + ${book.id}}">Torna al libro</a>
+            <div class="form-group">
+                <label for="title">Titolo:</label>
+                <input type="text" id="title" th:field="*{title}" placeholder="Un titolo per la tua recensione"/>
+                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Voto (1-5):</label>
+                <div class="rating-selection" id="ratingStars">
+                    <i class="far fa-star" data-value="1"></i>
+                    <i class="far fa-star" data-value="2"></i>
+                    <i class="far fa-star" data-value="3"></i>
+                    <i class="far fa-star" data-value="4"></i>
+                    <i class="far fa-star" data-value="5"></i>
+                </div>
+                <input type="hidden" id="rating" th:field="*{rating}" />
+                <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="text">Testo della recensione:</label>
+                <textarea id="text" th:field="*{text}" rows="6" placeholder="Condividi la tua opinione sul libro..."></textarea>
+                <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="error-message"></span>
+            </div>
+
+            <button type="submit">Invia Recensione</button>
+        </form>
+
+        <a th:href="@{'/books/' + ${book.id}}" class="back-link">Torna al libro</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingStars = document.getElementById('ratingStars');
+            const ratingInput = document.getElementById('rating');
+            const stars = ratingStars.querySelectorAll('.fa-star');
+
+            // Funzione per aggiornare l'aspetto delle stelle
+            function updateStars(value) {
+                stars.forEach(star => {
+                    const starValue = parseInt(star.dataset.value);
+                    if (starValue <= value) {
+                        star.classList.remove('far');
+                        star.classList.add('fas');
+                    } else {
+                        star.classList.remove('fas');
+                        star.classList.add('far');
+                    }
+                });
+            }
+
+            // Gestione del click sulle stelle
+            ratingStars.addEventListener('click', function(event) {
+                const clickedStar = event.target.closest('.fa-star');
+                if (clickedStar) {
+                    const value = parseInt(clickedStar.dataset.value);
+                    ratingInput.value = value;
+                    updateStars(value);
+                }
+            });
+
+            // Gestione del hover sulle stelle
+            ratingStars.addEventListener('mouseover', function(event) {
+                const hoveredStar = event.target.closest('.fa-star');
+                if (hoveredStar) {
+                    const value = parseInt(hoveredStar.dataset.value);
+                    stars.forEach(star => {
+                        const starValue = parseInt(star.dataset.value);
+                        if (starValue <= value) {
+                            star.classList.add('hovered');
+                        } else {
+                            star.classList.remove('hovered');
+                        }
+                    });
+                }
+            });
+
+            ratingStars.addEventListener('mouseout', function() {
+                stars.forEach(star => star.classList.remove('hovered'));
+                if (ratingInput.value) {
+                    updateStars(parseInt(ratingInput.value));
+                } else {
+                    updateStars(0);
+                }
+            });
+
+            if (ratingInput.value) {
+                updateStars(parseInt(ratingInput.value));
+            }
+        });
+    </script>
 </body>
 </html>
