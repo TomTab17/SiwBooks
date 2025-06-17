@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="login-container">
     <h2>Accedi al tuo account</h2>
+
+    <div th:if="${loginError}" class="message error-message alert-fade">
+        <p><i class="fas fa-exclamation-circle"></i> <span th:text="${loginError}"></span></p>
+    </div>
+
+    <div th:if="${verifiedMessage}" class="message success-message alert-fade">
+        <p><i class="fas fa-check-circle"></i> <span th:text="${verifiedMessage}"></span></p>
+    </div>
+
+    <div th:if="${logoutMessage}" class="message info-message alert-fade">
+        <p><i class="fas fa-info-circle"></i> <span th:text="${logoutMessage}"></span></p>
+    </div>
+
     <form th:action="@{/login}" method="post" class="login-form">
         <div class="form-group">
             <label for="username">Username</label>
@@ -24,5 +38,22 @@
         Non sei registrato? <a th:href="@{/register}" href="/register">Registrati</a>
     </p>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = document.querySelectorAll('.alert-fade');
+        messages.forEach(message => {
+            if (message) {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transition = 'opacity 0.5s ease-out';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 500);
+                }, 5000);
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -36,19 +36,31 @@ public class AuthController {
             case USERNAME_ALREADY_IN_USE_PENDING_VERIFICATION:
                 model.addAttribute("error", "Username già registrato e in attesa di verifica. Controlla la tua email.");
                 model.addAttribute("username", user.getUsername());
-                return "auth/verify"; // Reindirizza alla pagina di verifica per quell'utente
+                return "auth/verify";
             case EMAIL_ALREADY_IN_USE_PENDING_VERIFICATION:
                 model.addAttribute("error", "Email già registrata e in attesa di verifica. Controlla la tua email.");
-                model.addAttribute("username", user.getUsername()); // Potresti non avere lo username qui, ma l'email
-                return "auth/verify"; // Reindirizza alla pagina di verifica per quell'utente
+                model.addAttribute("username", user.getUsername());
+                return "auth/verify";
         }
 
-        model.addAttribute("user", user); // Mantiene i dati inseriti nel form
+        model.addAttribute("user", user);
         return "auth/register";
     }
 
     @GetMapping("/login")
-    public String showLoginForm() {
+    public String showLoginForm(@RequestParam(value = "error", required = false) String error,
+                                @RequestParam(value = "logout", required = false) String logout,
+                                @RequestParam(value = "verified", required = false) String verified,
+                                Model model) {
+        if (error != null) {
+            model.addAttribute("loginError", "Username o password non validi. Riprova.");
+        }
+        if (logout != null) {
+            model.addAttribute("logoutMessage", "Logout effettuato con successo.");
+        }
+        if (verified != null) {
+            model.addAttribute("verifiedMessage", "Account verificato con successo! Ora puoi accedere.");
+        }
         return "auth/login";
     }
 
