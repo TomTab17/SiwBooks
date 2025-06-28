@@ -11,7 +11,7 @@
 <body>
     <div class="profile-container">
         <div class="avatar-section">
-            <img th:src="@{${loggedUser.avatar}}" alt="Avatar utente" class="avatar" />
+            <img th:src="${loggedUser.avatar != null and !loggedUser.avatar.isEmpty() ? loggedUser.avatar : '/media/defaultGoogleAvatar.png'}" alt="Avatar utente" class="avatar" />
         </div>
 
         <div class="user-info">
