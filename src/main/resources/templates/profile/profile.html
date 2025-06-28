@@ -16,15 +16,26 @@
 
         <div class="user-info">
             <h1 th:text="${loggedUser.firstName} + ' ' + ${loggedUser.lastName}">Nome Cognome</h1>
-            <p><strong>Username:</strong> <span th:text="${loggedUser.username}">username</span></p>
-            <p><strong>Email:</strong> <span th:text="${loggedUser.email}">email@example.com</span></p>
+            <div class="detail-item">
+                <strong><i class="fas fa-user"></i> Username:</strong>
+                <span th:text="${loggedUser.username}">username</span>
+                <span th:if="${loggedUser.googleUser}" class="google-user-note">
+                    <i class="fab fa-google"></i> Utente Google
+                </span>
+            </div>
+            <div class="detail-item">
+                <strong><i class="fas fa-envelope"></i> Email:</strong>
+                <span th:text="${loggedUser.email}">email@example.com</span>
+            </div>
 
-            <a th:href="@{/profile/editProfile}" class="btn edit-profile-btn">
-                <i class="fas fa-user-edit"></i> Modifica Profilo
-            </a>
-            <a href="javascript:history.back()" class="btn back-btn">
-                <i class="fas fa-arrow-left"></i> Torna Indietro
-            </a>
+            <div class="button-group">
+                <a th:href="@{/profile/editProfile}" class="btn primary-btn">
+                    <i class="fas fa-user-edit"></i> Modifica Profilo
+                </a>
+                <a th:href="@{/}" class="btn secondary-btn">
+                    <i class="fas fa-arrow-left"></i> Torna alla Home
+                </a>
+            </div>
         </div>
     </div>
 </body>

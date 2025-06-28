@@ -1,78 +1,205 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
+    background: linear-gradient(to bottom right, #f0f4f8, #cdd9e8);
     margin: 0;
     padding: 20px;
     color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
 }
 
 .profile-container {
-    max-width: 600px;
-    margin: 40px auto;
+    max-width: 650px;
+    width: 90%;
+    margin: 80px auto 0;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
     text-align: center;
+    transform: translateY(0);
+    transition: transform 0.5s ease-out, box-shadow 0.3s ease-in-out;
+}
+
+.profile-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .avatar-section {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .avatar {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #007bff;
+    border: 5px solid #007bff;
+    box-shadow: 0 0 0 7px rgba(0, 123, 255, 0.2);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.avatar:hover {
+    border-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .user-info h1 {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #007bff;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.user-info p {
-    font-size: 1.1rem;
-    margin: 8px 0;
+.detail-item {
+    font-size: 1.15rem;
+    margin: 12px 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn {
-    display: block;
-    margin: 15px auto 0;
-    padding: 12px 28px;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    width: fit-content;
-}
-
-.btn i {
+.detail-item strong {
+    color: #444;
     margin-right: 8px;
 }
 
-.btn.edit-profile-btn {
+.detail-item i {
+    color: #007bff;
+    margin-right: 8px;
+}
+
+.google-user-note {
+    background-color: #e6f7ff;
+    color: #007bff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.google-user-note i {
+    margin-right: 5px;
+    color: #007bff;
+}
+
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 30px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn i {
+    margin-right: 10px;
+}
+
+.btn.primary-btn {
     background-color: #007bff;
     color: white;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
 }
 
-.btn.edit-profile-btn:hover {
+.btn.primary-btn:hover {
     background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
 }
 
-.btn.back-btn {
-    background-color: #dc3545;
+.btn.secondary-btn {
+    background-color: #6c757d;
     color: white;
-    font-size: 0.9rem;
-    padding: 10px 24px;
-    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
 }
 
-.btn.back-btn:hover {
-    background-color: #c82333;
+.btn.secondary-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.4);
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 25px;
+        margin: 60px auto 0;
+    }
+
+    .user-info h1 {
+        font-size: 2rem;
+    }
+
+    .detail-item {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .detail-item strong {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .google-user-note {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 80%;
+        max-width: none;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 15px;
+        margin: 40px auto 0;
+        border-radius: 10px;
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .user-info h1 {
+        font-size: 1.8rem;
+    }
+
+    .detail-item {
+        font-size: 0.95rem;
+    }
 }

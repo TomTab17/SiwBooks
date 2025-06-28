@@ -6,23 +6,40 @@
     <link rel="stylesheet" th:href="@{/css/editProfile.css}" />
 </head>
 <body>
-    <div class="container">
+    <div th:if="${loggedUser.googleUser}" class="google-user-overlay">
+        <div class="overlay-content">
+            <h2>Accesso tramite <img th:src="@{/media/GoogleScritta.png}" alt="Google Logo" class="google-logo-inline" /></h2>
+            <p>
+                Dato che hai effettuato l'accesso tramite il tuo account Google,
+                le tue informazioni principali come nome, cognome, email e password
+                sono gestite direttamente dal tuo provider di autenticazione.
+            </p>
+            <p>
+                Questo significa che per la tua sicurezza e comodità, non è possibile modificare questi dettagli qui.
+            </p>
+            <button type="button" class="btn back-to-profile-btn" onclick="window.location.href='/profile/myProfile'">
+                Torna al Tuo Profilo
+            </button>
+        </div>
+    </div>
+
+    <div class="container" th:classappend="${loggedUser.googleUser} ? 'blurred' : ''">
         <h1>Modifica Profilo</h1>
 
         <form th:action="@{/profile/editProfile}" th:object="${loggedUser}" method="post" class="edit-profile-form">
             <div class="form-group">
                 <label for="name">Nome:</label>
-                <input type="text" id="name" th:field="*{firstName}" required />
+                <input type="text" id="name" th:field="*{firstName}" th:disabled="${loggedUser.googleUser}" required />
             </div>
 
             <div class="form-group">
                 <label for="surname">Cognome:</label>
-                <input type="text" id="surname" th:field="*{lastName}" required />
+                <input type="text" id="surname" th:field="*{lastName}" th:disabled="${loggedUser.googleUser}" required />
             </div>
 
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" th:field="*{password}" placeholder="Lascia vuoto per mantenere la password attuale" />
+                <input type="password" id="password" th:field="*{password}" placeholder="Lascia vuoto per mantenere la password attuale" th:disabled="${loggedUser.googleUser}" />
             </div>
 
             <div class="form-group">
@@ -39,7 +56,7 @@
             </div>
 
             <div class="button-group">
-                <button type="submit" class="save-button">Salva modifiche</button>
+                <button type="submit" class="save-button" th:disabled="${loggedUser.googleUser}">Salva modifiche</button>
                 <button type="button" class="cancel-button" onclick="window.history.back();">Annulla modifiche</button>
             </div>
         </form>

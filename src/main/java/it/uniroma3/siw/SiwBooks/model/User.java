@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "users") 
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String firstName; // Nuovo campo
-    private String lastName;  // Nuovo campo
-    private String email;     // Nuovo campo
+    private String firstName;
+    private String lastName;
+    private String email;
     private String username;
     private String password;
     private String avatar;
@@ -25,13 +25,14 @@ public class User {
     @Column
     private boolean enabled = false;
 
+    @Column(nullable = false)
+    private boolean googleUser = false;
+
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles; // e.g. ROLE_USER, ROLE_ADMIN
+    private Set<String> roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Review> reviews;
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -98,26 +99,34 @@ public class User {
     }
 
     public String getVerificationCode() {
-    return verificationCode;
-}
+        return verificationCode;
+    }
 
-public void setVerificationCode(String verificationCode) {
-    this.verificationCode = verificationCode;
-}
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
 
-public boolean isEnabled() {
-    return enabled;
-}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
-}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-public String getAvatar() {
-    return avatar;
-}
+    public String getAvatar() {
+        return avatar;
+    }
 
-public void setAvatar(String avatar) {
-    this.avatar = avatar;
-}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public boolean isGoogleUser() {
+        return googleUser;
+    }
+
+    public void setGoogleUser(boolean googleUser) {
+        this.googleUser = googleUser;
+    }
 }

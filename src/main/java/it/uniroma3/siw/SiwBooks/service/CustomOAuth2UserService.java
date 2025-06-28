@@ -51,12 +51,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             user.setRoles(Set.of("ROLE_USER"));
             user.setEnabled(true);
             user.setAvatar(avatarUrl);
+            user.setGoogleUser(true);
             userRepository.save(user);
         } else {
             user = userOpt.get();
             if (user.getAvatar() == null || (avatarUrl != null && !user.getAvatar().equals(avatarUrl))) {
                  user.setAvatar(avatarUrl);
                  userRepository.save(user);
+            }
+            if (!user.isGoogleUser()) {
+                user.setGoogleUser(true);
+                userRepository.save(user);
             }
         }
 
