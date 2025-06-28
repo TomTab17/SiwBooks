@@ -8,7 +8,8 @@ import it.uniroma3.siw.SiwBooks.service.ReviewService;
 import it.uniroma3.siw.SiwBooks.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,10 +30,29 @@ public class ReviewController {
     @Autowired
     private UserService userService;
 
-    // Form nuova recensione
+    private User getLoggedInUser(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            if (email != null) {
+                return userService.getUserByEmail(email);
+            }
+        } else if (principal instanceof org.springframework.security.core.userdetails.UserDetails) {
+            String username = ((org.springframework.security.core.userdetails.UserDetails) principal).getUsername();
+            return userService.getUserByUsername(username);
+        }
+        return null;
+    }
+
     @GetMapping("/books/{bookId}/reviews/new")
     public String newReviewForm(@PathVariable Long bookId,
-                                @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser,
+                                Authentication authentication,
                                 Model model) {
         Optional<Book> bookOpt = bookService.findById(bookId);
         if (bookOpt.isEmpty()) {
@@ -40,7 +60,11 @@ public class ReviewController {
         }
 
         Book book = bookOpt.get();
-        User user = userService.getUserByUsername(currentUser.getUsername());
+        User user = getLoggedInUser(authentication);
+
+        if (user == null) {
+            return "redirect:/login?error=notLoggedInToReview";
+        }
 
         if (reviewService.findByBookAndUser(book, user).isPresent()) {
             model.addAttribute("alreadyReviewed", true);
@@ -52,22 +76,27 @@ public class ReviewController {
         return "reviews/reviewForm";
     }
 
-    // Salvataggio recensione
     @PostMapping("/books/{bookId}/reviews")
     public String saveReview(@PathVariable Long bookId,
                              @Valid @ModelAttribute("review") Review review,
                              BindingResult bindingResult,
-                             @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser,
+                             Authentication authentication,
                              RedirectAttributes redirectAttributes,
                              Model model) {
 
         Optional<Book> bookOpt = bookService.findById(bookId);
         if (bookOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Libro non trovato.");
             return "redirect:/books";
         }
 
         Book book = bookOpt.get();
-        User user = userService.getUserByUsername(currentUser.getUsername());
+        User user = getLoggedInUser(authentication);
+
+        if (user == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Devi essere loggato per inviare una recensione.");
+            return "redirect:/login";
+        }
 
         if (reviewService.findByBookAndUser(book, user).isPresent()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Hai già recensito questo libro.");
@@ -82,11 +111,11 @@ public class ReviewController {
         review.setBook(book);
         review.setUser(user);
         reviewService.save(review);
+
         redirectAttributes.addFlashAttribute("successMessage", "Recensione inviata con successo!");
         return "redirect:/books/" + bookId;
     }
 
-    // Cancellazione (solo admin)
     @GetMapping("/admin/reviews/delete/{id}")
     public String deleteReview(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Optional<Review> reviewOpt = reviewService.findById(id);
@@ -96,6 +125,7 @@ public class ReviewController {
             redirectAttributes.addFlashAttribute("successMessage", "Recensione eliminata con successo.");
             return "redirect:/books/" + bookId;
         }
+        redirectAttributes.addFlashAttribute("errorMessage", "Recensione non trovata.");
         return "redirect:/books";
     }
 }

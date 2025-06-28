@@ -6,6 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="login-container">
@@ -34,6 +35,18 @@
         </div>
         <button type="submit">Login</button>
     </form>
+
+    <div class="separator">
+        <span>o</span>
+    </div>
+
+    <div class="social-login-options">
+        <a th:href="@{/oauth2/authorization/google}" class="google-signin-button">
+            <img src="/media/GoogleLogo.png" alt="Google Logo" class="google-logo"/>
+            <span>Accedi con Google</span>
+        </a>
+    </div>
+
     <p class="register-link">
         Non sei registrato? <a th:href="@{/register}" href="/register">Registrati</a>
     </p>

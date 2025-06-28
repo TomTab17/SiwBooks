@@ -9,6 +9,7 @@ import it.uniroma3.siw.SiwBooks.service.ReviewService;
 import it.uniroma3.siw.SiwBooks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,38 +39,52 @@ public class BookController {
     @Autowired
     private UserService userService;
 
-    // Lista dei libri
+    private User getLoggedInUser(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            if (email != null) {
+                return userService.getUserByEmail(email);
+            }
+        } else if (principal instanceof org.springframework.security.core.userdetails.UserDetails) {
+            String username = ((org.springframework.security.core.userdetails.UserDetails) principal).getUsername();
+            return userService.getUserByUsername(username);
+        }
+        return null;
+    }
+
     @GetMapping("/books")
     public String listBooks(Model model) {
         model.addAttribute("books", bookService.findAll());
         return "books/list";
     }
 
-    // Dettaglio libro
     @GetMapping("/books/{id}")
     public String bookDetails(@PathVariable("id") Long id, Model model, Authentication authentication) {
         Optional<Book> bookOpt = bookService.findById(id);
-        if (bookOpt.isPresent()) {
-            Book book = bookOpt.get();
-            model.addAttribute("book", book);
-
-            boolean userHasReviewed = false;
-            if (authentication != null && authentication.isAuthenticated()) {
-                String username = authentication.getName();
-                User currentUser = userService.getUserByUsername(username);
-                if (currentUser != null) {
-                    userHasReviewed = reviewService.findByBookAndUser(book, currentUser).isPresent();
-                }
-            }
-            model.addAttribute("userHasReviewed", userHasReviewed);
-
-            return "books/details";
-        } else {
+        if (bookOpt.isEmpty()) {
             return "redirect:/books";
         }
+
+        Book book = bookOpt.get();
+        model.addAttribute("book", book);
+
+        boolean userHasReviewed = false;
+        User currentUser = getLoggedInUser(authentication);
+        if (currentUser != null) {
+            userHasReviewed = reviewService.findByBookAndUser(book, currentUser).isPresent();
+        }
+        model.addAttribute("userHasReviewed", userHasReviewed);
+
+        return "books/details";
     }
 
-    // Form per admin - nuovo libro
     @GetMapping("/admin/books/new")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
@@ -77,7 +92,6 @@ public class BookController {
         return "admin/bookForm";
     }
 
-    // Salvataggio libro (admin)
     @PostMapping("/admin/books")
     public String addBook(@ModelAttribute("book") Book book,
                           @RequestParam("authorIds") List<Long> authorIds,
@@ -106,14 +120,12 @@ public class BookController {
     }
 
 
-    // Cancellazione libro (admin)
     @GetMapping("/admin/books/delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteById(id);
         return "redirect:/books";
     }
 
-    // Ricerca
     @GetMapping("/books/search")
     public String searchBooks(@RequestParam(value = "q", required = false) String query,
                               @RequestParam(value = "type", defaultValue = "title") String searchType,

@@ -4,8 +4,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .login-container {
@@ -15,17 +17,98 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 400px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h2 {
     margin-bottom: 1.5rem;
     color: #333333;
+    width: 100%;
+    text-align: center;
+}
+
+.social-login-options {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.google-signin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #4285F4;
+    color: white;
+    border: 1px solid #4285F4;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+}
+
+.google-signin-button:hover {
+    background-color: #357ABD;
+    border-color: #357ABD;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.google-signin-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.google-logo {
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    background-color: white;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888;
+    width: 100%;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.separator:not(:empty)::before {
+    margin-right: 0.5em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: 0.5em;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login-form .form-group {
     margin-bottom: 1rem;
     text-align: left;
+    width: 100%;
 }
 
 .login-form label {
@@ -59,6 +142,8 @@ button[type="submit"] {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 300px;
 }
 
 button[type="submit"]:hover {
@@ -74,6 +159,8 @@ button[type="submit"]:active {
     margin-top: 1rem;
     font-size: 0.9rem;
     color: #555;
+    width: 100%;
+    text-align: center;
 }
 
 .register-link a {
@@ -96,6 +183,8 @@ button[type="submit"]:active {
     align-items: center;
     gap: 0.75rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .message p {

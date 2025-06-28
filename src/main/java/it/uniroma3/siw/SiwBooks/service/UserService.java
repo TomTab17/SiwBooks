@@ -3,10 +3,13 @@ package it.uniroma3.siw.SiwBooks.service;
 import it.uniroma3.siw.SiwBooks.model.User;
 import it.uniroma3.siw.SiwBooks.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.slf4j.Logger; // Nuovo import
+import org.slf4j.LoggerFactory; // Nuovo import
 
 import java.util.Set;
 import jakarta.mail.MessagingException;
@@ -19,17 +22,19 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class); // Inizializzazione del logger
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
+    @Lazy
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JavaMailSender mailSender;
 
     public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -48,6 +53,11 @@ public class UserService {
     public User getUserByUsername(String username) {
         return this.findByUsername(username).orElse(null);
     }
+
+    public User getUserByEmail(String email) {
+        return this.findByEmail(email).orElse(null);
+    }
+
 
     public RegisterResult registerWithVerification(User user) {
         Optional<User> existingUserByUsername = userRepository.findByUsername(user.getUsername());
@@ -74,12 +84,12 @@ public class UserService {
         user.setPassword(encodedPassword);
         user.setRoles(Set.of("ROLE_USER"));
 
-        String code = String.valueOf(new Random().nextInt(900000) + 100000); // 6 cifre
+        String code = String.valueOf(new Random().nextInt(900000) + 100000);
         user.setVerificationCode(code);
         user.setEnabled(false);
 
         userRepository.save(user);
-        sendVerificationEmail(user);
+        sendVerificationEmail(user); // Tentativo di invio email
 
         return RegisterResult.SUCCESS;
     }
@@ -99,11 +109,13 @@ public class UserService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
-            throw new IllegalStateException("Errore nell'invio della mail", e);
+            // Modifica qui: logga l'errore invece di lanciare un'eccezione
+            logger.error("Errore nell'invio dell'email di verifica a {}: {}", toAddress, e.getMessage());
+            // Il sistema continuerà a funzionare anche se l'email non viene inviata.
+            // Potresti voler aggiungere logica per riprovare più tardi o notificare l'amministratore.
         }
     }
 
-    // Email di conferma registrazione
     private void sendRegistrationConfirmationEmail(User user) {
         String toAddress = user.getEmail();
         String subject = "Registrazione completata su SIWBooks!";
@@ -124,7 +136,8 @@ public class UserService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
-            throw new IllegalStateException("Errore nell'invio della mail di conferma registrazione", e);
+            // Modifica qui: logga l'errore invece di lanciare un'eccezione
+            logger.error("Errore nell'invio della mail di conferma registrazione a {}: {}", toAddress, e.getMessage());
         }
     }
 
@@ -134,10 +147,9 @@ public class UserService {
             User user = optionalUser.get();
             if (user.getVerificationCode() != null && user.getVerificationCode().equals(code)) {
                 user.setEnabled(true);
-                user.setVerificationCode(null); // pulizia
+                user.setVerificationCode(null);
                 userRepository.save(user);
-                // Invia l'email di conferma
-                sendRegistrationConfirmationEmail(user);
+                sendRegistrationConfirmationEmail(user); // Tentativo di invio email
                 return true;
             }
         }
