@@ -2,44 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Nuovo Autore</title>
+    <title>Gestione Autore</title>
     <link rel="stylesheet" href="/css/authorForm.css" />
-</head>
-<body>
-    <h1>Nuovo Autore</h1>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head><body>
+    <header>
+        <h1>Nuovo Autore</h1>
+    </header>
 
-    <form th:action="@{/admin/authors}" method="post" enctype="multipart/form-data">
-        <label>
-            Nome:
-            <input type="text" name="firstName" required/>
-        </label><br/>
+    <main>
+        <form th:action="@{/admin/authors}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="firstName">Nome:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Inserisci il nome" required/>
+            </div>
 
-        <label>
-            Cognome:
-            <input type="text" name="lastName" required/>
-        </label><br/>
+            <div class="form-group">
+                <label for="lastName">Cognome:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Inserisci il cognome" required/>
+            </div>
 
-        <label>
-            Data di nascita:
-            <input type="date" name="birthDate" />
-        </label><br/>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthDate">Data di nascita:</label>
+                    <input type="date" id="birthDate" name="birthDate" />
+                </div>
 
-        <label>
-            Data di morte:
-            <input type="date" name="deathDate" />
-        </label><br/>
+                <div class="form-group">
+                    <label for="deathDate">Data di morte:</label>
+                    <input type="date" id="deathDate" name="deathDate" />
+                </div>
+            </div>
 
-        <label>
-            Nazionalità:
-            <input type="text" name="nationality" />
-        </label><br/>
+            <div class="form-group">
+                <label for="nationality">Nazionalità:</label>
+                <input type="text" id="nationality" name="nationality" placeholder="Es. Italiana, Americana"/>
+            </div>
 
-        <label>
-            Foto Autore:
-            <input type="file" name="photoFile" accept="image/*" />
-        </label><br/>
+            <div class="form-group">
+                <label for="photoFile">Foto Autore:</label>
+                <input type="file" id="photoFile" name="photoFile" accept="image/*" />
+                <small class="help-text">Carica un'immagine (JPG, PNG, GIF).</small>
+            </div>
 
-        <button type="submit">Salva</button>
-    </form>
+            <button type="submit">Salva Autore</button>
+            <a href="/" class="button-cancel">Annulla</a>
+        </form>
+    </main>
 </body>
 </html>

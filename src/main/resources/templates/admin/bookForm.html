@@ -4,33 +4,42 @@
     <meta charset="UTF-8">
     <title>Nuovo Libro</title>
     <link rel="stylesheet" href="/css/bookForm.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Nuovo Libro</h1>
+    <header>
+        <h1>Nuovo Libro</h1>
+    </header>
 
-    <form th:action="@{/admin/books}" method="post" enctype="multipart/form-data">
-        <label>
-            Titolo:
-            <input type="text" name="title" />
-        </label><br/>
+    <main>
+        <form th:action="@{/admin/books}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Titolo:</label>
+                <input type="text" id="title" name="title" placeholder="Inserisci il titolo del libro" required/>
+            </div>
 
-        <label>
-            Anno Pubblicazione:
-            <input type="number" name="publicationYear" />
-        </label><br/>
+            <div class="form-group">
+                <label for="publicationYear">Anno Pubblicazione:</label>
+                <input type="number" id="publicationYear" name="publicationYear" placeholder="Es. 2023" />
+            </div>
 
-        <label>
-            Copertina:
-            <input type="file" name="coverImage" />
-        </label><br/>
+            <div class="form-group">
+                <label for="coverImage">Copertina:</label>
+                <input type="file" id="coverImage" name="coverImage" accept="image/*" />
+                <small class="help-text">Carica un'immagine (JPG, PNG, GIF).</small>
+            </div>
 
-        <label>Autori:</label><br/>
-        <div th:each="author : ${allAuthors}">
-            <input type="checkbox" name="authorIds" th:value="${author.id}" />
-            <span th:text="${author.firstName + ' ' + author.lastName}"></span><br/>
-        </div>
+            <div class="form-group">
+                <label for="authorIds">Autori:</label>
+                <select id="authorIds" name="authorIds" multiple size="5" class="select-multiple">
+                    <option th:each="author : ${allAuthors}" th:value="${author.id}" th:text="${author.firstName + ' ' + author.lastName}"></option>
+                </select>
+                <small class="help-text">Tieni premuto CTRL (o CMD su Mac) per selezionare più autori.</small>
+            </div>
 
-        <button type="submit">Salva</button>
-    </form>
+            <button type="submit">Salva Libro</button>
+            <a href="/" class="button-cancel">Annulla</a>
+        </form>
+    </main>
 </body>
 </html>
