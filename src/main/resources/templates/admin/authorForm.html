@@ -2,51 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Gestione Autore</title>
+    <title th:text="${author.id == null ? 'Nuovo Autore' : 'Modifica Autore'}"></title>
     <link rel="stylesheet" href="/css/authorForm.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-</head><body>
+</head>
+<body>
     <header>
-        <h1>Nuovo Autore</h1>
+        <h1 th:text="${author.id == null ? 'Nuovo Autore' : 'Modifica Autore'}"></h1>
     </header>
 
     <main>
-        <form th:action="@{/admin/authors}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/admin/authors}" th:object="${author}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:if="${author.id != null}" th:field="*{id}" />
+
             <div class="form-group">
                 <label for="firstName">Nome:</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Inserisci il nome" required/>
+                <input type="text" id="firstName" th:field="*{firstName}" placeholder="Inserisci il nome" required/>
             </div>
 
             <div class="form-group">
                 <label for="lastName">Cognome:</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Inserisci il cognome" required/>
+                <input type="text" id="lastName" th:field="*{lastName}" placeholder="Inserisci il cognome" required/>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="birthDate">Data di nascita:</label>
-                    <input type="date" id="birthDate" name="birthDate" />
+                    <input type="date" id="birthDate" th:field="*{birthDate}" />
                 </div>
 
                 <div class="form-group">
                     <label for="deathDate">Data di morte:</label>
-                    <input type="date" id="deathDate" name="deathDate" />
+                    <input type="date" id="deathDate" th:field="*{deathDate}" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="nationality">Nazionalità:</label>
-                <input type="text" id="nationality" name="nationality" placeholder="Es. Italiana, Americana"/>
+                <input type="text" id="nationality" th:field="*{nationality}" placeholder="Es. Italiana, Americana"/>
             </div>
 
             <div class="form-group">
                 <label for="photoFile">Foto Autore:</label>
                 <input type="file" id="photoFile" name="photoFile" accept="image/*" />
-                <small class="help-text">Carica un'immagine (JPG, PNG, GIF).</small>
+                <small class="help-text">Carica un'immagine (JPG, PNG, GIF). Lascia vuoto per mantenere l'attuale.</small>
+                <div th:if="${author.photoPath != null and author.id != null}" class="current-image-preview">
+                    <p>Foto attuale:</p>
+                    <img th:src="@{${author.photoPath}}" alt="Foto autore attuale" style="max-width: 150px; height: auto; border-radius: 5px; margin-top: 10px;"/>
+                </div>
             </div>
 
-            <button type="submit">Salva Autore</button>
-            <a href="/" class="button-cancel">Annulla</a>
+            <button type="submit" th:text="${author.id == null ? 'Salva Autore' : 'Aggiorna Autore'}"></button>
+            <a href="javascript:history.back()" class="button-cancel">Annulla</a>
         </form>
     </main>
 </body>

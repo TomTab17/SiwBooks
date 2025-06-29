@@ -6,17 +6,16 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .background-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -42,6 +41,7 @@ body {
     align-items: center;
     gap: 25px;
     animation: fadeIn 0.8s ease-out;
+    margin: 30px auto;
 }
 
 @keyframes fadeIn {
@@ -183,5 +183,159 @@ h1 {
 
     .author-info p i {
         font-size: 1rem;
+    }
+}
+
+.admin-tools-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-left: 8px solid #ffc107;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #343a40;
+}
+
+.admin-tools-container h2 {
+    color: #e0a800;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-tools-container h2 i {
+    margin-right: 10px;
+    color: #e0a800;
+}
+
+.admin-buttons-details {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-admin-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-admin-action i {
+    margin-right: 8px;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.author-books-section {
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px dashed #e0e0e0;
+}
+
+.author-books-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.books-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.books-list li {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.books-list li:hover {
+    transform: translateY(-3px);
+    background-color: #e6e6e6;
+}
+
+.books-list li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.books-list li a:hover {
+    text-decoration: underline;
+}
+
+.books-list li span {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+    .admin-tools-container {
+        align-items: center;
+    }
+
+    .admin-buttons-details {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-admin-action {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .books-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .books-list li {
+        width: 90%;
+        text-align: center;
     }
 }

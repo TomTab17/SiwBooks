@@ -47,29 +47,83 @@ public class AuthorController {
         return "admin/authorForm";
     }
 
+    @GetMapping("/admin/authors/edit/{id}")
+    public String showEditAuthorForm(@PathVariable("id") Long id, Model model) {
+        Optional<Author> authorOpt = authorService.findById(id);
+        if (authorOpt.isEmpty()) {
+            return "redirect:/authors";
+        }
+        model.addAttribute("author", authorOpt.get());
+        return "admin/authorForm";
+    }
+
     @PostMapping("/admin/authors")
-    public String addAuthor(@ModelAttribute("author") Author author,
-                            @RequestParam("photoFile") MultipartFile photoFile) throws IOException {
+    public String saveAuthor(@ModelAttribute("author") Author author,
+                             @RequestParam(value = "photoFile", required = false) MultipartFile photoFile) throws IOException {
+        Author authorToSave;
+        if (author.getId() != null) {
+            Optional<Author> existingAuthorOpt = authorService.findById(author.getId());
+            if (existingAuthorOpt.isPresent()) {
+                authorToSave = existingAuthorOpt.get();
+                authorToSave.setFirstName(author.getFirstName());
+                authorToSave.setLastName(author.getLastName());
+                authorToSave.setBirthDate(author.getBirthDate());
+                authorToSave.setDeathDate(author.getDeathDate());
+                authorToSave.setNationality(author.getNationality());
+            } else {
+                return "redirect:/authors";
+            }
+        } else {
+            authorToSave = author;
+        }
 
-        if (!photoFile.isEmpty()) {
+        if (photoFile != null && !photoFile.isEmpty()) {
             Files.createDirectories(Paths.get(UPLOAD_DIR));
-
             String originalFilename = Paths.get(photoFile.getOriginalFilename()).getFileName().toString();
             String sanitizedFilename = originalFilename.replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
             String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
             Path path = Paths.get(UPLOAD_DIR, newFileName);
 
+            if (authorToSave.getPhotoPath() != null && !authorToSave.getPhotoPath().isEmpty()) {
+                String existingFileName = Paths.get(authorToSave.getPhotoPath()).getFileName().toString();
+                Path oldFile = Paths.get(UPLOAD_DIR, existingFileName);
+                try {
+                    if (Files.exists(oldFile)) {
+                        Files.delete(oldFile);
+                    }
+                } catch (IOException e) {
+                    System.err.println("Errore durante l'eliminazione della vecchia immagine autore: " + e.getMessage());
+                }
+            }
+
             Files.copy(photoFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-            author.setPhotoPath("/" + UPLOAD_DIR + "/" + newFileName);
+            authorToSave.setPhotoPath("/" + UPLOAD_DIR + "/" + newFileName);
         }
 
-        authorService.save(author);
-        return "redirect:/authors/" + author.getId();
+        authorService.save(authorToSave);
+        return "redirect:/authors/" + authorToSave.getId();
     }
 
     @GetMapping("/admin/authors/delete/{id}")
     public String deleteAuthor(@PathVariable("id") Long id) {
-        authorService.deleteById(id);
+        Optional<Author> authorOpt = authorService.findById(id);
+        if (authorOpt.isPresent()) {
+            Author authorToDelete = authorOpt.get();
+            String photoPath = authorToDelete.getPhotoPath();
+
+            if (photoPath != null && !photoPath.isEmpty()) {
+                try {
+                    String fileName = Paths.get(photoPath).getFileName().toString();
+                    Path filePath = Paths.get(UPLOAD_DIR, fileName);
+                    if (Files.exists(filePath)) {
+                        Files.delete(filePath);
+                    }
+                } catch (IOException e) {
+                    System.err.println("Errore durante l'eliminazione della foto dell'autore " + id + ": " + e.getMessage());
+                }
+            }
+            authorService.deleteById(id);
+        }
         return "redirect:/authors";
     }
 }

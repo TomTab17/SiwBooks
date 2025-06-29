@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Dettaglio Autore</title>
     <link rel="stylesheet" th:href="@{/css/detailsAuthor.css}" />
@@ -9,6 +9,15 @@
 <body>
     <div class="background-overlay"></div>
     <div class="author-details-container">
+
+        <div sec:authorize="hasRole('ADMIN')" class="admin-tools-container">
+            <h2><i class="fas fa-toolbox"></i> Strumenti Amministratore</h2>
+            <div class="admin-buttons-details">
+                <a th:href="@{'/admin/authors/edit/' + ${author.id}}" class="btn-admin-action edit-button"><i class="fas fa-edit"></i> Modifica autore</a>
+                <a th:href="@{'/admin/authors/delete/' + ${author.id}}" class="btn-admin-action delete-button" onclick="return confirm('Sei sicuro di voler eliminare questo autore? Questo eliminerà anche la sua foto.');"><i class="fas fa-trash-alt"></i> Elimina autore</a>
+            </div>
+        </div>
+
         <div class="author-header">
             <h1 th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</h1>
             <div class="author-image">
@@ -18,10 +27,24 @@
         </div>
         <div class="author-info">
             <p><i class="fas fa-birthday-cake"></i> <span th:text="'Nato il: ' + ${author.birthDate}">Nato il: data</span></p>
+            <p th:if="${author.deathDate}"><i class="fas fa-skull-crossbones"></i> <span th:text="'Deceduto il: ' + ${author.deathDate}">Deceduto il: data</span></p>
             <p><i class="fas fa-flag"></i> <span th:text="'Nazionalità: ' + ${author.nationality}">Nazionalità: nazionalita</span></p>
         </div>
+
+        <div class="author-books-section">
+            <h2>Libri di <span th:text="${author.firstName + ' ' + author.lastName}"></span></h2>
+            <div th:if="${author.books.isEmpty()}">
+                <p>Nessun libro associato a questo autore.</p>
+            </div>
+            <ul th:unless="${author.books.isEmpty()}" class="books-list">
+                <li th:each="book : ${author.books}">
+                    <a th:href="@{'/books/' + ${book.id}}" th:text="${book.title}">Titolo del Libro</a> (<span th:text="${book.publicationYear}"></span>)
+                </li>
+            </ul>
+        </div>
+
         <div class="back-button">
-            <a th:href="@{/}" class="btn-back"><i class="fas fa-home"></i> Torna alla Home</a>
+            <a th:href="@{/authors}" class="btn-back"><i class="fas fa-arrow-left"></i> Torna alla lista Autori</a>
         </div>
     </div>
 </body>
