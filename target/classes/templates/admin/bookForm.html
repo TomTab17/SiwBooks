@@ -12,17 +12,17 @@
     </header>
 
     <main>
-        <form th:action="@{/admin/books}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/admin/books}" th:object="${book}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:if="${book.id != null}" th:field="*{id}" />
 
             <div class="form-group">
                 <label for="title">Titolo:</label>
-                <input type="text" id="title" name="title" placeholder="Inserisci il titolo del libro" th:value="${book.title}" required/>
+                <input type="text" id="title" th:field="*{title}" placeholder="Inserisci il titolo del libro" required/>
             </div>
 
             <div class="form-group">
                 <label for="publicationYear">Anno Pubblicazione:</label>
-                <input type="number" id="publicationYear" name="publicationYear" placeholder="Es. 2023" th:value="${book.publicationYear}" />
+                <input type="number" id="publicationYear" th:field="*{publicationYear}" placeholder="Es. 2023" />
             </div>
 
             <div class="form-group">
