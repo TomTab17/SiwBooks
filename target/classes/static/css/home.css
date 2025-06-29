@@ -675,16 +675,16 @@ body {
 }
 
 .login-btn {
-    background-color: #007bff;
+    background-color: #d4a373;
     color: #fff;
-    border: 1px solid #007bff;
+    border: 1px solid #d4a373;
     animation-delay: 1.5s;
 }
 
 .login-btn:hover {
-    background-color: #0056b3;
+    background-color: #b5895a;
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(212, 163, 115, 0.3);
 }
 
 @keyframes slideInFromLeft {
