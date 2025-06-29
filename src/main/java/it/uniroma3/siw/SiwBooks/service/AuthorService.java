@@ -29,5 +29,8 @@ public class AuthorService {
     public void deleteById(Long id) {
         authorRepository.deleteById(id);
     }
-}
 
+    public long countAllAuthors() {
+        return authorRepository.count();
+    }
+}

@@ -33,19 +33,20 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    // Metodo per recuperare gli ultimi n libri ordinati per id discendente
     public List<Book> findLatestBooks(int n) {
         Pageable pageable = PageRequest.of(0, n, Sort.by(Sort.Direction.DESC, "id"));
         return bookRepository.findAll(pageable).getContent();
     }
 
-    // Metodo di ricerca per titolo
     public List<Book> searchBooksByTitle(String query) {
         return bookRepository.findByTitleContainingIgnoreCase(query);
     }
 
-    // Metodo di ricerca per autore
     public List<Book> searchBooksByAuthor(String query) {
         return bookRepository.findByAuthorsNameContainingIgnoreCase(query);
+    }
+
+    public long countAllBooks() {
+        return bookRepository.count();
     }
 }

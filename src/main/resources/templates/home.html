@@ -18,6 +18,16 @@
 
     <div class="container">
         <header class="main-header">
+            <div class="growth-stats-container">
+                <p class="growth-title">Siamo in continua crescita!</p>
+                <div class="stats-item">
+                    <i class="fas fa-book"></i> Totale libri: <span th:text="${totalBooks}"></span>
+                </div>
+                <div class="stats-item">
+                    <i class="fas fa-user-friends"></i> Totale autori: <span th:text="${totalAuthors}"></span>
+                </div>
+            </div>
+
             <div class="auth-section-container">
                 <div class="auth-section">
                     <div th:if="${loggedUser != null}" class="logged-in-user">
@@ -136,7 +146,7 @@
                         if (wrapper) {
                             const backgroundDiv = wrapper.querySelector('.book-image-background');
                             if (backgroundDiv) {
-                                backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                                backgroundDiv.style.backgroundColor = '#d3d3d3';
                             }
                         }
                     });
@@ -158,12 +168,11 @@
                 }
             } catch (e) {
                 console.error('Errore nell\'estrazione del colore o nell\'impostazione dello sfondo:', e);
-                // Imposta un colore di fallback in caso di errore nell'estrazione
                 const wrapper = imgElement.closest('.book-image-wrapper');
                 if (wrapper) {
                     const backgroundDiv = wrapper.querySelector('.book-image-background');
                     if (backgroundDiv) {
-                        backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                        backgroundDiv.style.backgroundColor = '#d3d3d3';
                     }
                 }
             }

@@ -22,6 +22,7 @@ body {
     text-align: center;
     flex-grow: 1;
     border: 1px solid #e0e0e0;
+    position: relative;
 }
 
 .main-header {
@@ -33,6 +34,67 @@ body {
     margin-bottom: 50px;
     padding-bottom: 20px;
     border-bottom: 1px solid #f0f0f0;
+}
+
+.growth-stats-container {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    color: #2c3e50;
+    border: 1px solid #e0e0e0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.growth-stats-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.growth-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.growth-title::after {
+    content: '🚀';
+    font-size: 1.3rem;
+}
+
+.stats-item {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats-item:last-child {
+    margin-bottom: 0;
+}
+
+.stats-item i {
+    color: #17a2b8;
+    font-size: 1rem;
+}
+
+.stats-item span {
+    font-weight: 600;
+    color: #333;
 }
 
 .logo-area {
@@ -93,7 +155,7 @@ body {
 .auth-section-container {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 10px;
     z-index: 100;
 }
 
@@ -831,6 +893,14 @@ footer {
         flex-direction: column;
         gap: 15px;
     }
+
+    .growth-stats-container {
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
+        width: auto;
+        padding: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -911,7 +981,7 @@ footer {
     }
 
     .modal-content {
-        padding: 25px;
+        padding: 30px;
     }
 
     .modal-content h2 {
@@ -997,6 +1067,14 @@ footer {
     .welcome-buttons {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .growth-stats-container {
+        position: static;
+        margin-bottom: 20px;
+        text-align: center;
+        width: auto;
+        padding: 15px;
     }
 }
 
@@ -1152,5 +1230,26 @@ footer {
 
     .login-btn {
         animation-delay: 1.5s;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .growth-stats-container {
+        position: static;
+        margin-bottom: 15px;
+        padding: 10px;
+        width: auto;
+        text-align: center;
+    }
+
+    .growth-title {
+        font-size: 1rem;
+    }
+
+    .stats-item {
+        font-size: 0.85rem;
     }
 }

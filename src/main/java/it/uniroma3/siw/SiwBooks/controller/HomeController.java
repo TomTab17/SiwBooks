@@ -2,6 +2,7 @@ package it.uniroma3.siw.SiwBooks.controller;
 
 import it.uniroma3.siw.SiwBooks.model.User;
 import it.uniroma3.siw.SiwBooks.model.Book;
+import it.uniroma3.siw.SiwBooks.service.AuthorService;
 import it.uniroma3.siw.SiwBooks.service.BookService;
 import it.uniroma3.siw.SiwBooks.service.UserService;
 
@@ -22,6 +23,9 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthorService authorService;
 
     private User getLoggedInUser(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -55,6 +59,9 @@ public class HomeController {
 
         List<Book> latestBooks = bookService.findLatestBooks(10);
         model.addAttribute("books", latestBooks);
+
+        model.addAttribute("totalBooks", bookService.countAllBooks());
+        model.addAttribute("totalAuthors", authorService.countAllAuthors());
 
         return "home";
     }
