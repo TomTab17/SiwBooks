@@ -7,8 +7,11 @@ import it.uniroma3.siw.SiwBooks.service.AuthorService;
 import it.uniroma3.siw.SiwBooks.service.BookService;
 import it.uniroma3.siw.SiwBooks.service.ReviewService;
 import it.uniroma3.siw.SiwBooks.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,14 +26,19 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Controller
 public class BookController {
 
+    @Autowired
     private BookService bookService;
 
+    @Autowired
     private AuthorService authorService;
 
+    @Autowired
     private ReviewService reviewService;
 
+    @Autowired
     private UserService userService;
 
     private static final String UPLOAD_DIR = "uploads/book-covers";
