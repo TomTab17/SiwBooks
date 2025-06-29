@@ -8,6 +8,14 @@
 </head>
 <body>
     <div class="container">
+        <div sec:authorize="hasRole('ADMIN')" class="admin-tools-container">
+            <h2><i class="fas fa-toolbox"></i> Strumenti Amministratore</h2>
+            <div class="admin-buttons-details">
+                <a th:href="@{'/admin/books/edit/' + ${book.id}}" class="btn-admin-action edit-button"><i class="fas fa-edit"></i> Modifica libro</a>
+                <a th:href="@{'/admin/books/delete/' + ${book.id}}" class="btn-admin-action delete-button" onclick="return confirm('Sei sicuro di voler eliminare questo libro?');"><i class="fas fa-trash-alt"></i> Elimina libro</a>
+            </div>
+        </div>
+
         <header>
             <h1 th:text="${book.title}">Titolo del Libro</h1>
             <p class="publication-info" th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>

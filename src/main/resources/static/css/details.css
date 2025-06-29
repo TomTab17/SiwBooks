@@ -355,3 +355,110 @@ h1 {
         margin: 10px auto 0;
     }
 }
+
+.admin-tools-container {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-left: 8px solid var(--secondary-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.admin-tools-container h2 {
+    color: var(--deep-blue);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.admin-tools-container h2 i {
+    margin-right: 10px;
+    color: var(--primary-blue);
+}
+
+.admin-buttons-details {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-admin-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-admin-action i {
+    margin-right: 8px;
+}
+
+.edit-button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.edit-button:hover {
+    background-color: var(--deep-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+    background-color: var(--red-error);
+    color: var(--white);
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.review-item .delete-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--red-error);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    box-shadow: none;
+}
+
+.review-item .delete-button:hover {
+    background-color: #c0392b;
+    transform: none;
+    box-shadow: none;
+}
+
+
+@media (max-width: 600px) {
+    .admin-tools-container {
+        align-items: center;
+    }
+
+    .admin-buttons-details {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-admin-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
