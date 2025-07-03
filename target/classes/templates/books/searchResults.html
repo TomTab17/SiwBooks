@@ -87,7 +87,7 @@
                         if (wrapper) {
                             const backgroundDiv = wrapper.querySelector('.book-image-background');
                             if (backgroundDiv) {
-                                backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                                backgroundDiv.style.backgroundColor = '#d3d3d3';
                             }
                         }
                     });
@@ -113,13 +113,12 @@
                 if (wrapper) {
                     const backgroundDiv = wrapper.querySelector('.book-image-background');
                     if (backgroundDiv) {
-                        backgroundDiv.style.backgroundColor = '#d3d3d3'; // Fallback color
+                        backgroundDiv.style.backgroundColor = '#d3d3d3';
                     }
                 }
             }
         }
 
-        // Funzione per cambiare il tipo di ricerca e inviare il form
         function changeSearchType(type) {
             document.getElementById('hiddenSearchType').value = type;
             document.querySelector('.search-form-results').submit();

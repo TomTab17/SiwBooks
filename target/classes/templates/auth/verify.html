@@ -34,9 +34,8 @@
 
         codeInputs.forEach((input, index) => {
             input.addEventListener('input', (e) => {
-                // This checks if the input is a single digit from 0-9
                 if (!/^[0-9]$/.test(e.data)) {
-                    input.value = ''; // Clear invalid input
+                    input.value = '';
                     return;
                 }
 

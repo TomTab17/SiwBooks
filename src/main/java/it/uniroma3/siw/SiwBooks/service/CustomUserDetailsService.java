@@ -20,7 +20,6 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
     User user = this.userRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-    // ✅ Controllo sull'account verificato
     if (!user.isEnabled()) {
         throw new UsernameNotFoundException("Account non verificato. Controlla la tua email.");
     }

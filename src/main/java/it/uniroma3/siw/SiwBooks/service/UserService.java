@@ -8,8 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.slf4j.Logger; // Nuovo import
-import org.slf4j.LoggerFactory; // Nuovo import
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 import jakarta.mail.MessagingException;
@@ -22,7 +22,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class); // Inizializzazione del logger
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -89,7 +89,7 @@ public class UserService {
         user.setEnabled(false);
 
         userRepository.save(user);
-        sendVerificationEmail(user); // Tentativo di invio email
+        sendVerificationEmail(user);
 
         return RegisterResult.SUCCESS;
     }
@@ -109,10 +109,7 @@ public class UserService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
-            // Modifica qui: logga l'errore invece di lanciare un'eccezione
             logger.error("Errore nell'invio dell'email di verifica a {}: {}", toAddress, e.getMessage());
-            // Il sistema continuerà a funzionare anche se l'email non viene inviata.
-            // Potresti voler aggiungere logica per riprovare più tardi o notificare l'amministratore.
         }
     }
 
@@ -136,7 +133,6 @@ public class UserService {
             helper.setText(content, true);
             mailSender.send(message);
         } catch (MessagingException e) {
-            // Modifica qui: logga l'errore invece di lanciare un'eccezione
             logger.error("Errore nell'invio della mail di conferma registrazione a {}: {}", toAddress, e.getMessage());
         }
     }
@@ -149,7 +145,7 @@ public class UserService {
                 user.setEnabled(true);
                 user.setVerificationCode(null);
                 userRepository.save(user);
-                sendRegistrationConfirmationEmail(user); // Tentativo di invio email
+                sendRegistrationConfirmationEmail(user);
                 return true;
             }
         }

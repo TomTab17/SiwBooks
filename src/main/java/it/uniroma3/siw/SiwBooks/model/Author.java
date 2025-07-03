@@ -24,7 +24,7 @@ public class Author {
 
     private String nationality;
 
-    private String photoPath; // Local path to photo file
+    private String photoPath;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;

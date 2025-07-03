@@ -14,7 +14,7 @@ public class Book {
 
     private Integer publicationYear;
 
-    private String imagePath; // Local path to image
+    private String imagePath;
 
     @ManyToMany
     private List<Author> authors;
@@ -22,7 +22,7 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Review> reviews;
 
-    // Getters and Setters
+
 
     public Long getId() {
         return id;

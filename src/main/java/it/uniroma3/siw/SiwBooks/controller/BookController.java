@@ -113,37 +113,32 @@ public class BookController {
     }
 
     @PostMapping("/admin/books")
-public String saveBook(@ModelAttribute("book") Book book,
+    public String saveBook(@ModelAttribute("book") Book book,
                        @RequestParam("authorIds") List<Long> authorIds,
                        @RequestParam(value = "coverImage", required = false) MultipartFile coverImage) throws IOException {
 
     Book bookToSave;
     if (book.getId() != null) {
-        // Caso di aggiornamento: carica il libro esistente
+        
         Optional<Book> existingBookOpt = bookService.findById(book.getId());
         if (existingBookOpt.isPresent()) {
             bookToSave = existingBookOpt.get();
-            // Aggiorna i campi del libro esistente
             bookToSave.setTitle(book.getTitle());
             bookToSave.setPublicationYear(book.getPublicationYear());
         } else {
-            // Se il libro non esiste, reindirizza con errore
             return "redirect:/books";
         }
     } else {
-        // Caso di creazione: crea un nuovo libro
         bookToSave = new Book();
         bookToSave.setTitle(book.getTitle());
         bookToSave.setPublicationYear(book.getPublicationYear());
     }
 
-    // Gestione degli autori
     List<Author> selectedAuthors = authorService.findAll().stream()
             .filter(a -> authorIds.contains(a.getId()))
             .collect(Collectors.toList());
     bookToSave.setAuthors(selectedAuthors);
 
-    // Gestione dell'immagine di copertina
     if (coverImage != null && !coverImage.isEmpty()) {
         Files.createDirectories(Paths.get(UPLOAD_DIR));
 
@@ -152,7 +147,6 @@ public String saveBook(@ModelAttribute("book") Book book,
         String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
         Path path = Paths.get(UPLOAD_DIR, newFileName);
 
-        // Elimina l'immagine esistente, se presente
         if (bookToSave.getImagePath() != null && !bookToSave.getImagePath().isEmpty()) {
             Path oldFile = Paths.get(UPLOAD_DIR, Paths.get(bookToSave.getImagePath()).getFileName().toString());
             try {

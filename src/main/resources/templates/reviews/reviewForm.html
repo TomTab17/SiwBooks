@@ -51,7 +51,6 @@
             const ratingInput = document.getElementById('rating');
             const stars = ratingStars.querySelectorAll('.fa-star');
 
-            // Funzione per aggiornare l'aspetto delle stelle
             function updateStars(value) {
                 stars.forEach(star => {
                     const starValue = parseInt(star.dataset.value);
@@ -65,7 +64,6 @@
                 });
             }
 
-            // Gestione del click sulle stelle
             ratingStars.addEventListener('click', function(event) {
                 const clickedStar = event.target.closest('.fa-star');
                 if (clickedStar) {
@@ -75,7 +73,6 @@
                 }
             });
 
-            // Gestione del hover sulle stelle
             ratingStars.addEventListener('mouseover', function(event) {
                 const hoveredStar = event.target.closest('.fa-star');
                 if (hoveredStar) {
