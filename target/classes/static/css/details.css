@@ -61,6 +61,72 @@ h1 {
   font-weight: 600;
 }
 
+/* --- New Styles for Average Rating --- */
+.average-rating-section {
+    margin-top: 20px;
+    padding: 15px 0;
+    border-top: 1px dashed var(--very-light-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-reviews-message {
+    color: var(--light-text);
+    font-style: italic;
+    font-size: 1em;
+    margin: 0;
+    padding: 10px 20px;
+    background-color: var(--very-light-blue);
+    border-radius: 8px;
+    border: 1px solid var(--light-blue);
+    display: inline-block; /* To make padding effective */
+}
+
+.average-rating-text {
+    color: var(--dark-text);
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.average-rating-stars {
+    color: gold;
+    font-size: 1.8em; /* Larger stars */
+    display: flex;
+    align-items: center;
+    gap: 3px; /* Space between stars */
+}
+
+.average-rating-stars .fas,
+.average-rating-stars .far {
+  color: gold; /* Ensure all stars are gold */
+}
+
+.average-rating-stars .fa-star-half-alt {
+  color: gold; /* Half-star color */
+}
+
+.average-rating-stars .far.fa-star {
+  color: #ccc; /* Empty star color */
+}
+
+
+.rating-value {
+    font-weight: 700;
+    font-size: 1.2em;
+    color: var(--primary-blue);
+    margin-left: 10px;
+}
+
+.review-count {
+    font-size: 0.9em;
+    color: var(--light-text);
+    margin-left: 5px;
+}
+/* --- End New Styles --- */
+
+
 .book-details {
   display: flex;
   flex-wrap: wrap;

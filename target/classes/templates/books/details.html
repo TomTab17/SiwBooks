@@ -19,7 +19,23 @@
         <header>
             <h1 th:text="${book.title}">Titolo del Libro</h1>
             <p class="publication-info" th:text="'Anno di pubblicazione: ' + ${book.publicationYear}"></p>
-        </header>
+
+            <div class="average-rating-section">
+                <div th:if="${book.reviews.isEmpty()}">
+                    <p class="no-reviews-message">Questo libro non ha ancora recensioni.</p>
+                </div>
+                <div th:unless="${book.reviews.isEmpty()}">
+                    <p class="average-rating-text">Valutazione media:</p>
+                    <div class="average-rating-stars">
+                        <span th:each="i : ${#numbers.sequence(1, 5)}">
+                            <i th:class="${i <= averageRating} ? 'fas fa-star' : (${i - 0.5 <= averageRating} ? 'fas fa-star-half-alt' : 'far fa-star')"></i>
+                        </span>
+                        <span class="rating-value" th:text="${#numbers.formatDecimal(averageRating, 0, 1)} + '/5'"></span>
+                        <span class="review-count" th:text="' (' + ${book.reviews.size()} + ' recensioni)'"></span>
+                    </div>
+                </div>
+            </div>
+            </header>
 
         <section class="book-details">
             <div class="book-image" th:if="${book.imagePath != null}">
