@@ -72,7 +72,40 @@
             </div>
             <div th:unless="${book.reviews.isEmpty()}">
                 <ul class="reviews-list">
-                    <li th:each="review : ${book.reviews}" class="review-item">
+                    <li th:if="${userReview != null}" class="review-item user-review">
+                        <h3 th:text="${userReview.title}">Titolo Recensione Utente</h3>
+                        <div class="rating">
+                            <span th:each="i : ${#numbers.sequence(1, 5)}">
+                                <i th:class="${i <= userReview.rating} ? 'fas fa-star' : 'far fa-star'"></i>
+                            </span>
+                        </div>
+                        <p class="review-text" th:text="${userReview.text}">Testo della recensione dell'utente...</p>
+                        <p class="review-author">Recensito da: <span th:text="${userReview.user.username}">Nome Utente</span></p>
+                        
+                        <div class="review-actions-buttons">
+                            <a th:if="${currentUserId != null and userReview.user.id == currentUserId}" 
+                               th:href="@{'/books/' + ${book.id} + '/reviews/edit'}" 
+                               class="btn-review-action edit-review-button-inline">
+                               <i class="fas fa-edit"></i> Modifica
+                            </a>
+                            <a th:if="${currentUserId != null and userReview.user.id == currentUserId and !#authorization.expression('hasRole(''ADMIN'')')}"
+                               th:href="@{'/books/' + ${book.id} + '/reviews/delete/' + ${userReview.id}}"
+                               class="btn-review-action delete-review-button-inline"
+                               onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">
+                               <i class="fas fa-trash-alt"></i> Elimina
+                            </a>
+                            
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{'/admin/reviews/delete/' + ${userReview.id}}" 
+                                   class="btn-review-action delete-button-inline" 
+                                   onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">
+                                   <i class="fas fa-trash-alt"></i> Elimina (Admin)
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li th:each="review : ${otherReviews}" class="review-item">
                         <h3 th:text="${review.title}">Titolo Recensione</h3>
                         <div class="rating">
                             <span th:each="i : ${#numbers.sequence(1, 5)}">

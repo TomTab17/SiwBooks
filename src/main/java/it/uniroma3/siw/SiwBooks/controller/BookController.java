@@ -2,6 +2,7 @@ package it.uniroma3.siw.SiwBooks.controller;
 
 import it.uniroma3.siw.SiwBooks.model.Author;
 import it.uniroma3.siw.SiwBooks.model.Book;
+import it.uniroma3.siw.SiwBooks.model.Review;
 import it.uniroma3.siw.SiwBooks.model.User;
 import it.uniroma3.siw.SiwBooks.service.AuthorService;
 import it.uniroma3.siw.SiwBooks.service.BookService;
@@ -21,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -90,11 +92,28 @@ public class BookController {
 
         boolean userHasReviewed = false;
         User currentUser = getLoggedInUser(authentication);
+        
+        Review userReview = null;
+        List<Review> otherReviews = new ArrayList<>();
+
         if (currentUser != null) {
-            userHasReviewed = reviewService.findByBookAndUser(book, currentUser).isPresent();
+            Optional<Review> existingUserReview = reviewService.findByBookAndUser(book, currentUser);
+            if (existingUserReview.isPresent()) {
+                userReview = existingUserReview.get();
+                userHasReviewed = true;
+            }
             model.addAttribute("currentUserId", currentUser.getId());
         }
         model.addAttribute("userHasReviewed", userHasReviewed);
+        
+        for (Review review : book.getReviews()) {
+            if (userReview == null || !review.getId().equals(userReview.getId())) {
+                otherReviews.add(review);
+            }
+        }
+
+        model.addAttribute("userReview", userReview);
+        model.addAttribute("otherReviews", otherReviews);
 
         return "books/details";
     }
@@ -127,54 +146,54 @@ public class BookController {
                        @RequestParam("authorIds") List<Long> authorIds,
                        @RequestParam(value = "coverImage", required = false) MultipartFile coverImage) throws IOException {
 
-    Book bookToSave;
-    if (book.getId() != null) {
-        
-        Optional<Book> existingBookOpt = bookService.findById(book.getId());
-        if (existingBookOpt.isPresent()) {
-            bookToSave = existingBookOpt.get();
+        Book bookToSave;
+        if (book.getId() != null) {
+            
+            Optional<Book> existingBookOpt = bookService.findById(book.getId());
+            if (existingBookOpt.isPresent()) {
+                bookToSave = existingBookOpt.get();
+                bookToSave.setTitle(book.getTitle());
+                bookToSave.setPublicationYear(book.getPublicationYear());
+            } else {
+                return "redirect:/books";
+            }
+        } else {
+            bookToSave = new Book();
             bookToSave.setTitle(book.getTitle());
             bookToSave.setPublicationYear(book.getPublicationYear());
-        } else {
-            return "redirect:/books";
         }
-    } else {
-        bookToSave = new Book();
-        bookToSave.setTitle(book.getTitle());
-        bookToSave.setPublicationYear(book.getPublicationYear());
-    }
 
-    List<Author> selectedAuthors = authorService.findAll().stream()
-            .filter(a -> authorIds.contains(a.getId()))
-            .collect(Collectors.toList());
-    bookToSave.setAuthors(selectedAuthors);
+        List<Author> selectedAuthors = authorService.findAll().stream()
+                .filter(a -> authorIds.contains(a.getId()))
+                .collect(Collectors.toList());
+        bookToSave.setAuthors(selectedAuthors);
 
-    if (coverImage != null && !coverImage.isEmpty()) {
-        Files.createDirectories(Paths.get(UPLOAD_DIR));
+        if (coverImage != null && !coverImage.isEmpty()) {
+            Files.createDirectories(Paths.get(UPLOAD_DIR));
 
-        String originalFilename = Paths.get(coverImage.getOriginalFilename()).getFileName().toString();
-        String sanitizedFilename = originalFilename.replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
-        String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
-        Path path = Paths.get(UPLOAD_DIR, newFileName);
+            String originalFilename = Paths.get(coverImage.getOriginalFilename()).getFileName().toString();
+            String sanitizedFilename = originalFilename.replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
+            String newFileName = UUID.randomUUID() + "_" + sanitizedFilename;
+            Path path = Paths.get(UPLOAD_DIR, newFileName);
 
-        if (bookToSave.getImagePath() != null && !bookToSave.getImagePath().isEmpty()) {
-            Path oldFile = Paths.get(UPLOAD_DIR, Paths.get(bookToSave.getImagePath()).getFileName().toString());
-            try {
-                if (Files.exists(oldFile)) {
-                    Files.delete(oldFile);
+            if (bookToSave.getImagePath() != null && !bookToSave.getImagePath().isEmpty()) {
+                Path oldFile = Paths.get(UPLOAD_DIR, Paths.get(bookToSave.getImagePath()).getFileName().toString());
+                try {
+                    if (Files.exists(oldFile)) {
+                        Files.delete(oldFile);
+                    }
+                } catch (IOException e) {
+                    System.err.println("Errore durante l'eliminazione della vecchia immagine: " + e.getMessage());
                 }
-            } catch (IOException e) {
-                System.err.println("Errore durante l'eliminazione della vecchia immagine: " + e.getMessage());
             }
+
+            Files.copy(coverImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            bookToSave.setImagePath("/" + UPLOAD_DIR + "/" + newFileName);
         }
 
-        Files.copy(coverImage.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        bookToSave.setImagePath("/" + UPLOAD_DIR + "/" + newFileName);
+        bookService.save(bookToSave);
+        return "redirect:/books/" + bookToSave.getId();
     }
-
-    bookService.save(bookToSave);
-    return "redirect:/books/" + bookToSave.getId();
-}
 
     @GetMapping("/admin/books/delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
