@@ -46,7 +46,9 @@
                 <h2>Autori</h2>
                 <ul class="author-list">
                     <li th:each="author : ${book.authors}">
-                        <span th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</span>
+                        <a th:href="@{'/authors/' + ${author.id}}">
+                            <span th:text="${author.firstName + ' ' + author.lastName}">Nome Cognome Autore</span>
+                        </a>
                     </li>
                 </ul>
             </div>

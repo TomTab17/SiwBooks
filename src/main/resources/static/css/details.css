@@ -195,6 +195,16 @@ h1 {
   box-shadow: 0 2px 8px var(--shadow-light);
 }
 
+.author-list li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.author-list li a:hover {
+    text-decoration: none;
+    color: var(--white); 
+}
+
 .reviews-section {
   margin-top: 40px;
   padding-top: 20px;
