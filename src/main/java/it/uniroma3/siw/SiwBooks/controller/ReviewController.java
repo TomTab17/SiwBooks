@@ -73,11 +73,40 @@ public class ReviewController {
 
         model.addAttribute("book", book);
         model.addAttribute("review", new Review());
+        model.addAttribute("isEditing", false);
+        return "reviews/reviewForm";
+    }
+
+    @GetMapping("/books/{bookId}/reviews/edit")
+    public String editReviewForm(@PathVariable Long bookId, Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
+        Optional<Book> bookOpt = bookService.findById(bookId);
+        if (bookOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Libro non trovato.");
+            return "redirect:/books";
+        }
+
+        Book book = bookOpt.get();
+        User user = getLoggedInUser(authentication);
+
+        if (user == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Devi essere loggato per modificare una recensione.");
+            return "redirect:/login";
+        }
+
+        Optional<Review> existingReviewOpt = reviewService.findByBookAndUser(book, user);
+        if (existingReviewOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Nessuna recensione trovata da modificare per questo libro.");
+            return "redirect:/books/" + bookId;
+        }
+
+        model.addAttribute("book", book);
+        model.addAttribute("review", existingReviewOpt.get());
+        model.addAttribute("isEditing", true);
         return "reviews/reviewForm";
     }
 
     @PostMapping("/books/{bookId}/reviews")
-    public String saveReview(@PathVariable Long bookId,
+    public String upsertReview(@PathVariable Long bookId,
                              @Valid @ModelAttribute("review") Review review,
                              BindingResult bindingResult,
                              Authentication authentication,
@@ -97,22 +126,29 @@ public class ReviewController {
             redirectAttributes.addFlashAttribute("errorMessage", "Devi essere loggato per inviare una recensione.");
             return "redirect:/login";
         }
-
-        if (reviewService.findByBookAndUser(book, user).isPresent()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Hai già recensito questo libro.");
-            return "redirect:/books/" + bookId;
-        }
+        
+        Optional<Review> existingReviewOpt = reviewService.findByBookAndUser(book, user);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("book", book);
+            model.addAttribute("isEditing", existingReviewOpt.isPresent()); 
             return "reviews/reviewForm";
         }
 
-        review.setBook(book);
-        review.setUser(user);
-        reviewService.save(review);
+        Review reviewToSave = existingReviewOpt.orElse(new Review()); 
+        reviewToSave.setTitle(review.getTitle());
+        reviewToSave.setText(review.getText());
+        reviewToSave.setRating(review.getRating());
+        reviewToSave.setBook(book);
+        reviewToSave.setUser(user);
+        
+        reviewService.save(reviewToSave);
 
-        redirectAttributes.addFlashAttribute("successMessage", "Recensione inviata con successo!");
+        if (existingReviewOpt.isPresent()) {
+            redirectAttributes.addFlashAttribute("successMessage", "Recensione aggiornata con successo!");
+        } else {
+            redirectAttributes.addFlashAttribute("successMessage", "Recensione inviata con successo!");
+        }
         return "redirect:/books/" + bookId;
     }
 

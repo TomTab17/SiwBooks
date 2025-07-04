@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Scrivi una recensione per <span th:text="${book.title}">Libro</span></h1>
+        <h1 th:text="${isEditing ? 'Modifica la tua recensione per ' + book.title : 'Scrivi una recensione per ' + book.title}"></h1>
 
         <form th:action="@{'/books/' + ${book.id} + '/reviews'}" th:object="${review}" method="post">
             <div th:if="${#fields.hasErrors('global')}" class="alert alert-danger">
@@ -39,7 +39,7 @@
                 <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="error-message"></span>
             </div>
 
-            <button type="submit">Invia Recensione</button>
+            <button type="submit" th:text="${isEditing ? 'Aggiorna Recensione' : 'Invia Recensione'}"></button>
         </form>
 
         <a th:href="@{'/books/' + ${book.id}}" class="back-link">Torna al libro</a>

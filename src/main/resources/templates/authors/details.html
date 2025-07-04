@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class="author-info">
-            <p><i class="fas fa-birthday-cake"></i> <span th:text="'Nato il: ' + ${author.birthDate}">Nato il: data</span></p>
-            <p th:if="${author.deathDate}"><i class="fas fa-skull-crossbones"></i> <span th:text="'Deceduto il: ' + ${author.deathDate}">Deceduto il: data</span></p>
+            <p><i class="fas fa-birthday-cake"></i> <span th:text="'Nato il: ' + ${#temporals.format(author.birthDate, 'dd-MM-yyyy')}">Nato il: data</span></p>
+            <p th:if="${author.deathDate}"><i class="fas fa-skull-crossbones"></i> <span th:text="'Deceduto il: ' + ${#temporals.format(author.deathDate, 'dd-MM-yyyy')}">Deceduto il: data</span></p>
             <p><i class="fas fa-flag"></i> <span th:text="'Nazionalità: ' + ${author.nationality}">Nazionalità: nazionalita</span></p>
         </div>
 

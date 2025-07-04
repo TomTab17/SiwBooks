@@ -79,7 +79,6 @@ public class BookController {
         Book book = bookOpt.get();
         model.addAttribute("book", book);
 
-        // Calculate average rating
         double averageRating = 0.0;
         if (!book.getReviews().isEmpty()) {
             averageRating = book.getReviews().stream()
@@ -93,6 +92,7 @@ public class BookController {
         User currentUser = getLoggedInUser(authentication);
         if (currentUser != null) {
             userHasReviewed = reviewService.findByBookAndUser(book, currentUser).isPresent();
+            model.addAttribute("currentUserId", currentUser.getId());
         }
         model.addAttribute("userHasReviewed", userHasReviewed);
 

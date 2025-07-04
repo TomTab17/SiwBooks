@@ -61,7 +61,6 @@ h1 {
   font-weight: 600;
 }
 
-/* --- New Styles for Average Rating --- */
 .average-rating-section {
     margin-top: 20px;
     padding: 15px 0;
@@ -80,7 +79,7 @@ h1 {
     background-color: var(--very-light-blue);
     border-radius: 8px;
     border: 1px solid var(--light-blue);
-    display: inline-block; /* To make padding effective */
+    display: inline-block;
 }
 
 .average-rating-text {
@@ -92,23 +91,23 @@ h1 {
 
 .average-rating-stars {
     color: gold;
-    font-size: 1.8em; /* Larger stars */
+    font-size: 1.8em;
     display: flex;
     align-items: center;
-    gap: 3px; /* Space between stars */
+    gap: 3px;
 }
 
 .average-rating-stars .fas,
 .average-rating-stars .far {
-  color: gold; /* Ensure all stars are gold */
+  color: gold;
 }
 
 .average-rating-stars .fa-star-half-alt {
-  color: gold; /* Half-star color */
+  color: gold;
 }
 
 .average-rating-stars .far.fa-star {
-  color: #ccc; /* Empty star color */
+  color: #ccc;
 }
 
 
@@ -124,7 +123,6 @@ h1 {
     color: var(--light-text);
     margin-left: 5px;
 }
-/* --- End New Styles --- */
 
 
 .book-details {
@@ -280,19 +278,19 @@ h1 {
   border-color: #c0392b;
 }
 
-.add-review-link {
+.add-review-link-top {
   text-align: center;
   margin-bottom: 25px;
 }
 
-.add-review-link p {
+.add-review-link-top p {
   color: var(--primary-blue);
   font-weight: 600;
   font-size: 1.1em;
   margin-bottom: 15px;
 }
 
-.add-review-link .button {
+.add-review-link-top .button {
   display: inline-block;
   background-color: var(--secondary-blue);
   color: var(--white);
@@ -305,44 +303,54 @@ h1 {
   box-shadow: 0 4px 10px var(--shadow-light);
 }
 
-.add-review-link .button:hover {
+.add-review-link-top .button:hover {
   background-color: var(--primary-blue);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px var(--shadow-medium);
 }
 
-.delete-button {
-  background-color: var(--red-error);
-  color: var(--white);
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+.review-actions-buttons {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
 }
 
-.delete-button:hover {
-  background-color: #c0392b;
+.btn-review-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.review-item .delete-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background-color: var(--red-error);
-  color: var(--white);
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 0.9em;
-  font-weight: 500;
-  box-shadow: none;
+.btn-review-action i {
+    margin-right: 5px;
 }
 
-.review-item .delete-button:hover {
-  background-color: #c0392b;
-  transform: none;
-  box-shadow: none;
+.edit-review-button-inline {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+}
+
+.edit-review-button-inline:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-1px);
+}
+
+.delete-button-inline {
+    background-color: var(--red-error);
+    color: var(--white);
+}
+
+.delete-button-inline:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
 }
 
 .back-button-container {
@@ -415,7 +423,7 @@ h1 {
   }
 
   .back-button,
-  .add-review-link .button {
+  .add-review-link-top .button {
     width: 100%;
     box-sizing: border-box;
   }
@@ -424,11 +432,20 @@ h1 {
     padding: 15px;
   }
 
-  .review-item .delete-button {
-    position: static;
-    display: block;
-    width: fit-content;
-    margin: 10px auto 0;
+  .review-actions-buttons {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      margin: 10px auto 0;
+      gap: 8px;
+  }
+
+  .btn-review-action {
+      width: 100%;
+      justify-content: center;
+      padding: 8px 15px;
+      font-size: 0.9em;
   }
 }
 
@@ -490,6 +507,17 @@ h1 {
   background-color: var(--deep-blue);
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button {
+    background-color: var(--red-error);
+    color: var(--white);
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {

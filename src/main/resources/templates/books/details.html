@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            </header>
+        </header>
 
         <section class="book-details">
             <div class="book-image" th:if="${book.imagePath != null}">
@@ -60,7 +60,7 @@
             <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
             <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
 
-            <div sec:authorize="isAuthenticated()" class="add-review-link">
+            <div sec:authorize="isAuthenticated()" class="add-review-link-top">
                 <p th:if="${userHasReviewed}">Hai già lasciato una recensione per questo libro.</p>
                 <a th:unless="${userHasReviewed}" th:href="@{'/books/' + ${book.id} + '/reviews/new'}" class="button">Aggiungi Recensione</a>
             </div>
@@ -79,8 +79,21 @@
                         </div>
                         <p class="review-text" th:text="${review.text}">Testo della recensione...</p>
                         <p class="review-author">Recensito da: <span th:text="${review.user.username}">Nome Utente</span></p>
-                        <div sec:authorize="hasRole('ADMIN')">
-                            <a th:href="@{'/admin/reviews/delete/' + ${review.id}}" class="delete-button" onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">Elimina Recensione</a>
+                        
+                        <div class="review-actions-buttons">
+                            <a th:if="${currentUserId != null and review.user.id == currentUserId}" 
+                               th:href="@{'/books/' + ${book.id} + '/reviews/edit'}" 
+                               class="btn-review-action edit-review-button-inline">
+                               <i class="fas fa-edit"></i> Modifica
+                            </a>
+                            
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <a th:href="@{'/admin/reviews/delete/' + ${review.id}}" 
+                                   class="btn-review-action delete-button-inline" 
+                                   onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">
+                                   <i class="fas fa-trash-alt"></i> Elimina
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>
