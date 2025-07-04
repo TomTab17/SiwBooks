@@ -353,6 +353,16 @@ h1 {
     transform: translateY(-1px);
 }
 
+.delete-review-button-inline {
+    background-color: var(--red-error);
+    color: var(--white);
+}
+
+.delete-review-button-inline:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
 .delete-button-inline {
     background-color: var(--red-error);
     color: var(--white);

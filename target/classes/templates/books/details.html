@@ -88,12 +88,18 @@
                                class="btn-review-action edit-review-button-inline">
                                <i class="fas fa-edit"></i> Modifica
                             </a>
+                            <a th:if="${currentUserId != null and review.user.id == currentUserId and !#authorization.expression('hasRole(''ADMIN'')')}"
+                               th:href="@{'/books/' + ${book.id} + '/reviews/delete/' + ${review.id}}"
+                               class="btn-review-action delete-review-button-inline"
+                               onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">
+                               <i class="fas fa-trash-alt"></i> Elimina
+                            </a>
                             
                             <div sec:authorize="hasRole('ADMIN')">
                                 <a th:href="@{'/admin/reviews/delete/' + ${review.id}}" 
                                    class="btn-review-action delete-button-inline" 
                                    onclick="return confirm('Sei sicuro di voler eliminare questa recensione?');">
-                                   <i class="fas fa-trash-alt"></i> Elimina
+                                   <i class="fas fa-trash-alt"></i> Elimina (Admin)
                                 </a>
                             </div>
                         </div>

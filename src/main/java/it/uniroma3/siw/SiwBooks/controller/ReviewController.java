@@ -152,6 +152,38 @@ public class ReviewController {
         return "redirect:/books/" + bookId;
     }
 
+    @GetMapping("/books/{bookId}/reviews/delete/{reviewId}")
+    public String deleteUserReview(@PathVariable Long bookId, @PathVariable Long reviewId, 
+                                 Authentication authentication, RedirectAttributes redirectAttributes) {
+        User currentUser = getLoggedInUser(authentication);
+        if (currentUser == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Devi essere loggato per eliminare una recensione.");
+            return "redirect:/login";
+        }
+
+        Optional<Review> reviewOpt = reviewService.findById(reviewId);
+        if (reviewOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Recensione non trovata.");
+            return "redirect:/books/" + bookId;
+        }
+
+        Review reviewToDelete = reviewOpt.get();
+
+        if (!reviewToDelete.getUser().getId().equals(currentUser.getId())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Non sei autorizzato a eliminare questa recensione.");
+            return "redirect:/books/" + bookId;
+        }
+        
+        if (!reviewToDelete.getBook().getId().equals(bookId)) {
+            redirectAttributes.addFlashAttribute("errorMessage", "La recensione non appartiene a questo libro.");
+            return "redirect:/books/" + bookId;
+        }
+
+        reviewService.deleteById(reviewId);
+        redirectAttributes.addFlashAttribute("successMessage", "Recensione eliminata con successo.");
+        return "redirect:/books/" + bookId;
+    }
+
     @GetMapping("/admin/reviews/delete/{id}")
     public String deleteReview(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Optional<Review> reviewOpt = reviewService.findById(id);
