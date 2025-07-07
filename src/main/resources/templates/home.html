@@ -18,16 +18,7 @@
 
     <div class="container">
         <header class="main-header">
-            <div class="growth-stats-container">
-                <p class="growth-title">Siamo in continua crescita!</p>
-                <div class="stats-item">
-                    <i class="fas fa-book"></i> Totale libri: <span th:text="${totalBooks}"></span>
-                </div>
-                <div class="stats-item">
-                    <i class="fas fa-user-friends"></i> Totale autori: <span th:text="${totalAuthors}"></span>
-                </div>
-            </div>
-
+            
             <div class="auth-section-container">
                 <div class="auth-section">
                     <div th:if="${loggedUser != null}" class="logged-in-user">
